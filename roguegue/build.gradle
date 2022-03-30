@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    allprojects {
+        repositories {
+            maven { url 'https://jitpack.io' }
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    implementation 'com.github.trystan:AsciiPanel:master-SNAPSHOT'
+}
+
+test {
+    useJUnitPlatform()
+}
