@@ -2,9 +2,14 @@ package ru.hse.sd.roguegue.map;
 
 /**
  * Represents the map, map is stored in the array of cells
- * @param cellArray array of cells the map consists of, each cell represents a cell type
  */
-public record Map(CellType[][] cellArray) {
+public class Map {
+
+    private final CellType[][] cellArray;
+
+    public Map(CellType[][] cellArray) {
+        this.cellArray = cellArray;
+    }
 
     /**
      * @param x x coordinate
@@ -17,8 +22,9 @@ public record Map(CellType[][] cellArray) {
 
     /**
      * Sets cell to specified position
-     * @param x x coordinate
-     * @param y y coordinate
+     *
+     * @param x    x coordinate
+     * @param y    y coordinate
      * @param cell to be set
      */
     public void setCell(int x, int y, CellType cell) {

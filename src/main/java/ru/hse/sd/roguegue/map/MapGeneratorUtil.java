@@ -34,20 +34,21 @@ public class MapGeneratorUtil {
 
     /**
      * Generates distinct coordinated for ground spaces, sets random sizes to each one and fills the cells accordingly
+     *
      * @return list of all generated ground spaces
      */
     private List<GroundSpace> setGroundSpaces() {
-        int groundsAcross = cells.length / constraints.maxW();
-        int groundsDown = cells[0].length / constraints.maxH();
+        int groundsAcross = cells.length / constraints.maxW;
+        int groundsDown = cells[0].length / constraints.maxH;
         int maxGrounds = groundsAcross * groundsDown;
-        int totalGrounds = RandUtil.getRandom((int) (maxGrounds * constraints.minRate()), (int) (maxGrounds * constraints.maxRate()));
+        int totalGrounds = RandUtil.getRandom((int) (maxGrounds * constraints.minRate), (int) (maxGrounds * constraints.maxRate));
         List<GroundSpace> grounds = new ArrayList<>(totalGrounds);
         List<Integer> coords = generateCoordinates(totalGrounds, maxGrounds - 1);
         coords.forEach(center -> {
-            int w = RandUtil.getRandom(constraints.minW(), constraints.maxW());
-            int h = RandUtil.getRandom(constraints.minH(), constraints.maxH());
-            int x = constraints.maxW() * (center % groundsAcross) + RandUtil.getRandom(0, constraints.maxW() - w);
-            int y = constraints.maxH() * (center / groundsAcross) + RandUtil.getRandom(0, constraints.maxH() - h);
+            int w = RandUtil.getRandom(constraints.minW, constraints.maxW);
+            int h = RandUtil.getRandom(constraints.minH, constraints.maxH);
+            int x = constraints.maxW * (center % groundsAcross) + RandUtil.getRandom(0, constraints.maxW - w);
+            int y = constraints.maxH * (center / groundsAcross) + RandUtil.getRandom(0, constraints.maxH - h);
             GroundSpace ground = new GroundSpace(x, y, w, h);
             ground.setCells(cells);
             grounds.add(ground);
@@ -69,16 +70,17 @@ public class MapGeneratorUtil {
 
     /**
      * Connects ground spaces by moving from one to another by random number of steps in random directions
+     *
      * @param groundSpaces list of generated ground spaces
      */
     private void connectGroundSpaces(List<GroundSpace> groundSpaces) {
         enum Direction {X, Y}
         GroundSpace cur = groundSpaces.remove(0);
         for (GroundSpace nxt : groundSpaces) {
-            int curX = cur.x + cur.w() / 2;
-            int curY = cur.y + cur.h() / 2;
-            int stepX = nxt.x + nxt.w() / 2 - curX;
-            int stepY = nxt.y + nxt.h() / 2 - curY;
+            int curX = cur.x + cur.w / 2;
+            int curY = cur.y + cur.h / 2;
+            int stepX = nxt.x + nxt.w / 2 - curX;
+            int stepY = nxt.y + nxt.h / 2 - curY;
             int stepXDir = stepX == 0 ? 1 : stepX / Math.abs(stepX);
             int stepYDir = stepY == 0 ? 1 : stepY / Math.abs(stepY);
             while (!(stepX == 0 && stepY == 0)) {
@@ -113,13 +115,21 @@ public class MapGeneratorUtil {
 
     /**
      * Representation of a rectangular ground space
-     *
-     * @param x x coordinate
-     * @param y y coordinate
-     * @param w width
-     * @param h height
      */
-    private record GroundSpace(int x, int y, int w, int h) {
+    private static class GroundSpace {
+
+        public final int x;
+        public final int y;
+        public final int w;
+        public final int h;
+
+        public GroundSpace(int x, int y, int w, int h) {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+        }
+
         public void setCells(CellType[][] cells) {
             for (int i = x + 1; i < x + w - 1; i++) {
                 for (int j = y + 1; j < y + h - 1; j++) {
@@ -131,15 +141,23 @@ public class MapGeneratorUtil {
 
     /**
      * Constraints for map generation
-     *
-     * @param minRate minimal rate of space occupied by ground spaces
-     * @param maxRate maximal rate of space occupied by ground spaces
-     * @param minW    minimal ground space width
-     * @param maxW    maximal ground space width
-     * @param minH    minimal ground space height
-     * @param maxH    maximal ground space height
      */
-    private record Constraints(double minRate, double maxRate, int minW, int maxW, int minH, int maxH) {
+    private static class Constraints {
+        public double minRate;
+        public double maxRate;
+        public int minW;
+        public int maxW;
+        public int minH;
+        public int maxH;
+
+        public Constraints(double minRate, double maxRate, int minW, int maxW, int minH, int maxH) {
+            this.minRate = minRate;
+            this.maxRate = maxRate;
+            this.minW = minW;
+            this.maxW = maxW;
+            this.minH = minH;
+            this.maxH = maxH;
+        }
     }
 
     /**
