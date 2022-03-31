@@ -69,7 +69,7 @@ public class MapGeneratorUtil {
         return coords;
     }
 
-    private enum Direction {X, Y}
+//    private enum Direction {X, Y}
 
     /**
      * Connects ground spaces by moving from one to another by random number of steps in random directions
@@ -77,6 +77,7 @@ public class MapGeneratorUtil {
      * @param groundSpaces list of generated ground spaces
      */
     private void connectGroundSpaces(List<GroundSpace> groundSpaces) {
+        enum Direction {X, Y}
         if (groundSpaces.isEmpty()) return;
         GroundSpace cur = groundSpaces.remove(0);
         for (GroundSpace nxt : groundSpaces) {
