@@ -11,8 +11,8 @@ import java.util.Queue;
 
 public class UserInteraction extends JFrame implements KeyListener {
     private final Queue<KeyEvent> inputQueue = new LinkedList<>();
-    private Menu menu = new Menu();
-    private Handler handler = new Handler();
+    private final Menu menu = new Menu();
+    private final Handler handler = new Handler();
     //private AsciiPanel terminal = new AsciiPanel(500, 500);
 
     public UserInteraction() {
