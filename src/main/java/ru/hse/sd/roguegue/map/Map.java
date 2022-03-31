@@ -1,13 +1,14 @@
 package ru.hse.sd.roguegue.map;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
-public class Map {
-    public final List<CellType> cellArray;
+public record Map(CellType[][] cellArray) {
 
-    public Map(@NotNull List<CellType> cellArray) {
-        this.cellArray = cellArray;
+    public CellType getCell(int x, int y) {
+        return cellArray[x][y];
+    }
+
+    public void setCell(int x, int y, CellType cell) {
+        cellArray[x][y] = cell;
     }
 }

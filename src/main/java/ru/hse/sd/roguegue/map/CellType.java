@@ -1,5 +1,5 @@
 package ru.hse.sd.roguegue.map;
 
 public enum CellType {
-    BORDER, OBSTACLE, GROUND, EXIT, ENTRANCE
+    OBSTACLE, GROUND, EXIT, ENTRANCE, PLAYER
 }
