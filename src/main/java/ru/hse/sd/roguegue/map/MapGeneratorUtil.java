@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MapGeneratorUtil {
-    private final CellType[][] cells = new CellType[0][0];
+    private CellType[][] cells = new CellType[0][0];
     private Constraints constraints;
 
     /**
@@ -18,16 +18,17 @@ public class MapGeneratorUtil {
      */
     public Map generateMap(int width, int height) {
         initCells(width, height);
-        constraints = new Constraints(0.25, 0.7, 4, 8, 4, 8);
+        constraints = new Constraints(0.4, 0.7, 4, 8, 4, 8);
         List<GroundSpace> groundSpaces = setGroundSpaces();
         connectGroundSpaces(groundSpaces);
         return new Map(cells);
     }
 
     private void initCells(int width, int height) {
+        cells = new CellType[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                cells[i][j] = CellType.GROUND;
+                cells[i][j] = CellType.OBSTACLE;
             }
         }
     }
@@ -76,6 +77,7 @@ public class MapGeneratorUtil {
      * @param groundSpaces list of generated ground spaces
      */
     private void connectGroundSpaces(List<GroundSpace> groundSpaces) {
+        if (groundSpaces.isEmpty()) return;
         GroundSpace cur = groundSpaces.remove(0);
         for (GroundSpace nxt : groundSpaces) {
             int curX = cur.x + cur.w / 2;
@@ -134,7 +136,7 @@ public class MapGeneratorUtil {
         public void setCells(CellType[][] cells) {
             for (int i = x + 1; i < x + w - 1; i++) {
                 for (int j = y + 1; j < y + h - 1; j++) {
-                    cells[i][j] = CellType.OBSTACLE;
+                    cells[i][j] = CellType.GROUND;
                 }
             }
         }

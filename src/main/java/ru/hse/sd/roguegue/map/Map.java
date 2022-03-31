@@ -11,6 +11,10 @@ public class Map {
         this.cellArray = cellArray;
     }
 
+    public CellType[][] getCellArray() {
+        return cellArray;
+    }
+
     /**
      * @param x x coordinate
      * @param y y coordinate
