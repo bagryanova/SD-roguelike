@@ -18,13 +18,13 @@ public class Handler {
             return;
         }
         switch (event.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_LEFT ->
                 userAction.updateState(Move.LEFT);
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_RIGHT ->
                 userAction.updateState(Move.RIGHT);
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_DOWN ->
                 userAction.updateState(Move.DOWN);
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_UP ->
                 userAction.updateState(Move.UP);
         }
     }

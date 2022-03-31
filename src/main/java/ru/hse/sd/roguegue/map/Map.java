@@ -3,17 +3,7 @@ package ru.hse.sd.roguegue.map;
 /**
  * Represents the map, map is stored in the array of cells
  */
-public class Map {
-
-    private final CellType[][] cellArray;
-
-    public Map(CellType[][] cellArray) {
-        this.cellArray = cellArray;
-    }
-
-    public CellType[][] getCellArray() {
-        return cellArray;
-    }
+public record Map(CellType[][] cellArray) {
 
     /**
      * @param x x coordinate

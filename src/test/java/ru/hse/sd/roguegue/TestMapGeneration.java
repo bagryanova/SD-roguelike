@@ -15,9 +15,9 @@ public class TestMapGeneration {
             MapGenerator mapGenerator = new MapGenerator();
             Map map = mapGenerator.getMap();
             int fin = 0;
-            for (int i = 0; i < map.getCellArray().length; i++) {
+            for (int i = 0; i < map.cellArray().length; i++) {
                 boolean space = false;
-                for (int j = 0; j < map.getCellArray()[0].length; j++) {
+                for (int j = 0; j < map.cellArray()[0].length; j++) {
                     if (map.getCell(i, j) == CellType.GROUND) {
                         space = true;
                         fin = 1;
