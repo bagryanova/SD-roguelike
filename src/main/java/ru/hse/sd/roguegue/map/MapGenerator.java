@@ -1,15 +1,29 @@
 package ru.hse.sd.roguegue.map;
 
+import ru.hse.sd.roguegue.status.MapMode;
+import ru.hse.sd.roguegue.status.Status;
+
 public class MapGenerator {
-    public Map getMap(){
-        return null;
+    private final MapGeneratorUtil mapGeneratorUtil = new MapGeneratorUtil();
+
+    /**
+     * According to the map mode either generates or loads map from file
+     * @return generated instance of Map
+     */
+    public Map getMap() {
+        if (Status.mapMode == MapMode.RANDOM) {
+            return generateMap();
+        } else {
+            return getMapFromFile();
+        }
     }
 
-    private Map generateMap(){
-        return null;
+    private Map generateMap() {
+        return mapGeneratorUtil.generateMap(100, 100);
     }
 
-    private Map getMapFromFile(){
+    private Map getMapFromFile() {
+        // todo
         return null;
     }
 }

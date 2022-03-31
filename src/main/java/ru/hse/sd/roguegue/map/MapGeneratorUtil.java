@@ -8,12 +8,20 @@ public class MapGeneratorUtil {
     private final CellType[][] cells = new CellType[0][0];
     private Constraints constraints;
 
-    public CellType[][] generateMap(int width, int height) {
+    /**
+     * Initializes new map, sets constraints for its creation, generates random number of separated ground spaces
+     * and connects them in a way that all the ground spaces are connected either by paths or by paths and other ground spaces
+     *
+     * @param width  map width
+     * @param height map height
+     * @return randomly generated map
+     */
+    public Map generateMap(int width, int height) {
         initCells(width, height);
         constraints = new Constraints(0.25, 0.7, 4, 8, 4, 8);
         List<GroundSpace> groundSpaces = setGroundSpaces();
         connectGroundSpaces(groundSpaces);
-        return cells;
+        return new Map(cells);
     }
 
     private void initCells(int width, int height) {
@@ -24,6 +32,10 @@ public class MapGeneratorUtil {
         }
     }
 
+    /**
+     * Generates distinct coordinated for ground spaces, sets random sizes to each one and fills the cells accordingly
+     * @return list of all generated ground spaces
+     */
     private List<GroundSpace> setGroundSpaces() {
         int groundsAcross = cells.length / constraints.maxW();
         int groundsDown = cells[0].length / constraints.maxH();
@@ -55,6 +67,10 @@ public class MapGeneratorUtil {
         return coords;
     }
 
+    /**
+     * Connects ground spaces by moving from one to another by random number of steps in random directions
+     * @param groundSpaces list of generated ground spaces
+     */
     private void connectGroundSpaces(List<GroundSpace> groundSpaces) {
         enum Direction {X, Y}
         GroundSpace cur = groundSpaces.remove(0);
@@ -127,7 +143,7 @@ public class MapGeneratorUtil {
     }
 
     /**
-     * Util class for getting random values
+     * Util class for getting random values bounded by constraints
      */
     private static class RandUtil {
 
