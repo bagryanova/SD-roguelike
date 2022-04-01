@@ -20,6 +20,17 @@ test {
     useJUnitPlatform()
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'ru.hse.sd.roguegue.Roguegue'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
