@@ -5,6 +5,7 @@ import ru.hse.sd.roguegue.map.Map;
 import ru.hse.sd.roguegue.map.MapGenerator;
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.GameStatus;
+import ru.hse.sd.roguegue.status.MapMode;
 import ru.hse.sd.roguegue.status.Status;
 
 import java.awt.event.KeyEvent;
@@ -26,6 +27,7 @@ public class Menu {
 
     private void startGame() {
         MapGenerator mapGenerator = new MapGenerator();
+        Status.mapMode = MapMode.RANDOM;
         map = mapGenerator.getMap();
         Status.gameStatus = GameStatus.GAME;
         Status.userState.updatePosition(new Position(0, 0));

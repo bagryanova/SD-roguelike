@@ -19,7 +19,7 @@ public class MapGenerator {
     }
 
     private Map generateMap() {
-        return mapGeneratorUtil.generateMap(50, 70);
+        return mapGeneratorUtil.generateMap(20, 30);
     }
 
     private Map getMapFromFile() {

@@ -13,7 +13,7 @@ public class MapState {
             System.out.println("null");
         }
         map = newMap;
-        System.out.print("TO");
+        System.out.println("TO");
         if (map != null) {
             map.printMap();
         } else {

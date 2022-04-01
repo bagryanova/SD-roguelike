@@ -28,7 +28,7 @@ public record Map(CellType[][] cellArray) {
     public void printMap() {
         for (int i = 0; i < cellArray.length; ++i) {
             for (int j = 0; j < cellArray[i].length; ++j) {
-                System.out.print(cellArray[i][j]);
+                System.out.print(cellArray[i][j] == CellType.GROUND ? "G " : "O ");
             }
             System.out.println();
         }
