@@ -4,7 +4,8 @@ import ru.hse.sd.roguegue.status.MapMode;
 import ru.hse.sd.roguegue.status.Status;
 
 public class MapGenerator {
-    private final MapGeneratorUtil mapGeneratorUtil = new MapGeneratorUtil();
+    private final RandomMapGeneratorUtil mapGeneratorUtil = new RandomMapGeneratorUtil();
+    private final MapFromFileUtil mapFromFileUtil = new MapFromFileUtil();
 
     /**
      * According to the map mode either generates or loads map from file
@@ -23,7 +24,6 @@ public class MapGenerator {
     }
 
     private Map getMapFromFile() {
-        // todo как и хотела
-        return null;
+        return mapFromFileUtil.getRandomMapFromFile();
     }
 }

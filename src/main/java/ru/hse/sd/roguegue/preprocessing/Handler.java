@@ -1,7 +1,7 @@
 package ru.hse.sd.roguegue.preprocessing;
 
 import ru.hse.sd.roguegue.logic.Move;
-import ru.hse.sd.roguegue.logic.UserAction;
+import ru.hse.sd.roguegue.logic.impl.UserAction;
 
 import java.awt.event.KeyEvent;
 

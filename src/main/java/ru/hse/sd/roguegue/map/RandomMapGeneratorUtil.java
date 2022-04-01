@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MapGeneratorUtil {
+public class RandomMapGeneratorUtil {
     private CellType[][] cells = new CellType[0][0];
     private Constraints constraints;
 
@@ -18,10 +18,20 @@ public class MapGeneratorUtil {
      */
     public Map generateMap(int width, int height) {
         initCells(width, height);
-        constraints = new Constraints(0.4, 0.7, 4, 8, 4, 8);
+        constraints = new Constraints(0.4, 0.75, 5, 10, 5, 10);
         List<GroundSpace> groundSpaces = setGroundSpaces();
         connectGroundSpaces(groundSpaces);
-        return new Map(cells);
+        CellType[][] borderedCells = new CellType[cells.length + 2][cells[0].length + 2];
+        for (int i = 0; i < borderedCells.length; i++) {
+            for (int j = 0; j < borderedCells[0].length; j++) {
+                if (i == 0 || i == borderedCells.length - 1 || j == 0 || j == borderedCells[0].length - 1) {
+                    borderedCells[i][j] = CellType.OBSTACLE;
+                } else {
+                    borderedCells[i][j] = cells[i - 1][j - 1];
+                }
+            }
+        }
+        return new Map(borderedCells);
     }
 
     private void initCells(int width, int height) {
