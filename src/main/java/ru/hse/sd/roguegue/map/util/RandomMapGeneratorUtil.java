@@ -1,4 +1,9 @@
-package ru.hse.sd.roguegue.map;
+package ru.hse.sd.roguegue.map.util;
+
+import ru.hse.sd.roguegue.map.CellType;
+import ru.hse.sd.roguegue.map.Map;
+import ru.hse.sd.roguegue.state.Position;
+import ru.hse.sd.roguegue.status.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +11,7 @@ import java.util.Random;
 
 public class RandomMapGeneratorUtil {
     private CellType[][] cells = new CellType[0][0];
+    private final Random rand = new Random();
     private Constraints constraints;
 
     /**
@@ -21,12 +27,19 @@ public class RandomMapGeneratorUtil {
         constraints = new Constraints(0.4, 0.75, 5, 10, 5, 10);
         List<GroundSpace> groundSpaces = setGroundSpaces();
         connectGroundSpaces(groundSpaces);
+        GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size() - 1));
+        cells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
+        boolean setPosition = true;
         CellType[][] borderedCells = new CellType[cells.length + 2][cells[0].length + 2];
         for (int i = 0; i < borderedCells.length; i++) {
             for (int j = 0; j < borderedCells[0].length; j++) {
                 if (i == 0 || i == borderedCells.length - 1 || j == 0 || j == borderedCells[0].length - 1) {
                     borderedCells[i][j] = CellType.OBSTACLE;
                 } else {
+                    if (cells[i - 1][j - 1] == CellType.GROUND && setPosition) {
+                        setPosition = false;
+                        Status.userState.updatePosition(new Position(i, j));
+                    }
                     borderedCells[i][j] = cells[i - 1][j - 1];
                 }
             }

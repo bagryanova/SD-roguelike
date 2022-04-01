@@ -1,4 +1,7 @@
-package ru.hse.sd.roguegue.map;
+package ru.hse.sd.roguegue.map.util;
+
+import ru.hse.sd.roguegue.map.CellType;
+import ru.hse.sd.roguegue.map.Map;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +15,10 @@ public class MapFromFileUtil {
     private final String pathName =
             "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar + "templates";
 
+    /**
+     * Gets map representation from random file and converts it to Map type
+     * @return converted Map
+     */
     public Map getRandomMapFromFile() {
         File file = new File(pathName);
         String[] fileList = file.list();
@@ -19,11 +26,11 @@ public class MapFromFileUtil {
             return null;
         }
         File mapTemplate = new File(pathName + File.separatorChar + fileList[rand.nextInt(fileList.length - 1)]);
-        CellType[][] cellArray = decodeFromFile(mapTemplate);
+        CellType[][] cellArray = convertToMapFromFile(mapTemplate);
         return new Map(cellArray);
     }
 
-    private CellType[][] decodeFromFile(File mapTemplate) {
+    private CellType[][] convertToMapFromFile(File mapTemplate) {
         CellType[][] cellArray = new CellType[42][52];
         AtomicInteger lineNum = new AtomicInteger();
         try (Stream<String> lines = Files.lines(mapTemplate.toPath())) {

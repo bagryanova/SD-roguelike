@@ -1,5 +1,7 @@
 package ru.hse.sd.roguegue.map;
 
+import ru.hse.sd.roguegue.map.util.MapFromFileUtil;
+import ru.hse.sd.roguegue.map.util.RandomMapGeneratorUtil;
 import ru.hse.sd.roguegue.status.MapMode;
 import ru.hse.sd.roguegue.status.Status;
 
