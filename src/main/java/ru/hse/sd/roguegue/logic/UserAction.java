@@ -10,16 +10,17 @@ public class UserAction {
      * @param move current user's move
      */
     public void updateState(Move move) {
-        Position position = Status.userState.getPosition();
+        var state = Status.userState;
+        // todo validate, добавить границу, если стоит на выходе, вызывать финиш игры у game стейта, поменять стейт на меню
         switch (move) {
             case UP ->
-                position.updatePosition(position.getX(), position.getY() + 1);
+                state.updatePosition(new Position(state.getPosition().getX(), state.getPosition().getY() + 1));
             case DOWN ->
-                position.updatePosition(position.getX(), position.getY() - 1);
+                state.updatePosition(new Position(state.getPosition().getX(), state.getPosition().getY() - 1));
             case LEFT ->
-                position.updatePosition(position.getX() - 1, position.getY());
+                state.updatePosition(new Position(state.getPosition().getX() - 1, state.getPosition().getY()));
             case RIGHT ->
-                position.updatePosition(position.getX() + 1, position.getY());
+                state.updatePosition(new Position(state.getPosition().getX() + 1, state.getPosition().getY()));
         }
     }
 }

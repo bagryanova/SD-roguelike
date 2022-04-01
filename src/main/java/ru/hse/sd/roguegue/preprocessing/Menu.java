@@ -27,7 +27,7 @@ public class Menu {
 
     private void startGame() {
         MapGenerator mapGenerator = new MapGenerator();
-        Status.mapMode = MapMode.RANDOM;
+        Status.mapMode = MapMode.RANDOM; // todo кире mapMode задать
         map = mapGenerator.getMap();
         Status.gameStatus = GameStatus.GAME;
         Status.userState.updatePosition(new Position(0, 0));

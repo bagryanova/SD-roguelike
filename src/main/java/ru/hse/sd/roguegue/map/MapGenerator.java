@@ -19,11 +19,11 @@ public class MapGenerator {
     }
 
     private Map generateMap() {
-        return mapGeneratorUtil.generateMap(20, 30);
+        return mapGeneratorUtil.generateMap(40, 50);
     }
 
     private Map getMapFromFile() {
-        // todo
+        // todo как и хотела
         return null;
     }
 }
