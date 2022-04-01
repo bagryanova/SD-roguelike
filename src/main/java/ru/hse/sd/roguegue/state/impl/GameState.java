@@ -13,4 +13,8 @@ public class GameState {
     public int getScore() {
         return score;
     }
+
+    // todo соба
+    public void finishLevel() {
+    }
 }
