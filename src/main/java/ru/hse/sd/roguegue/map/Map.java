@@ -1,5 +1,7 @@
 package ru.hse.sd.roguegue.map;
 
+import ru.hse.sd.roguegue.state.Position;
+
 /**
  * Represents the map, map is stored in the array of cells
  */
@@ -12,6 +14,10 @@ public record Map(CellType[][] cellArray) {
      */
     public CellType getCell(int x, int y) {
         return cellArray[x][y];
+    }
+
+    public CellType getCell(Position position) {
+        return cellArray[position.getX()][position.getY()];
     }
 
     /**

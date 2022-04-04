@@ -30,7 +30,7 @@ public class Menu {
         Status.mapMode = MapMode.RANDOM; // todo кире mapMode задать
         map = mapGenerator.getMap();
         Status.gameStatus = GameStatus.GAME;
-        Status.userState.updatePosition(new Position(0, 0));
+        //Status.userState.updatePosition(new Position(0, 0));
         gameAction.updateState(map);
     }
 

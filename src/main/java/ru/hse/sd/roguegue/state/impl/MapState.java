@@ -1,6 +1,7 @@
 package ru.hse.sd.roguegue.state.impl;
 
 import ru.hse.sd.roguegue.map.Map;
+import ru.hse.sd.roguegue.status.Status;
 
 public class MapState {
     private Map map;
@@ -19,6 +20,9 @@ public class MapState {
         } else {
             System.out.println("null");
         }
+        Status.mapUI.displayMap();
+        Status.userUI.displayPosition();
+
     }
 
     public Map getMap() {

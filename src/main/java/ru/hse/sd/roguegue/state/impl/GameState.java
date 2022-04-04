@@ -1,5 +1,7 @@
 package ru.hse.sd.roguegue.state.impl;
 
+import ru.hse.sd.roguegue.status.Status;
+
 public class GameState {
     private int score;
 
@@ -8,6 +10,7 @@ public class GameState {
         System.out.print("Change score from " + score);
         score = newScore;
         System.out.println("to " + score);
+        Status.gameUI.displayScore();
     }
 
     public int getScore() {
@@ -15,6 +18,15 @@ public class GameState {
     }
 
     // todo соба
+    public void startLevel() {
+        Status.screen = Status.screen.change();
+        Status.terminal.clear();
+        Status.screen.display();
+    }
+
     public void finishLevel() {
+        Status.screen = Status.screen.change();
+        Status.terminal.clear();
+        Status.screen.display();
     }
 }

@@ -20,7 +20,7 @@ public class UserAction implements GameObjectAction {
     public void updateState(Move move) {
         UserState state = Status.userState;
         Position position = state.getPosition();
-        if (Status.mapState.getMap().cellArray()[position.getX()][position.getY() + 1] == CellType.EXIT) {
+        if (Status.mapState.getMap().cellArray()[position.getX()][position.getY()] == CellType.EXIT) {
             Status.gameStatus = GameStatus.MENU;
             Status.gameState.finishLevel();
         }
@@ -28,8 +28,8 @@ public class UserAction implements GameObjectAction {
             state.updatePosition(position);
         }
         switch (move) {
-            case UP -> state.updatePosition(new Position(position.getX(), position.getY() + 1));
-            case DOWN -> state.updatePosition(new Position(position.getX(), position.getY() - 1));
+            case UP -> state.updatePosition(new Position(position.getX(), position.getY() - 1));
+            case DOWN -> state.updatePosition(new Position(position.getX(), position.getY() + 1));
             case LEFT -> state.updatePosition(new Position(position.getX() - 1, position.getY()));
             case RIGHT -> state.updatePosition(new Position(position.getX() + 1, position.getY()));
         }
@@ -41,12 +41,12 @@ public class UserAction implements GameObjectAction {
         CellType[][] cells = Status.mapState.getMap().cellArray();
         switch (move) {
             case UP -> {
-                if (cells[position.getX()][position.getY() + 1] == CellType.OBSTACLE) {
+                if (cells[position.getX()][position.getY() - 1] == CellType.OBSTACLE) {
                     return false;
                 }
             }
             case DOWN -> {
-                if (cells[position.getX()][position.getY() - 1] == CellType.OBSTACLE) {
+                if (cells[position.getX()][position.getY() + 1] == CellType.OBSTACLE) {
                     return false;
                 }
             }

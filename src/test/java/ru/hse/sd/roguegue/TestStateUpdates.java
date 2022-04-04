@@ -1,6 +1,7 @@
 package ru.hse.sd.roguegue;
 
 import org.junit.jupiter.api.Test;
+import ru.hse.sd.roguegue.UI.MapUI;
 import ru.hse.sd.roguegue.logic.GameAction;
 import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.map.Map;
@@ -13,8 +14,7 @@ public class TestStateUpdates {
         for (int i = 0; i < cellTypes.length; i++) {
             for (int j = 0; j < cellTypes[i].length; j++) {
                 if (j % 3 == 0) cellTypes[i][j] = CellType.GROUND;
-                else if (j % 2 == 0) cellTypes[i][j] = CellType.OBSTACLE;
-                else cellTypes[i][j] = CellType.PLAYER;
+                else cellTypes[i][j] = CellType.OBSTACLE;
             }
         }
         Map map = new Map(cellTypes);
