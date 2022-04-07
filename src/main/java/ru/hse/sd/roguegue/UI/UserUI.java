@@ -7,7 +7,6 @@ public class UserUI extends GameObjectUI{
     private Character view = '!';
 
     public void displayPosition() {
-
         Status.terminal.write(view, Status.userState.getPosition().getX() + dx, Status.userState.getPosition().getY() + dy);
     }
 

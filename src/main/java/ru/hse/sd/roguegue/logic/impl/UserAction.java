@@ -20,18 +20,20 @@ public class UserAction implements GameObjectAction {
     public void updateState(Move move) {
         UserState state = Status.userState;
         Position position = state.getPosition();
-        if (Status.mapState.getMap().cellArray()[position.getX()][position.getY()] == CellType.EXIT) {
-            Status.gameStatus = GameStatus.MENU;
-            Status.gameState.finishLevel();
-        }
         if (!validateStep(move)) {
+            System.out.println("not valid");
             state.updatePosition(position);
+            return;
         }
         switch (move) {
             case UP -> state.updatePosition(new Position(position.getX(), position.getY() - 1));
             case DOWN -> state.updatePosition(new Position(position.getX(), position.getY() + 1));
             case LEFT -> state.updatePosition(new Position(position.getX() - 1, position.getY()));
             case RIGHT -> state.updatePosition(new Position(position.getX() + 1, position.getY()));
+        }
+        if (Status.mapState.getMap().cellArray()[Status.userState.getPosition().getY()][Status.userState.getPosition().getX()] == CellType.EXIT) {
+            Status.gameStatus = GameStatus.MENU;
+            Status.gameState.finishLevel();
         }
     }
 
@@ -41,22 +43,22 @@ public class UserAction implements GameObjectAction {
         CellType[][] cells = Status.mapState.getMap().cellArray();
         switch (move) {
             case UP -> {
-                if (cells[position.getX()][position.getY() - 1] == CellType.OBSTACLE) {
+                if (cells[position.getY() - 1][position.getX()] == CellType.OBSTACLE) {
                     return false;
                 }
             }
             case DOWN -> {
-                if (cells[position.getX()][position.getY() + 1] == CellType.OBSTACLE) {
+                if (cells[position.getY() + 1][position.getX()] == CellType.OBSTACLE) {
                     return false;
                 }
             }
             case LEFT -> {
-                if (cells[position.getX() - 1][position.getY()] == CellType.OBSTACLE) {
+                if (cells[position.getY()][position.getX() - 1] == CellType.OBSTACLE) {
                     return false;
                 }
             }
             case RIGHT -> {
-                if (cells[position.getX() + 1][position.getY()] == CellType.OBSTACLE) {
+                if (cells[position.getY()][position.getX() + 1] == CellType.OBSTACLE) {
                     return false;
                 }
             }

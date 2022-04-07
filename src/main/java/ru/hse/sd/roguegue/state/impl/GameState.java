@@ -17,7 +17,6 @@ public class GameState {
         return score;
     }
 
-    // todo соба
     public void startLevel() {
         Status.screen = Status.screen.change();
         Status.terminal.clear();

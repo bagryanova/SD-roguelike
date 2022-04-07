@@ -22,7 +22,7 @@ public class MapGenerator {
     }
 
     private Map generateMap() {
-        return mapGeneratorUtil.generateMap(40, 50);
+        return mapGeneratorUtil.generateMap(50, 40);
     }
 
     private Map getMapFromFile() {

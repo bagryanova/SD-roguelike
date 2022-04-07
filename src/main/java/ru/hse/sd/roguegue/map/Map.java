@@ -1,6 +1,7 @@
 package ru.hse.sd.roguegue.map;
 
 import ru.hse.sd.roguegue.state.Position;
+import ru.hse.sd.roguegue.status.Status;
 
 /**
  * Represents the map, map is stored in the array of cells
@@ -17,7 +18,7 @@ public record Map(CellType[][] cellArray) {
     }
 
     public CellType getCell(Position position) {
-        return cellArray[position.getX()][position.getY()];
+        return cellArray[position.getY()][position.getX()];
     }
 
     /**
@@ -32,9 +33,12 @@ public record Map(CellType[][] cellArray) {
     }
 
     public void printMap() {
-        for (CellType[] cellTypes : cellArray) {
-            for (int j = 0; j < cellTypes.length; ++j) {
-                if (cellTypes[j] == CellType.EXIT) System.out.print("E");
+        System.out.println("USER POS " + Status.userState.getPosition().getX() + ' ' + Status.userState.getPosition().getY());
+        for (int i = 0; i < cellArray.length; i++) {
+            var cellTypes = cellArray[i];
+            for (int j = 0; j < cellTypes.length; j++) {
+                if (Status.userState.getPosition().getX() == j && Status.userState.getPosition().getY() == i) System.out.print("O");
+                else if (cellTypes[j] == CellType.EXIT) System.out.print("E");
 //                else if (cellTypes[j] == CellType.PLAYER) System.out.print("P");
                 else if (cellTypes[j] == CellType.GROUND) System.out.print("G");
                 else if (cellTypes[j] == CellType.OBSTACLE) System.out.print(".");

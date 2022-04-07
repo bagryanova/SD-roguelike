@@ -38,7 +38,7 @@ public class MapUI {
             //System.out.println(Status.terminal.getCursorX());
             Status.terminal.setCursorX(dx);
             for (int j = 0; j < cellArray[i].length; ++j) {
-                System.out.println(cellArray[i][j]);
+//                System.out.println(cellArray[i][j]);
                 Status.terminal.write(graphicRepresentation.get(cellArray[i][j]));
                 //graphicRepresentation.get(cellArray[i][j]);
             }
