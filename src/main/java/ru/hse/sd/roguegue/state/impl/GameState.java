@@ -2,14 +2,21 @@ package ru.hse.sd.roguegue.state.impl;
 
 import ru.hse.sd.roguegue.status.Status;
 
+/**
+ * Class for information about game process (such as score)
+ */
 public class GameState {
     private int score;
 
+    /**
+     * @param newScore
+     * update score according to the newScore and display changes on the screen
+     */
     // todo как у нас вообще счет обновляется..?
     public void updateScore(int newScore) {
-        System.out.print("Change score from " + score);
+        //System.out.print("Change score from " + score);
         score = newScore;
-        System.out.println("to " + score);
+        //System.out.println("to " + score);
         Status.gameUI.displayScore();
     }
 
@@ -17,12 +24,18 @@ public class GameState {
         return score;
     }
 
+    /**
+     * Do everything to start the level in terms of UI (change screens, clear terminal and display new information)
+     */
     public void startLevel() {
         Status.screen = Status.screen.change();
         Status.terminal.clear();
         Status.screen.display();
     }
 
+    /**
+     * Do everything to finish the level in terms of UI (change screens, clear terminal and display new information)
+     */
     public void finishLevel() {
         Status.screen = Status.screen.change();
         Status.terminal.clear();

@@ -7,12 +7,19 @@ import ru.hse.sd.roguegue.status.Status;
 
 import java.util.EnumMap;
 
+/**
+ * Class for displaying the map. It should have graphic representations for all cell types.
+ * Can display a full map or a one cell.
+ */
 public class MapUI {
     private final EnumMap<CellType, Character> graphicRepresentation;
     private final int dx = Constants.MAP_START_X;
     private final int dy = Constants.MAP_START_Y;
 
 
+    /**
+     * In the constructor we have to define all graphic representations
+     */
     public MapUI() {
         graphicRepresentation = new EnumMap<>(CellType.class);
         graphicRepresentation.put(CellType.GROUND, (char)250);
@@ -20,6 +27,10 @@ public class MapUI {
         graphicRepresentation.put(CellType.EXIT, '+');
     }
 
+    /**
+     * @param position
+     * Display only one cell from the map according to the position
+     */
     public void displayCell(Position position) {
         if (Status.mapState.getMap() == null) {
             return;
@@ -28,19 +39,16 @@ public class MapUI {
         Status.terminal.write(graphicRepresentation.get(curCell), dx + position.getX(), dy + position.getY());
     }
 
+    /**
+     * Display a full map
+     */
     public void displayMap() {
-        //System.out.println("CCCC");
-        //Status.terminal.clear();
-        //Status.screen.display();
         CellType[][] cellArray = Status.mapState.getMap().cellArray();
         Status.terminal.setCursorY(dy);
         for (int i = 0; i < cellArray.length; ++i) {
-            //System.out.println(Status.terminal.getCursorX());
             Status.terminal.setCursorX(dx);
             for (int j = 0; j < cellArray[i].length; ++j) {
-//                System.out.println(cellArray[i][j]);
                 Status.terminal.write(graphicRepresentation.get(cellArray[i][j]));
-                //graphicRepresentation.get(cellArray[i][j]);
             }
             Status.terminal.setCursorY(Status.terminal.getCursorY() + 1);
         }

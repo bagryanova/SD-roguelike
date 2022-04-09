@@ -1,6 +1,7 @@
 package ru.hse.sd.roguegue.status;
 
 import asciiPanel.AsciiPanel;
+import ru.hse.sd.roguegue.Constants;
 import ru.hse.sd.roguegue.UI.GameUI;
 import ru.hse.sd.roguegue.UI.MapUI;
 import ru.hse.sd.roguegue.UI.UserUI;
@@ -36,10 +37,29 @@ public class Status {
      */
     public static MapState mapState = new MapState();
 
-    public static AsciiPanel terminal = new AsciiPanel(100, 100);
+    /**
+     * Terminal for UI
+     */
+    public static AsciiPanel terminal = new AsciiPanel(Constants.TERMINAL_SIZE_X, Constants.TERMINAL_SIZE_Y);
+
+    /**
+     * Current version of screen (menu, game or win)
+     */
     public static Screen screen = new MenuScreen();
+
+    /**
+     * UI for Map. Can display it
+     */
     public static MapUI mapUI = new MapUI();
+
+    /**
+     * UI for game information. Can display score
+     */
     public static GameUI gameUI = new GameUI();
+
+    /**
+     * UI for user. Can display user
+     */
     public static UserUI userUI = new UserUI();
 
     /**
