@@ -14,9 +14,7 @@ public class GameState {
      */
     // todo как у нас вообще счет обновляется..?
     public void updateScore(int newScore) {
-        //System.out.print("Change score from " + score);
         score = newScore;
-        //System.out.println("to " + score);
         Status.gameUI.displayScore();
     }
 

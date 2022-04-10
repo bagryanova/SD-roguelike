@@ -13,10 +13,8 @@ public abstract class GameObjectState {
      * update position according to the newPosition and display changes on the screen
      */
     public void updatePosition(Position newPosition) {
-        //System.out.print("Change position from (" + position.getX() + ", " + position.getY() + ")");
         Status.mapUI.displayCell(position);
         position = newPosition;
-        //System.out.println(" to (" + position.getX() + ", " + position.getY() + ")");
         Status.userUI.displayPosition();
     }
 

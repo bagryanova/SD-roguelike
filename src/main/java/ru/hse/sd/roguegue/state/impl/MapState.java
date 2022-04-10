@@ -14,19 +14,7 @@ public class MapState {
      * update map according to the newMap and display changes on the screen (map and everything which should be on it)
      */
     public void updateMap(Map newMap) {
-        /*System.out.println("CHANGE MAP FROM");
-        if (map != null) {
-            map.printMap();
-        } else {
-            System.out.println("null");
-        }*/
         map = newMap;
-        /*System.out.println("TO");
-        if (map != null) {
-            map.printMap();
-        } else {
-            System.out.println("null");
-        }*/
         Status.mapUI.displayMap();
         Status.userUI.displayPosition();
 

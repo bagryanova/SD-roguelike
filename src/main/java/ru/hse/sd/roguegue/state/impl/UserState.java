@@ -14,9 +14,7 @@ public class UserState extends GameObjectState {
      * update health according to the newHealth and display changes on the screen
      */
     public void updateHealth(int newHealth) {
-        //System.out.print("Change health from " + health);
         health = newHealth;
-        //System.out.println(" to " + health);
         Status.userUI.displayHealth();
     }
 
