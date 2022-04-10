@@ -1,5 +1,7 @@
 package ru.hse.sd.roguegue.state;
 
+import java.util.Objects;
+
 /**
  * Position on the two-dimensional map
  */
@@ -39,5 +41,18 @@ public class Position {
      */
     public int getY() {
         return y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Position)) return false;
+        Position position = (Position) o;
+        return getX() == position.getX() && getY() == position.getY();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getX(), getY());
     }
 }
