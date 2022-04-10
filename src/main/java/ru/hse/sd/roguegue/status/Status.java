@@ -35,6 +35,12 @@ public class Status {
      */
     public static void init() {
         gameStatus = GameStatus.MENU;
+        mapMode = MapMode.RANDOM;
+    }
+
+    public static void init(MapMode newMapMode) {
+        gameStatus = GameStatus.MENU;
+        mapMode = newMapMode;
     }
 
 }
