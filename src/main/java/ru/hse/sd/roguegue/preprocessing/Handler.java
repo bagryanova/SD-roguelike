@@ -13,6 +13,9 @@ public class Handler {
                 event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN;
     }
 
+    /**
+     * Depending on the user's action update game state
+     */
     public void setUserAction(KeyEvent event) {
         if (!validateAction(event)) {
             return;

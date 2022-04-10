@@ -23,6 +23,9 @@ public class UserInteraction extends JFrame implements KeyListener {
         //super.repaint();
     }
 
+    /**
+     * Get user's action and redirect it on the next layer
+     */
     public synchronized void getUserAction() {
         KeyEvent event = inputQueue.poll();
         if (event == null) {
@@ -31,7 +34,7 @@ public class UserInteraction extends JFrame implements KeyListener {
         redirectUserAction(event);
     }
 
-    void redirectUserAction(KeyEvent event) {
+    private void redirectUserAction(KeyEvent event) {
         if (Status.gameStatus == GameStatus.MENU) {
             menu.handleAction(event);
         } else if (Status.gameStatus == GameStatus.GAME) {
@@ -43,6 +46,9 @@ public class UserInteraction extends JFrame implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * Put all user's action un queue
+     */
     @Override
     synchronized public void keyPressed(KeyEvent e) {
         inputQueue.add(e);

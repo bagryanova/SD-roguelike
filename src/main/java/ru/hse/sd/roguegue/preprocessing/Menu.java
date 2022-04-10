@@ -14,6 +14,9 @@ public class Menu {
     private final GameAction gameAction = new GameAction();
     private Map map;
 
+    /**
+     * Depending on the user's action start the game or exit
+     */
     public void handleAction(KeyEvent event) {
         if (!validateAction(event)) {
             return;
