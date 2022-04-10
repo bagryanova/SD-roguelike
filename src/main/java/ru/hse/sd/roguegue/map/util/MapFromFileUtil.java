@@ -27,7 +27,8 @@ public class MapFromFileUtil {
         }
         File mapTemplate = new File(pathName + File.separatorChar + fileList[rand.nextInt(fileList.length - 1)]);
         CellType[][] cellArray = convertToMapFromFile(mapTemplate);
-        return new Map(cellArray);
+        CommonMapUtil commonMapUtil = new CommonMapUtil();
+        return new Map(commonMapUtil.setBoundsAndPositions(cellArray));
     }
 
     private CellType[][] convertToMapFromFile(File mapTemplate) {
