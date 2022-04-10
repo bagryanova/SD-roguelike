@@ -12,6 +12,7 @@ import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.Status;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,36 +38,32 @@ public class TestHandler {
     @Test
     public void testHandlerUp() {
         assertEquals(Status.userState.getPosition(), new Position(1, 1));
-        UserInteraction userInteraction = new UserInteraction();
         Handler handler = new Handler();
-        handler.setUserAction(new KeyEvent(userInteraction, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_UP, 'w'));
+        handler.setUserAction(new KeyEvent(new Component() {}, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_UP, 'w'));
         assertEquals(Status.userState.getPosition(), new Position(1, 2));
     }
 
     @Test
     public void testHandlerDown() {
         assertEquals(Status.userState.getPosition(), new Position(1, 1));
-        UserInteraction userInteraction = new UserInteraction();
         Handler handler = new Handler();
-        handler.setUserAction(new KeyEvent(userInteraction, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_DOWN, 's'));
+        handler.setUserAction(new KeyEvent(new Component() {}, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_DOWN, 's'));
         assertEquals(Status.userState.getPosition(), new Position(1, 0));
     }
 
     @Test
     public void testHandlerLeft() {
         assertEquals(Status.userState.getPosition(), new Position(1, 1));
-        UserInteraction userInteraction = new UserInteraction();
         Handler handler = new Handler();
-        handler.setUserAction(new KeyEvent(userInteraction, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_LEFT, 'a'));
+        handler.setUserAction(new KeyEvent(new Component() {}, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_LEFT, 'a'));
         assertEquals(Status.userState.getPosition(), new Position(0, 1));
     }
 
     @Test
     public void testHandlerRight() {
         assertEquals(Status.userState.getPosition(), new Position(1, 1));
-        UserInteraction userInteraction = new UserInteraction();
         Handler handler = new Handler();
-        handler.setUserAction(new KeyEvent(userInteraction, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_RIGHT, 'd'));
+        handler.setUserAction(new KeyEvent(new Component() {}, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_RIGHT, 'd'));
         assertEquals(Status.userState.getPosition(), new Position(2, 1));
     }
 }
