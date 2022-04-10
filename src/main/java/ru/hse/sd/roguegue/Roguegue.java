@@ -8,6 +8,9 @@ import ru.hse.sd.roguegue.status.Status;
 import java.util.Objects;
 
 public class Roguegue {
+    /**
+     * Initialize status and start game
+     */
     public static void main(String[] args) {
         if (args.length == 1 && Objects.equals(args[0], "-f")) {
             Status.init(MapMode.FILE);
