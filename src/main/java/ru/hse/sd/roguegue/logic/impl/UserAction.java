@@ -21,7 +21,6 @@ public class UserAction implements GameObjectAction {
         UserState state = Status.userState;
         Position position = state.getPosition();
         if (!validateStep(move)) {
-            System.out.println("not valid");
             state.updatePosition(position);
             return;
         }

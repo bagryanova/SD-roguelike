@@ -11,7 +11,7 @@ public class TestMapGeneration {
     @Test
     public void stressTestRandomMapGeneration() {
         Status.mapMode = MapMode.RANDOM;
-        for (int cnt = 0; cnt < 100; cnt++) {
+        for (int cnt = 0; cnt < 1000; cnt++) {
             MapGenerator mapGenerator = new MapGenerator();
             Map map = mapGenerator.getMap();
             int fin = 0;

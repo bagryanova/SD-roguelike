@@ -1,5 +1,6 @@
 package ru.hse.sd.roguegue.map;
 
+import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.map.util.MapFromFileUtil;
 import ru.hse.sd.roguegue.map.util.RandomMapGeneratorUtil;
 import ru.hse.sd.roguegue.status.MapMode;
@@ -22,7 +23,7 @@ public class MapGenerator {
     }
 
     private Map generateMap() {
-        return mapGeneratorUtil.generateMap(50, 40);
+        return mapGeneratorUtil.generateMap(Constants.MAP_WIDTH, Constants.MAP_HEIGHT);
     }
 
     private Map getMapFromFile() {

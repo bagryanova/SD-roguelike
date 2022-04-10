@@ -1,7 +1,6 @@
 package ru.hse.sd.roguegue.status;
 
 import asciiPanel.AsciiPanel;
-import ru.hse.sd.roguegue.Constants;
 import ru.hse.sd.roguegue.UI.GameUI;
 import ru.hse.sd.roguegue.UI.MapUI;
 import ru.hse.sd.roguegue.UI.UserUI;

@@ -26,31 +26,30 @@ public class RandomMapGeneratorUtil {
         initCells(width, height);
         constraints = new Constraints(0.4, 0.75, 5, 10, 5, 10);
         List<GroundSpace> groundSpaces = setGroundSpaces();
-        System.out.println("sz before " + groundSpaces.size());
         connectGroundSpaces(groundSpaces);
-        System.out.println(groundSpaces.size());
         GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
         cells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
         boolean setPosition = true;
         CellType[][] borderedCells = new CellType[cells.length + 2][cells[0].length + 2];
-        for (int i = 0; i < borderedCells.length; i++) {
-            for (int j = 0; j < borderedCells[0].length; j++) {
-                if (i == 0 || i == borderedCells.length - 1 || j == 0 || j == borderedCells[0].length - 1) {
-                    borderedCells[i][j] = CellType.OBSTACLE;
-                } else {
-                    borderedCells[i][j] = cells[i - 1][j - 1];
-                }
-            }
-        }
-        for (int i = 0; i < borderedCells.length; i++) {
-            for (int j = 0; j < borderedCells[0].length; j++) {
-                if (borderedCells[i][j] == CellType.GROUND && setPosition) {
-                    setPosition = false;
-                    Status.userState.updatePosition(new Position(j, i));
-                }
-            }
-        }
-        return new Map(borderedCells);
+//        for (int i = 0; i < borderedCells.length; i++) {
+//            for (int j = 0; j < borderedCells[0].length; j++) {
+//                if (i == 0 || i == borderedCells.length - 1 || j == 0 || j == borderedCells[0].length - 1) {
+//                    borderedCells[i][j] = CellType.OBSTACLE;
+//                } else {
+//                    borderedCells[i][j] = cells[i - 1][j - 1];
+//                }
+//            }
+//        }
+//        for (int i = 0; i < borderedCells.length; i++) {
+//            for (int j = 0; j < borderedCells[0].length; j++) {
+//                if (borderedCells[i][j] == CellType.GROUND && setPosition) {
+//                    setPosition = false;
+//                    Status.userState.updatePosition(new Position(j, i));
+//                }
+//            }
+//        }
+        CommonMapUtil commonMapUtil = new CommonMapUtil();
+        return new Map(commonMapUtil.setBoundsAndPositions(cells));
     }
 
     private void initCells(int width, int height) {
@@ -76,7 +75,6 @@ public class RandomMapGeneratorUtil {
         if (maxGrounds < totalGrounds) maxGrounds = totalGrounds + 1;
         List<GroundSpace> grounds = new ArrayList<>(totalGrounds);
         List<Integer> coords = generateCoordinates(totalGrounds, maxGrounds - 1);
-        System.out.println("coords sz " + coords.size());
         coords.forEach(center -> {
             int w = RandUtil.getRandom(constraints.minW(), constraints.maxW());
             int h = RandUtil.getRandom(constraints.minH(), constraints.maxH());
@@ -86,7 +84,6 @@ public class RandomMapGeneratorUtil {
             ground.setCells(cells);
             grounds.add(ground);
         });
-        System.out.println("sz " + grounds.size());
         return grounds;
     }
 

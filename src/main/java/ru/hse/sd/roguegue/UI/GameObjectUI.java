@@ -1,6 +1,6 @@
 package ru.hse.sd.roguegue.UI;
 
-import ru.hse.sd.roguegue.Constants;
+import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.Status;
 
