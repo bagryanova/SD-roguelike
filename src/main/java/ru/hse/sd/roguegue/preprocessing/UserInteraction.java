@@ -18,9 +18,6 @@ public class UserInteraction extends JFrame implements KeyListener {
     public UserInteraction() {
         super();
         add(Status.terminal);
-        //super.addKeyListener(this);
-        //super.setSize(600, 600);
-        //Status.terminal.setDefaultForegroundColor(Color.green);
         pack();
         addKeyListener(this);
         setVisible(true);

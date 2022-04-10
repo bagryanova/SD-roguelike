@@ -3,9 +3,7 @@ package ru.hse.sd.roguegue.preprocessing;
 import ru.hse.sd.roguegue.logic.GameAction;
 import ru.hse.sd.roguegue.map.Map;
 import ru.hse.sd.roguegue.map.MapGenerator;
-import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.GameStatus;
-import ru.hse.sd.roguegue.status.MapMode;
 import ru.hse.sd.roguegue.status.Status;
 
 import java.awt.event.KeyEvent;
@@ -32,7 +30,6 @@ public class Menu {
         MapGenerator mapGenerator = new MapGenerator();
         map = mapGenerator.getMap();
         Status.gameStatus = GameStatus.GAME;
-        //Status.userState.updatePosition(new Position(0, 0));
         gameAction.updateState(map);
     }
 
