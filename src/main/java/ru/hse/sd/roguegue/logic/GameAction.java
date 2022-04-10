@@ -10,6 +10,7 @@ public class GameAction {
      */
     public void updateState(Map map) {
         Status.mapState.updateMap(map);
+        Status.gameState.startLevel();
     }
 }
 

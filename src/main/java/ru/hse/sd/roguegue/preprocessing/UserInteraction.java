@@ -4,6 +4,7 @@ import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.Status;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
@@ -13,14 +14,19 @@ public class UserInteraction extends JFrame implements KeyListener {
     private final Queue<KeyEvent> inputQueue = new LinkedList<>();
     private final Menu menu = new Menu();
     private final Handler handler = new Handler();
-    //private AsciiPanel terminal = new AsciiPanel(500, 500);
 
     public UserInteraction() {
-        //super.add(terminal);
-        super.addKeyListener(this);
+        super();
+        add(Status.terminal);
+        //super.addKeyListener(this);
         //super.setSize(600, 600);
-        super.setVisible(true);
-        //super.repaint();
+        //Status.terminal.setDefaultForegroundColor(Color.green);
+        pack();
+        addKeyListener(this);
+        setVisible(true);
+        Status.terminal.clear();
+        Status.screen.display();
+        super.repaint();
     }
 
     /**
@@ -32,6 +38,7 @@ public class UserInteraction extends JFrame implements KeyListener {
             return;
         }
         redirectUserAction(event);
+        super.repaint();
     }
 
     private void redirectUserAction(KeyEvent event) {

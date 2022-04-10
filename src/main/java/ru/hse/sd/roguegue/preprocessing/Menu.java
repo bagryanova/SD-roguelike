@@ -32,7 +32,7 @@ public class Menu {
         MapGenerator mapGenerator = new MapGenerator();
         map = mapGenerator.getMap();
         Status.gameStatus = GameStatus.GAME;
-        Status.userState.updatePosition(new Position(0, 0));
+        //Status.userState.updatePosition(new Position(0, 0));
         gameAction.updateState(map);
     }
 
