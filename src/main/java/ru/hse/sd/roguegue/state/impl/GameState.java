@@ -2,11 +2,23 @@ package ru.hse.sd.roguegue.state.impl;
 
 import ru.hse.sd.roguegue.status.Status;
 
+import java.util.ArrayList;
+
 /**
  * Class for information about game process (such as score)
  */
 public class GameState {
     private int score;
+
+    public ArrayList<MobState> getMobStates() {
+        return mobStates;
+    }
+
+    public void setMobStates(ArrayList<MobState> mobStates) {
+        this.mobStates = mobStates;
+    }
+
+    private ArrayList<MobState> mobStates;
 
     /**
      * @param newScore
