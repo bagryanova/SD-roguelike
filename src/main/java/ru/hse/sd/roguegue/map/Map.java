@@ -39,8 +39,9 @@ public record Map(CellType[][] cellArray) {
             for (int j = 0; j < cellTypes.length; j++) {
                 if (Status.userState.getPosition().getX() == j && Status.userState.getPosition().getY() == i) System.out.print("O");
                 else if (cellTypes[j] == CellType.EXIT) System.out.print("E");
-                else if (cellTypes[j] == CellType.GROUND) System.out.print("G");
+                else if (cellTypes[j] == CellType.GROUND) System.out.print("x");
                 else if (cellTypes[j] == CellType.OBSTACLE) System.out.print(".");
+                else if (cellTypes[j] == CellType.INVENTORY) System.out.print("I");
             }
             System.out.println();
         }

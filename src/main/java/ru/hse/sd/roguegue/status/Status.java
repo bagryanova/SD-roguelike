@@ -10,6 +10,9 @@ import ru.hse.sd.roguegue.state.impl.GameState;
 import ru.hse.sd.roguegue.state.impl.MapState;
 import ru.hse.sd.roguegue.state.impl.UserState;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Status {
     /**
      * Current game status
@@ -60,6 +63,11 @@ public class Status {
      * UI for user. Can display user
      */
     public static UserUI userUI = new UserUI();
+
+    // todo где-нибудь инициализировать в начале игры и задать этому всему характеристики
+    public static List<String> inventoryObjects = List.of("Helmet", "Sword", "Knife", "Coat");
+
+    public static List<InventoryItem> inventory = new ArrayList<>(List.of());
 
     /**
      * Initializes game status by setting default values todo

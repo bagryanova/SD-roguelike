@@ -3,6 +3,7 @@ package ru.hse.sd.roguegue.map.util;
 import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.map.Map;
 import ru.hse.sd.roguegue.state.Position;
+import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
 import java.util.ArrayList;
@@ -28,28 +29,27 @@ public class RandomMapGeneratorUtil {
         List<GroundSpace> groundSpaces = setGroundSpaces();
         connectGroundSpaces(groundSpaces);
         GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
+        placeInventory(groundSpaces);
         cells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
-        boolean setPosition = true;
-        CellType[][] borderedCells = new CellType[cells.length + 2][cells[0].length + 2];
-//        for (int i = 0; i < borderedCells.length; i++) {
-//            for (int j = 0; j < borderedCells[0].length; j++) {
-//                if (i == 0 || i == borderedCells.length - 1 || j == 0 || j == borderedCells[0].length - 1) {
-//                    borderedCells[i][j] = CellType.OBSTACLE;
-//                } else {
-//                    borderedCells[i][j] = cells[i - 1][j - 1];
-//                }
-//            }
-//        }
-//        for (int i = 0; i < borderedCells.length; i++) {
-//            for (int j = 0; j < borderedCells[0].length; j++) {
-//                if (borderedCells[i][j] == CellType.GROUND && setPosition) {
-//                    setPosition = false;
-//                    Status.userState.updatePosition(new Position(j, i));
-//                }
-//            }
-//        }
         CommonMapUtil commonMapUtil = new CommonMapUtil();
         return new Map(commonMapUtil.setBoundsAndPositions(cells));
+    }
+
+    private void placeMobs() {
+
+    }
+
+    private void placeInventory(List<GroundSpace> groundSpaces) {
+        for (String item : Status.inventoryObjects) {
+            GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
+            Position position = getRandomGroundCell(gs);
+            Status.inventory.add(new InventoryItem(item, position));
+            cells[position.getX()][position.getY()] = CellType.INVENTORY;
+        }
+    }
+
+    private Position getRandomGroundCell(GroundSpace gs) {
+        return new Position(rand.nextInt(gs.x + 1, gs.x + gs.w - 1), rand.nextInt(gs.y() + 1, gs.y() + gs.h() - 1));
     }
 
     private void initCells(int width, int height) {

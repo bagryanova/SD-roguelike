@@ -11,9 +11,10 @@ public class TestMapGeneration {
     @Test
     public void stressTestRandomMapGeneration() {
         Status.mapMode = MapMode.RANDOM;
-        for (int cnt = 0; cnt < 100; cnt++) {
+        for (int cnt = 0; cnt < 10; cnt++) {
             MapGenerator mapGenerator = new MapGenerator();
             Map map = mapGenerator.getMap();
+            map.printMap();
             int fin = 0;
             for (int i = 0; i < map.cellArray().length; i++) {
                 boolean space = false;
