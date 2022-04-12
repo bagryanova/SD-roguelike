@@ -14,7 +14,6 @@ public class TestMapGeneration {
         for (int cnt = 0; cnt < 10; cnt++) {
             MapGenerator mapGenerator = new MapGenerator();
             Map map = mapGenerator.getMap();
-            map.printMap();
             int fin = 0;
             for (int i = 0; i < map.cellArray().length; i++) {
                 boolean space = false;

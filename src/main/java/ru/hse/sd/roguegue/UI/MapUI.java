@@ -25,8 +25,12 @@ public class MapUI {
         graphicRepresentation.put(CellType.GROUND, (char)250);
         graphicRepresentation.put(CellType.OBSTACLE, (char)177);
         graphicRepresentation.put(CellType.EXIT, '+');
+
         // todo соба я тут тестила и поменяла тебе немного
         graphicRepresentation.put(CellType.INVENTORY, 'I');
+        graphicRepresentation.put(CellType.AGGRESSIVE_MOB, 'A');
+        graphicRepresentation.put(CellType.PASSIVE_MOB, 'P');
+        graphicRepresentation.put(CellType.FEARFUL_MOB, 'F');
     }
 
     /**

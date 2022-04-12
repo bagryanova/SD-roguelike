@@ -30,13 +30,30 @@ public class RandomMapGeneratorUtil {
         connectGroundSpaces(groundSpaces);
         GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
         placeInventory(groundSpaces);
+        placeMobs();
         cells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
         CommonMapUtil commonMapUtil = new CommonMapUtil();
         return new Map(commonMapUtil.setBoundsAndPositions(cells));
     }
 
     private void placeMobs() {
+        int aggressiveMobsCount = rand.nextInt(2, 5);
+        int passiveMobsCount = rand.nextInt(2, 6);
+        int fearfulMobsCount = rand.nextInt(2, 5);
+        placeMobsOfType(aggressiveMobsCount, CellType.AGGRESSIVE_MOB);
+        placeMobsOfType(passiveMobsCount, CellType.PASSIVE_MOB);
+        placeMobsOfType(fearfulMobsCount, CellType.FEARFUL_MOB);
+    }
 
+    private void placeMobsOfType(int mobsCount, CellType mobType) {
+        for (int c = 0; c < mobsCount; c++) {
+            int i = 0, j = 0;
+            while (cells[j][i] != CellType.GROUND) {
+                i = rand.nextInt(1, cells[0].length - 1);
+                j = rand.nextInt(1, cells.length - 1);
+            }
+            cells[j][i] = mobType;
+        }
     }
 
     private void placeInventory(List<GroundSpace> groundSpaces) {
