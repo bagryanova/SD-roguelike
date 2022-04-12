@@ -8,6 +8,7 @@ import ru.hse.sd.roguegue.UI.screens.MenuScreen;
 import ru.hse.sd.roguegue.UI.screens.Screen;
 import ru.hse.sd.roguegue.state.impl.GameState;
 import ru.hse.sd.roguegue.state.impl.MapState;
+import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.state.impl.UserState;
 
 public class Status {

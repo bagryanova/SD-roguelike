@@ -1,6 +1,11 @@
 package ru.hse.sd.roguegue.state;
 
+import ru.hse.sd.roguegue.logic.Move;
+
+import java.awt.event.KeyEvent;
 import java.util.Objects;
+
+import static java.lang.Math.abs;
 
 /**
  * Position on the two-dimensional map
@@ -11,6 +16,7 @@ public class Position {
 
     /**
      * Sets position to the position specified by coordinates
+     *
      * @param x x coordinate
      * @param y y coordinate
      */
@@ -20,7 +26,8 @@ public class Position {
     }
 
     /**
-     Updates position according to the given coordinates
+     * Updates position according to the given coordinates
+     *
      * @param x x coordinate
      * @param y y coordinate
      */
@@ -54,5 +61,20 @@ public class Position {
     @Override
     public int hashCode() {
         return Objects.hash(getX(), getY());
+    }
+
+    public Position move(Move move) {
+        Position tmp = this;
+        switch (move) {
+            case DOWN -> tmp.updatePosition(x, y - 1);
+            case UP -> tmp.updatePosition(x, y + 1);
+            case LEFT -> tmp.updatePosition(x - 1, y);
+            case RIGHT -> tmp.updatePosition(x + 1, y);
+        }
+        return tmp;
+    }
+
+    public int distance(Position position) {
+        return abs(x - position.getX()) + abs(y - position.getY());
     }
 }
