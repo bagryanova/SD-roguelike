@@ -3,6 +3,7 @@ package ru.hse.sd.roguegue.map.util;
 import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.map.Map;
 import ru.hse.sd.roguegue.state.Position;
+import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
@@ -25,34 +26,27 @@ public class RandomMapGeneratorUtil {
      */
     public Map generateMap(int width, int height) {
         initCells(width, height);
-        constraints = new Constraints(0.4, 0.75, 5, 10, 5, 10);
+        constraints = new Constraints(0.4, 0.65, 6, 10, 6, 12);
         List<GroundSpace> groundSpaces = setGroundSpaces();
         connectGroundSpaces(groundSpaces);
         GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
         placeInventory(groundSpaces);
-        placeMobs();
         cells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
         CommonMapUtil commonMapUtil = new CommonMapUtil();
-        return new Map(commonMapUtil.setBoundsAndPositions(cells));
+        Map newMap = new Map(commonMapUtil.setBoundsAndPositions(cells));
+        placeMobs(newMap.cellArray());
+        return newMap;
     }
 
-    private void placeMobs() {
-        int aggressiveMobsCount = rand.nextInt(2, 5);
-        int passiveMobsCount = rand.nextInt(2, 6);
-        int fearfulMobsCount = rand.nextInt(2, 5);
-        placeMobsOfType(aggressiveMobsCount, CellType.AGGRESSIVE_MOB);
-        placeMobsOfType(passiveMobsCount, CellType.PASSIVE_MOB);
-        placeMobsOfType(fearfulMobsCount, CellType.FEARFUL_MOB);
-    }
-
-    private void placeMobsOfType(int mobsCount, CellType mobType) {
-        for (int c = 0; c < mobsCount; c++) {
+    private void placeMobs(CellType[][] mapCells) {
+        for (int c = 0; c < Status.gameState.getMobStates().size(); c++) {
             int i = 0, j = 0;
-            while (cells[j][i] != CellType.GROUND) {
-                i = rand.nextInt(1, cells[0].length - 1);
-                j = rand.nextInt(1, cells.length - 1);
+            while (mapCells[i][j] != CellType.GROUND) {
+                i = rand.nextInt(0, mapCells.length - 1);
+                j = rand.nextInt(0, mapCells[0].length - 1);
             }
-            cells[j][i] = mobType;
+            assert mapCells[i][j] == CellType.GROUND;
+            Status.gameState.getMobStates().get(c).updatePosition(new Position(j, i)); // todo надеюсь реально i j, а не j i
         }
     }
 

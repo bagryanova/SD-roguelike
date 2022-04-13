@@ -3,12 +3,15 @@ package ru.hse.sd.roguegue.state.impl;
 import ru.hse.sd.roguegue.status.Status;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for information about game process (such as score)
  */
 public class GameState {
     private int score;
+
+    private ArrayList<MobState> mobStates = new ArrayList<>(List.of(new MobState(), new MobState(), new MobState(), new MobState(), new MobState(), new MobState(), new MobState(), new MobState()));
 
     public ArrayList<MobState> getMobStates() {
         return mobStates;
@@ -17,8 +20,6 @@ public class GameState {
     public void setMobStates(ArrayList<MobState> mobStates) {
         this.mobStates = mobStates;
     }
-
-    private ArrayList<MobState> mobStates;
 
     /**
      * @param newScore

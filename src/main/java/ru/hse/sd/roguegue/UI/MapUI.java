@@ -28,9 +28,6 @@ public class MapUI {
 
         // todo соба я тут тестила и поменяла тебе немного
         graphicRepresentation.put(CellType.INVENTORY, 'I');
-        graphicRepresentation.put(CellType.AGGRESSIVE_MOB, 'A');
-        graphicRepresentation.put(CellType.PASSIVE_MOB, 'P');
-        graphicRepresentation.put(CellType.FEARFUL_MOB, 'F');
     }
 
     /**

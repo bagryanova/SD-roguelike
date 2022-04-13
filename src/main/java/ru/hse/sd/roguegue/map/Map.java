@@ -37,6 +37,15 @@ public record Map(CellType[][] cellArray) {
         for (int i = 0; i < cellArray.length; i++) {
             var cellTypes = cellArray[i];
             for (int j = 0; j < cellTypes.length; j++) {
+                boolean mob = false;
+                for (int ii = 0; ii < Status.gameState.getMobStates().size(); ii++) {
+                    if (Status.gameState.getMobStates().get(ii).getPosition().getX() == j && Status.gameState.getMobStates().get(ii).getPosition().getY() == i) {
+                        System.out.print("M");
+                        mob = true;
+                        break;
+                    }
+                }
+                if (mob) continue;
                 if (Status.userState.getPosition().getX() == j && Status.userState.getPosition().getY() == i) System.out.print("O");
                 else if (cellTypes[j] == CellType.EXIT) System.out.print("E");
                 else if (cellTypes[j] == CellType.GROUND) System.out.print("x");

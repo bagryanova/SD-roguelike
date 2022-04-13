@@ -21,4 +21,8 @@ public class MobState extends GameObjectState {
         Position newPosition = strategy.getNewPosition(super.getPosition());
         super.updatePosition(newPosition);
     }
+
+    public void updatePosition(Position position) {
+        super.updatePosition(position);
+    }
 }
