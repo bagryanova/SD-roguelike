@@ -51,10 +51,10 @@ public class RandomMapGeneratorUtil {
     }
 
     private void placeInventory(List<GroundSpace> groundSpaces) {
-        for (String item : Status.inventoryObjects) {
+        for (InventoryItem item : Status.inventory) {
             GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
             Position position = getRandomGroundCell(gs);
-            Status.inventory.add(new InventoryItem(item, position));
+            item.position = position;
             cells[position.getX()][position.getY()] = CellType.INVENTORY;
         }
     }

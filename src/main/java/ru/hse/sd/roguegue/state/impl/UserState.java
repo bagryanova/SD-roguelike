@@ -1,7 +1,13 @@
 package ru.hse.sd.roguegue.state.impl;
 
 import ru.hse.sd.roguegue.state.GameObjectState;
+import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Class for the specific information about user
@@ -10,6 +16,8 @@ public class UserState extends GameObjectState {
     private int health;
     private int exp;
     private int attack;
+    private Set<InventoryItem> inventoryStorage = new HashSet<>();
+    private Set<InventoryItem> activeInventory = new HashSet<>();
 
     /**
      * @param newHealth
@@ -49,5 +57,18 @@ public class UserState extends GameObjectState {
 
     public int getAttack() {
         return attack;
+    }
+
+    public void putOnInventoryItem(InventoryItem item) {
+        attack += item.plusAttack;
+        health += item.plusHealth;
+        activeInventory.add(item);
+        inventoryStorage.add(item);
+    }
+
+    public void takeOffInventoryItem(InventoryItem item) {
+        activeInventory.remove(item);
+        attack -= item.plusAttack;
+        health -= item.plusHealth;
     }
 }
