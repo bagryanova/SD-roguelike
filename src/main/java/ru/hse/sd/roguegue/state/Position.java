@@ -2,7 +2,6 @@ package ru.hse.sd.roguegue.state;
 
 import ru.hse.sd.roguegue.logic.Move;
 
-import java.awt.event.KeyEvent;
 import java.util.Objects;
 
 import static java.lang.Math.abs;
@@ -10,7 +9,7 @@ import static java.lang.Math.abs;
 /**
  * Position on the two-dimensional map
  */
-public class Position {
+public class Position implements Cloneable{
     private int x;
     private int y;
 
@@ -64,7 +63,7 @@ public class Position {
     }
 
     public Position move(Move move) {
-        Position tmp = this;
+        Position tmp = this.clone();
         switch (move) {
             case DOWN -> tmp.updatePosition(x, y - 1);
             case UP -> tmp.updatePosition(x, y + 1);
@@ -76,5 +75,10 @@ public class Position {
 
     public int distance(Position position) {
         return abs(x - position.getX()) + abs(y - position.getY());
+    }
+
+    @Override
+    public Position clone() {
+        return new Position(this.x, this.y);
     }
 }
