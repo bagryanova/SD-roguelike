@@ -10,4 +10,5 @@ public final class Constants {
     public static final int MAP_START_Y = 7; //show how many columns it has to pass from left to display map
     public static final int MAP_WIDTH = 50;
     public static final int MAP_HEIGHT = 40;
+    public static final int MAX_USER_HEALTH = 100;
 }

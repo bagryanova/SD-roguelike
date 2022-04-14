@@ -39,10 +39,10 @@ public class UserAction implements GameObjectAction {
                             break;
                         }
                     }
-                } // todo если из меню с инвентарем
+                } // todo from inventory menu
             }
 //            case TAKE_OFF -> ; // todo после того как добавится меню и я пойму, что вообще приходит
-//            case CONFUSE -> // todo;
+//            case CONFUSE -> ; // todo
         }
         if (Status.mapState.getMap().cellArray()[Status.userState.getPosition().getY()][Status.userState.getPosition().getX()] == CellType.EXIT) {
             Status.gameStatus = GameStatus.MENU;
@@ -56,7 +56,18 @@ public class UserAction implements GameObjectAction {
     }
 
     private void fight(MobState mob) {
-        // todo, если сдохли, то тут финишировать игру
+        // todo finish game if user died
+        if (mob.getStrength() > Status.userState.getStrength()) {
+            Status.userState.updateHealth(mob.getStrength() / 2);
+            if (Status.userState.getLives() <= 0) {
+                Status.gameStatus = GameStatus.LOSE;
+                // выставила юзеру изначальные значения
+                Status.userState.setInitialValues();
+                Status.gameState.finishLevel();
+            }
+        } else {
+            mob.updateLives(mob.getLives() - 1);
+        }
     }
 
     private boolean validateStep(Move move) {
@@ -86,7 +97,7 @@ public class UserAction implements GameObjectAction {
             }
             case PUT_ON -> {
                 // todo gameStatus наверное не меню а инвентарь
-                if (!(cells[position.getY()][position.getX()] == CellType.INVENTORY && Status.gameStatus.equals(GameStatus.MENU))) {
+                if (!(cells[position.getY()][position.getX()] == CellType.INVENTORY && Status.gameStatus.equals(GameStatus.INVENTORY))) {
                     return false;
                 }
             }

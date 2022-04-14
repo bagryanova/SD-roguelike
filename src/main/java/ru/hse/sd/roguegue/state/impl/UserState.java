@@ -1,6 +1,7 @@
 package ru.hse.sd.roguegue.state.impl;
 
 import ru.hse.sd.roguegue.state.GameObjectState;
+import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
@@ -15,17 +16,42 @@ import java.util.Set;
 public class UserState extends GameObjectState {
     private int health;
     private int exp;
-    private int attack;
+    private int strength;
+    private int lives;
     private Set<InventoryItem> inventoryStorage = new HashSet<>();
     private Set<InventoryItem> activeInventory = new HashSet<>();
 
+    public void setInitialValues() {
+        health = 100;
+        exp = 0;
+        strength = 50;
+        lives = 5;
+        inventoryStorage = new HashSet<>();
+        activeInventory = new HashSet<>();
+    }
+
     /**
-     * @param newHealth
+     * @param lostHealth
      * update health according to the newHealth and display changes on the screen
      */
-    public void updateHealth(int newHealth) {
-        health = newHealth;
+    public void updateHealth(int lostHealth) {
+        if (health > lostHealth) {
+            health -= lostHealth;
+        }
+        else {
+            int cur = lostHealth - health;
+            int cnt = 0;
+            while (cur > 0) {
+                cur -= Constants.MAX_USER_HEALTH;
+                cnt++;
+            }
+            lives -= cnt;
+            // todo хз надо ли
+            exp -= 10;
+            health = Constants.MAX_USER_HEALTH - cur;
+        }
         Status.userUI.displayHealth();
+        // todo display lives
     }
 
     public int getHealth() {
@@ -47,20 +73,34 @@ public class UserState extends GameObjectState {
     }
 
     /**
-     * @param newAttack
+     * @param newStrength
      * update attack according to the newAttack
      */
-    public void updateAttack(int newAttack) {
-        attack = newAttack;
+    public void updateStrength(int newStrength) {
+        strength = newStrength;
 //        Status.userUI.displayAttack();
     }
 
-    public int getAttack() {
-        return attack;
+    public int getStrength() {
+        return strength;
+    }
+
+    /**
+     * @param newLives
+     * update attack according to the newAttack
+     */
+    public void updateLives(int newLives) {
+        lives = newLives;
+        // todo
+//        Status.userUI.displayLives();
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     public void putOnInventoryItem(InventoryItem item) {
-        attack += item.plusAttack;
+        strength += item.plusAttack;
         health += item.plusHealth;
         activeInventory.add(item);
         inventoryStorage.add(item);
@@ -68,7 +108,7 @@ public class UserState extends GameObjectState {
 
     public void takeOffInventoryItem(InventoryItem item) {
         activeInventory.remove(item);
-        attack -= item.plusAttack;
+        strength -= item.plusAttack;
         health -= item.plusHealth;
     }
 }

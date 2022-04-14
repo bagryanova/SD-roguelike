@@ -1,5 +1,5 @@
 package ru.hse.sd.roguegue.status;
 
 public enum GameStatus {
-    MENU, GAME, EXIT
+    MENU, GAME, EXIT, LOSE, INVENTORY
 }
