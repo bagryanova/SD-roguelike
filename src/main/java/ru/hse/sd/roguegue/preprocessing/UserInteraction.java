@@ -15,6 +15,8 @@ public class UserInteraction extends JFrame implements KeyListener {
     private final Menu menu = new Menu();
     private final Handler handler = new Handler();
 
+    private final InventoryHandler inventoryHandler = new InventoryHandler();
+
     public UserInteraction() {
         super();
         add(Status.terminal);
@@ -43,6 +45,8 @@ public class UserInteraction extends JFrame implements KeyListener {
             menu.handleAction(event);
         } else if (Status.gameStatus == GameStatus.GAME) {
             handler.setUserAction(event);
+        } else if(Status.gameStatus == GameStatus.INVENTORY){
+            inventoryHandler.setInventoryAction(event);
         }
     }
 

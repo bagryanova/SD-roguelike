@@ -13,6 +13,28 @@ public class GameState {
 
     private ArrayList<MobState> mobStates = new ArrayList<>(List.of(new MobState(), new MobState(), new MobState(), new MobState(), new MobState(), new MobState(), new MobState(), new MobState()));
 
+    public InventoryState getInventoryState() {
+        return inventoryState;
+    }
+
+    public void upCurrentInventoryItem() {
+        this.inventoryState.nextCurrentItem();
+    }
+
+    public void downCurrentInventoryItem() {
+        this.inventoryState.prevCurrentItem();
+    }
+
+    public void putOnCurrentInventoryItem() {
+        this.inventoryState.prevCurrentItem();
+    }
+
+    public void takeOffCurrentInventoryItem() {
+        this.inventoryState.prevCurrentItem();
+    }
+
+    private InventoryState inventoryState = new InventoryState();
+
     public ArrayList<MobState> getMobStates() {
         return mobStates;
     }
@@ -51,5 +73,8 @@ public class GameState {
         Status.screen = Status.screen.change();
         Status.terminal.clear();
         Status.screen.display();
+    }
+
+    public void inventoryMenu() {
     }
 }

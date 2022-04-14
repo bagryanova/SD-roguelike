@@ -7,7 +7,6 @@ import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.state.impl.UserState;
 import ru.hse.sd.roguegue.status.GameStatus;
-import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
 public class UserAction implements GameObjectAction {
@@ -31,18 +30,22 @@ public class UserAction implements GameObjectAction {
             case DOWN -> state.updatePosition(new Position(position.getX(), position.getY() + 1));
             case LEFT -> state.updatePosition(new Position(position.getX() - 1, position.getY()));
             case RIGHT -> state.updatePosition(new Position(position.getX() + 1, position.getY()));
-            case PUT_ON -> {
-                if (Status.gameStatus.equals(GameStatus.GAME)) {
-                    for (InventoryItem item : Status.inventory) {
-                        if (item.position == position) {
-                            state.putOnInventoryItem(item);
-                            break;
-                        }
-                    }
-                } else if (Status.gameStatus.equals(GameStatus.INVENTORY)) {
-                    // todo from inventory menu
-                }
+            case INVENTORY -> {
+                Status.gameStatus = GameStatus.INVENTORY;
+                Status.gameState.inventoryMenu();
             }
+//            case PUT_ON -> {
+//                if (Status.gameStatus.equals(GameStatus.GAME)) {
+//                    for (InventoryItem item : Status.inventory) {
+//                        if (item.position == position) {
+//                            state.putOnInventoryItem(item);
+//                            break;
+//                        }
+//                    }
+//                } else if (Status.gameStatus.equals(GameStatus.INVENTORY)) {
+//                    // todo from inventory menu
+//                }
+//            }
 //            case TAKE_OFF -> ; // todo после того как добавится меню и я пойму, что вообще приходит
 //            case CONFUSE -> ; // todo
         }

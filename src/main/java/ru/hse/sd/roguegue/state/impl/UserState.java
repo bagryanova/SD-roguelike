@@ -15,8 +15,6 @@ public class UserState extends GameObjectState {
     private int exp;
     private int strength;
     private int lives;
-    private Set<InventoryItem> inventoryStorage = new HashSet<>();
-    private Set<InventoryItem> activeInventory = new HashSet<>();
     private HashMap<Integer, List<Integer>> levels = new HashMap<>();
 
     public void setInitialValues() {
@@ -24,8 +22,6 @@ public class UserState extends GameObjectState {
         exp = 0;
         strength = 50;
         lives = 5;
-        inventoryStorage = new HashSet<>();
-        activeInventory = new HashSet<>();
         // initial levels
         levels.put(0, List.of(20, 100, 50)); // level num; req exp, health, strength
         levels.put(1, List.of(60, 125, 60));
@@ -115,12 +111,9 @@ public class UserState extends GameObjectState {
     public void putOnInventoryItem(InventoryItem item) {
         strength += item.plusAttack;
         health += item.plusHealth;
-        activeInventory.add(item);
-        inventoryStorage.add(item);
     }
 
     public void takeOffInventoryItem(InventoryItem item) {
-        activeInventory.remove(item);
         strength -= item.plusAttack;
         health -= item.plusHealth;
     }
