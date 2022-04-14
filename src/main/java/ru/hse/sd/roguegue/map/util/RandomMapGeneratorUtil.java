@@ -2,8 +2,12 @@ package ru.hse.sd.roguegue.map.util;
 
 import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.map.Map;
+import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
+import ru.hse.sd.roguegue.state.impl.AggressiveStrategy;
+import ru.hse.sd.roguegue.state.impl.AvoidingStrategy;
 import ru.hse.sd.roguegue.state.impl.MobState;
+import ru.hse.sd.roguegue.state.impl.PassiveStrategy;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
@@ -39,14 +43,20 @@ public class RandomMapGeneratorUtil {
     }
 
     private void placeMobs(CellType[][] mapCells) {
-        for (int c = 0; c < Status.gameState.getMobStates().size(); c++) {
+        placeMobsOfType(mapCells, new AggressiveStrategy(), 3);
+        placeMobsOfType(mapCells, new PassiveStrategy(), 3);
+        placeMobsOfType(mapCells, new AvoidingStrategy(), 2);
+    }
+
+    private void placeMobsOfType(CellType[][] mapCells, MobStrategy mobStrategy, int mobsNum) {
+        for (int c = 0; c < mobsNum; c++) {
             int i = 0, j = 0;
             while (mapCells[i][j] != CellType.GROUND) {
                 i = rand.nextInt(0, mapCells.length - 1);
                 j = rand.nextInt(0, mapCells[0].length - 1);
             }
             assert mapCells[i][j] == CellType.GROUND;
-            Status.gameState.getMobStates().get(c).updatePosition(new Position(j, i)); // todo надеюсь реально i j, а не j i
+            Status.gameState.getMobStates().add(new MobState(mobStrategy, new Position(j, i))); // todo надеюсь реально i j, а не j i
         }
     }
 

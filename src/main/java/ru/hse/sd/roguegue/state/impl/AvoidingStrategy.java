@@ -6,7 +6,7 @@ import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.Status;
 
 public class AvoidingStrategy extends MobStrategy {
-    AvoidingStrategy() {
+    public AvoidingStrategy() {
         super.lives = 6;
         super.strength = 3;
     }

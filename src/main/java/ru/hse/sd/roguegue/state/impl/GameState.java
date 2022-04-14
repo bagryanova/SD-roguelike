@@ -11,7 +11,7 @@ import java.util.List;
 public class GameState {
     private int score;
 
-    private ArrayList<MobState> mobStates = new ArrayList<>(List.of(new MobState(), new MobState(), new MobState(), new MobState(), new MobState(), new MobState(), new MobState(), new MobState()));
+    private ArrayList<MobState> mobStates = new ArrayList<>();
 
     public InventoryState getInventoryState() {
         return inventoryState;
