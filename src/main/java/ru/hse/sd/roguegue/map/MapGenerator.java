@@ -12,6 +12,7 @@ public class MapGenerator {
 
     /**
      * According to the map mode either generates or loads map from file
+     *
      * @return generated instance of Map
      */
     public Map getMap() {

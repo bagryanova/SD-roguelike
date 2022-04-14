@@ -38,6 +38,6 @@ public class Menu {
     }
 
     private boolean validateAction(KeyEvent event) {
-        return event.getKeyCode() == KeyEvent.VK_ENTER || event.getKeyCode() == KeyEvent.VK_Q;
+        return event != null && (event.getKeyCode() == KeyEvent.VK_ENTER || event.getKeyCode() == KeyEvent.VK_Q);
     }
 }

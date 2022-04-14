@@ -17,6 +17,7 @@ public class MapFromFileUtil {
 
     /**
      * Gets map representation from random file and converts it to Map type
+     *
      * @return converted Map
      */
     public Map getRandomMapFromFile() {

@@ -7,6 +7,8 @@ import ru.hse.sd.roguegue.status.Status;
 
 import java.util.Objects;
 
+import static java.lang.Thread.sleep;
+
 public class Roguegue {
     /**
      * Initialize status and start game

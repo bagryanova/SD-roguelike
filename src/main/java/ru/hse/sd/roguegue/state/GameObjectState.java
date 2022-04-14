@@ -9,8 +9,7 @@ public abstract class GameObjectState {
     private Position position = new Position(0, 0);
 
     /**
-     * @param newPosition
-     * update position according to the newPosition and display changes on the screen
+     * @param newPosition update position according to the newPosition and display changes on the screen
      */
     public void updatePosition(Position newPosition) {
         Status.mapUI.displayCell(position);

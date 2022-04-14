@@ -5,28 +5,26 @@ import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
 
 public class MobState extends GameObjectState {
-    private int strength;
-    private int lives;
     private MobStrategy strategy = new PassiveStrategy();
 
-    public void updateStrategy(MobStrategy strategy){
+    public void updateStrategy(MobStrategy strategy) {
         this.strategy = strategy;
     }
 
     public void updateStrength(int newStrength) {
-        strength = newStrength;
+        strategy.strength = newStrength;
     }
 
     public int getStrength() {
-        return strength;
+        return strategy.strength;
     }
 
     public void updateLives(int newLives) {
-        lives = newLives;
+        strategy.lives = newLives;
     }
 
     public int getLives() {
-        return lives;
+        return strategy.lives;
     }
 
     public void updatePosition() {

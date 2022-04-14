@@ -46,7 +46,8 @@ public record Map(CellType[][] cellArray) {
                     }
                 }
                 if (mob) continue;
-                if (Status.userState.getPosition().getX() == j && Status.userState.getPosition().getY() == i) System.out.print("O");
+                if (Status.userState.getPosition().getX() == j && Status.userState.getPosition().getY() == i)
+                    System.out.print("O");
                 else if (cellTypes[j] == CellType.EXIT) System.out.print("E");
                 else if (cellTypes[j] == CellType.GROUND) System.out.print("x");
                 else if (cellTypes[j] == CellType.OBSTACLE) System.out.print(".");

@@ -33,9 +33,6 @@ public class UserInteraction extends JFrame implements KeyListener {
      */
     public synchronized void getUserAction() {
         KeyEvent event = inputQueue.poll();
-        if (event == null) {
-            return;
-        }
         redirectUserAction(event);
         super.repaint();
     }
@@ -45,7 +42,7 @@ public class UserInteraction extends JFrame implements KeyListener {
             menu.handleAction(event);
         } else if (Status.gameStatus == GameStatus.GAME) {
             handler.setUserAction(event);
-        } else if(Status.gameStatus == GameStatus.INVENTORY){
+        } else if (Status.gameStatus == GameStatus.INVENTORY) {
             inventoryHandler.setInventoryAction(event);
         }
     }
