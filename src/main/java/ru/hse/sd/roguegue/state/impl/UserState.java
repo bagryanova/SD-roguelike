@@ -5,10 +5,7 @@ import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class for the specific information about user
@@ -20,6 +17,7 @@ public class UserState extends GameObjectState {
     private int lives;
     private Set<InventoryItem> inventoryStorage = new HashSet<>();
     private Set<InventoryItem> activeInventory = new HashSet<>();
+    private HashMap<Integer, List<Integer>> levels = new HashMap<>();
 
     public void setInitialValues() {
         health = 100;
@@ -28,6 +26,12 @@ public class UserState extends GameObjectState {
         lives = 5;
         inventoryStorage = new HashSet<>();
         activeInventory = new HashSet<>();
+        // initial levels
+        levels.put(0, List.of(20, 100, 50)); // level num; req exp, health, strength
+        levels.put(1, List.of(60, 125, 60));
+        levels.put(2, List.of(100, 140, 75));
+        levels.put(3, List.of(140, 175, 90));
+        levels.put(4, List.of(200, 205, 100));
     }
 
     /**
@@ -46,8 +50,6 @@ public class UserState extends GameObjectState {
                 cnt++;
             }
             lives -= cnt;
-            // todo хз надо ли
-            exp -= 10;
             health = Constants.MAX_USER_HEALTH - cur;
         }
         Status.userUI.displayHealth();
@@ -56,6 +58,17 @@ public class UserState extends GameObjectState {
 
     public int getHealth() {
         return health;
+    }
+
+    public void defeatMob() {
+        exp += 20;
+        if (exp > levels.get(4).get(0)) {
+            health = levels.get(4).get(1);
+            strength = levels.get(4).get(2);
+        } else if (exp > levels.get(3).get(0)) {
+            health = levels.get(3).get(1);
+            strength = levels.get(3).get(2);
+        } // todo in cycle
     }
 
     /**

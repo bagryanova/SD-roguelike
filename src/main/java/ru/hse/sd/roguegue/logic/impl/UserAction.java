@@ -39,7 +39,9 @@ public class UserAction implements GameObjectAction {
                             break;
                         }
                     }
-                } // todo from inventory menu
+                } else if (Status.gameStatus.equals(GameStatus.INVENTORY)) {
+                    // todo from inventory menu
+                }
             }
 //            case TAKE_OFF -> ; // todo после того как добавится меню и я пойму, что вообще приходит
 //            case CONFUSE -> ; // todo
@@ -67,6 +69,7 @@ public class UserAction implements GameObjectAction {
             }
         } else {
             mob.updateLives(mob.getLives() - 1);
+            Status.userState.defeatMob();
         }
     }
 
@@ -96,7 +99,6 @@ public class UserAction implements GameObjectAction {
                 }
             }
             case PUT_ON -> {
-                // todo gameStatus наверное не меню а инвентарь
                 if (!(cells[position.getY()][position.getX()] == CellType.INVENTORY && Status.gameStatus.equals(GameStatus.INVENTORY))) {
                     return false;
                 }
