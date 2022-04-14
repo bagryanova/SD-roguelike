@@ -1,7 +1,6 @@
 package ru.hse.sd.roguegue.state;
 
 import ru.hse.sd.roguegue.map.CellType;
-import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.Status;
 
 public class MobStrategy {

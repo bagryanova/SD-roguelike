@@ -15,7 +15,7 @@ public class UserState extends GameObjectState {
     private int exp;
     private int strength;
     private int lives;
-    private HashMap<Integer, List<Integer>> levels = new HashMap<>();
+    private final HashMap<Integer, List<Integer>> levels = new HashMap<>();
 
     public void setInitialValues() {
         health = 100;
