@@ -22,6 +22,9 @@ public class Roguegue {
         UserInteraction userInteraction = new UserInteraction();
         while (Status.gameStatus != GameStatus.EXIT) {
             userInteraction.getUserAction();
+//            try{
+//                sleep(300);
+//            } catch (InterruptedException ignored) {}
         }
     }
 }
