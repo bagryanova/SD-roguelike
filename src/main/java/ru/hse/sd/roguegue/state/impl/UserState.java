@@ -16,30 +16,33 @@ public class UserState extends GameObjectState {
     private int exp;
     private int strength;
     private int lives;
-    private final HashMap<Integer, List<Integer>> levels = new HashMap<>();
     public UserUI userUI = new UserUI();
     private int level = 0;
+    // Key - level number; Value - required experience, health, strength
+    private final Map<Integer, List<Integer>> levels = Map.of(0, List.of(20, 12, 50),
+            1, List.of(60, 15, 60),
+            2, List.of(100, 17, 75),
+            3, List.of(140, 20, 90),
+            4, List.of(200, 25, 100));
 
     {
         setUI(userUI);
     }
 
+    /**
+     * Set initial default values in case of user's death or start of the new game
+     */
     public void setInitialValues() {
         health = 10;
         exp = 0;
         strength = 5;
         lives = 5;
-        levels.put(0, List.of(20, 12, 50)); // level num; req exp, health, strength
-        levels.put(1, List.of(60, 15, 60));
-        levels.put(2, List.of(100, 17, 75));
-        levels.put(3, List.of(140, 20, 90));
-        levels.put(4, List.of(200, 25, 100));
     }
 
     /**
      * @param lostHealth health that was lost in a fight
-     *
-     * Update health according to the newHealth and display changes on the screen
+     *                   <p>
+     *                   Update health according to the newHealth and display changes on the screen
      */
     public void loseHealth(int lostHealth) {
         if (health > lostHealth) {
@@ -58,20 +61,30 @@ public class UserState extends GameObjectState {
         }
     }
 
+    /**
+     * @param newHealth new health to be set
+     *                  Updates health according to the new health
+     */
     public void updateHealth(int newHealth) {
         this.health = newHealth;
         Status.userState.userUI.displayInformation();
     }
 
+    /**
+     * @return current health
+     */
     public int getHealth() {
         return health;
     }
 
+    /**
+     * Update experience after mob's death and set a new level if user gained enough experience
+     */
     public void defeatMob() {
-        System.out.println(exp);
         updateExp(exp + 20);
         for (int i = 4; i >= 0; i--) {
             if (exp > levels.get(i).get(0)) {
+                level = i;
                 updateHealth(levels.get(i).get(1));
                 updateStrength(levels.get(i).get(2));
             }
@@ -98,6 +111,9 @@ public class UserState extends GameObjectState {
         Status.userState.userUI.displayInformation();
     }
 
+    /**
+     * @return current strength
+     */
     public int getStrength() {
         return strength;
     }
@@ -110,6 +126,9 @@ public class UserState extends GameObjectState {
         Status.userState.userUI.displayInformation();
     }
 
+    /**
+     * @return current number of lives
+     */
     public int getLives() {
         return lives;
     }
