@@ -42,7 +42,7 @@ public class UserState extends GameObjectState {
      */
     public void loseHealth(int lostHealth) {
         if (health > lostHealth) {
-            health -= lostHealth;
+            updateHealth(health - lostHealth);
         }
         else {
             int cur = lostHealth - health;
@@ -51,14 +51,14 @@ public class UserState extends GameObjectState {
                 cur -= Constants.MAX_USER_HEALTH;
                 cnt++;
             }
-            lives -= cnt;
-            health = Constants.MAX_USER_HEALTH - cur;
+            updateLives(lives - cnt);
+            updateHealth(Constants.MAX_USER_HEALTH - cur);
         }
-        Status.userState.userUI.displayInformation();
     }
 
     public void updateHealth(int newHealth) {
         this.health = newHealth;
+        Status.userState.userUI.displayInformation();
     }
 
     public int getHealth() {
@@ -70,8 +70,8 @@ public class UserState extends GameObjectState {
         updateExp(exp + 20);
         for (int i = 4; i >= 0; i--) {
             if (exp > levels.get(i).get(0)) {
-                health = levels.get(i).get(1);
-                strength = levels.get(i).get(2);
+                updateHealth(levels.get(i).get(1));
+                updateStrength(levels.get(i).get(2));
             }
         }
     }

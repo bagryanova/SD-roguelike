@@ -9,9 +9,11 @@ public class InventoryScreen implements Screen {
     @Override
     public void display() {
         Status.terminal.clear();
-        Status.terminal.writeCenter("The contents of your inventory:", Constants.SENTENCES_Y);
+        Status.terminal.writeCenter("The contents of your inventory:", Constants.SENTENCES_Y - 1);
+        Status.userState.userUI.displayInformation();
         Status.inventoryUI.displayUsersInventoryList();
         Status.terminal.write('>', Constants.MAP_START_X, Constants.MAP_START_Y + 1);
+
     }
 
     @Override
