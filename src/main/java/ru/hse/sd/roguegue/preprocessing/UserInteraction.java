@@ -37,7 +37,7 @@ public class UserInteraction extends JFrame implements KeyListener {
             public void run() {
                 synchronized (inputQueue) {
                     if (Status.gameStatus == GameStatus.GAME) {
-                        inputQueue.add(new KeyEvent(new Component() {
+                        redirectUserAction(new KeyEvent(new Component() {
                         }, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_M, '\n'));
                     }
                 }
