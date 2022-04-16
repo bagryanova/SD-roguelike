@@ -24,9 +24,13 @@ public class UserUI extends GameObjectUI{
      * Display user's health above the map
      */
     public void displayInformation() {
+        Status.terminal.writeCenter("                                       ", Constants.HEALTH_Y);
         Status.terminal.writeCenter("HEALTH: " + Status.userState.getHealth(), Constants.HEALTH_Y);
+        Status.terminal.writeCenter("                                       ", Constants.HEALTH_Y + 1);
         Status.terminal.writeCenter("LIVES: " + Status.userState.getLives(), Constants.HEALTH_Y + 1);
+        Status.terminal.writeCenter("                                       ", Constants.HEALTH_Y + 2);
         Status.terminal.writeCenter("EXP: " + Status.userState.getExp(), Constants.HEALTH_Y + 2);
+        Status.terminal.writeCenter("                                       ", Constants.HEALTH_Y + 3);
         Status.terminal.writeCenter("STRENGTH: " + Status.userState.getStrength(), Constants.HEALTH_Y + 3);
     }
 }
