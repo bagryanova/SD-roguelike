@@ -64,7 +64,7 @@ public class Status {
      */
     public static UserUI userUI = new UserUI();
 
-    public static List<InventoryItem> inventory = new ArrayList<>(List.of());
+    public static List<InventoryItem> inventoryMapItems = new ArrayList<>(List.of());
 
     /**
      * Initializes game status by setting default values todo
