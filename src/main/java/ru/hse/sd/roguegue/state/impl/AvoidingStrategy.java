@@ -14,14 +14,14 @@ public class AvoidingStrategy extends MobStrategy {
     @Override
     public Position getNewPosition(Position position) {
         Position userPosition = Status.userState.getPosition();
-        if (super.validatePosition(userPosition.move(Move.UP)) && (userPosition.move(Move.UP).distance(position) > userPosition.distance(position))) {
-            return userPosition.move(Move.UP);
-        } else if (super.validatePosition(userPosition.move(Move.DOWN)) && (userPosition.move(Move.DOWN).distance(position) > userPosition.distance(position))) {
-            return userPosition.move(Move.DOWN);
-        } else if (super.validatePosition(userPosition.move(Move.LEFT)) && (userPosition.move(Move.LEFT).distance(position) > userPosition.distance(position))) {
-            return userPosition.move(Move.LEFT);
-        } else if (super.validatePosition(userPosition.move(Move.RIGHT)) && (userPosition.move(Move.RIGHT).distance(position) > userPosition.distance(position))) {
-            return userPosition.move(Move.RIGHT);
+        if (super.validatePosition(position.move(Move.UP)) && (position.move(Move.UP).distance(userPosition) > userPosition.distance(position))) {
+            return position.move(Move.UP);
+        } else if (super.validatePosition(position.move(Move.DOWN)) && (position.move(Move.DOWN).distance(userPosition) > userPosition.distance(position))) {
+            return position.move(Move.DOWN);
+        } else if (super.validatePosition(position.move(Move.LEFT)) && (position.move(Move.LEFT).distance(userPosition) > userPosition.distance(position))) {
+            return position.move(Move.LEFT);
+        } else if (super.validatePosition(position.move(Move.RIGHT)) && (position.move(Move.RIGHT).distance(userPosition) > userPosition.distance(position))) {
+            return position.move(Move.RIGHT);
         }
         return position;
     }
