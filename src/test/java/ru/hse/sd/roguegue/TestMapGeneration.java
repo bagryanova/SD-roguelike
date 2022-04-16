@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Test;
 import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.map.Map;
 import ru.hse.sd.roguegue.map.MapGenerator;
+import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.MapMode;
 import ru.hse.sd.roguegue.status.Status;
+
+import java.util.ArrayList;
 
 public class TestMapGeneration {
     @Test
@@ -51,6 +54,32 @@ public class TestMapGeneration {
                 if (fin == 1 && !space) fin = 2;
                 if (fin == 2 || fin == 0) assert !space;
                 else assert space;
+            }
+        }
+    }
+
+    @Test
+    public void testInventoryGeneration() {
+        Status.mapMode = MapMode.RANDOM;
+        for (int cnt = 0; cnt < 100; cnt++) {
+            Status.inventoryMapItems = new ArrayList<>();
+            MapGenerator mapGenerator = new MapGenerator();
+            Map map = mapGenerator.getMap();
+            for (InventoryItem item : Status.inventoryMapItems) {
+                assert map.getCell(item.position.getY(), item.position.getX()).equals(CellType.GROUND);
+            }
+        }
+    }
+
+    @Test
+    public void testInventoryOnFileMapGeneration() {
+        Status.mapMode = MapMode.FILE;
+        for (int cnt = 0; cnt < 100; cnt++) {
+            Status.inventoryMapItems = new ArrayList<>();
+            MapGenerator mapGenerator = new MapGenerator();
+            Map map = mapGenerator.getMap();
+            for (InventoryItem item : Status.inventoryMapItems) {
+                assert map.getCell(item.position.getY(), item.position.getX()).equals(CellType.GROUND);
             }
         }
     }
