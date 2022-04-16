@@ -30,12 +30,16 @@ public class UserInteraction extends JFrame implements KeyListener {
         Status.terminal.clear();
         Status.screen.display();
         super.repaint();
+    }
 
+    public void startMob() {
         TimerTask task = new TimerTask() {
             public void run() {
                 synchronized (inputQueue) {
-                    inputQueue.add(new KeyEvent(new Component() {
-                    }, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_M, '\n'));
+                    if (Status.gameStatus == GameStatus.GAME) {
+                        inputQueue.add(new KeyEvent(new Component() {
+                        }, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_M, '\n'));
+                    }
                 }
             }
         };
@@ -51,11 +55,11 @@ public class UserInteraction extends JFrame implements KeyListener {
         synchronized (inputQueue) {
             event = inputQueue.poll();
         }
-            if (event == null) {
-                return;
-            }
-            redirectUserAction(event);
-            super.repaint();
+        if (event == null) {
+            return;
+        }
+        redirectUserAction(event);
+        super.repaint();
     }
 
     private void redirectUserAction(KeyEvent event) {
