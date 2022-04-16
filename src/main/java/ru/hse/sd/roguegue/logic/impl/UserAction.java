@@ -10,6 +10,9 @@ import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class UserAction implements GameObjectAction {
     /**
      * Updates user state according to the move made by user.
@@ -48,7 +51,8 @@ public class UserAction implements GameObjectAction {
             Status.gameStatus = GameStatus.MENU;
             Status.gameState.changeScreen();
         }
-        for (MobState mob : Status.gameState.getMobStates()) {
+        ArrayList<MobState> mobStates = new ArrayList<>(Status.gameState.getMobStates());
+        for (MobState mob : mobStates) {
             if (mob.getPosition().equals(user.getPosition())) {
                 fight(mob);
             }
@@ -58,7 +62,7 @@ public class UserAction implements GameObjectAction {
     private void fight(MobState mob) {
         // todo finish game if user died
         if (mob.getStrength() > Status.userState.getStrength()) {
-            System.out.println("fight 1");
+            System.out.println("fight 2");
             Status.userState.updateHealth(mob.getStrength() / 2);
             if (Status.userState.getLives() <= 0) {
                 Status.gameStatus = GameStatus.LOSE;
@@ -67,13 +71,12 @@ public class UserAction implements GameObjectAction {
                 Status.gameState.changeScreen();
             }
         } else {
-            System.out.println("fight 2");
+            System.out.println("fight 1");
+//            Status.userState.updateExp(Status.userState.getExp() + 20);
             mob.updateLives(mob.getLives() - 1);
-            if (mob.getLives() == 0) {
-                Status.gameState.getMobStates().remove(mob);
-                System.out.println("mobs");
-                Status.gameState.getMobStates().forEach(System.out::println);
-                System.out.println("mobs fin");
+            if (mob.getLives() <= 0) {
+//                Status.gameState.getMobStates().remove(mob);
+                mob.alive = false;
             }
             Status.userState.defeatMob();
         }

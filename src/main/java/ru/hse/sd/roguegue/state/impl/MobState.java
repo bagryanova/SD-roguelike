@@ -4,11 +4,14 @@ import ru.hse.sd.roguegue.UI.MobUI;
 import ru.hse.sd.roguegue.state.GameObjectState;
 import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
+import ru.hse.sd.roguegue.status.GameStatus;
+import ru.hse.sd.roguegue.status.Status;
 
 public class MobState extends GameObjectState {
 
     private MobStrategy strategy;
     public MobUI mobUI;
+    public boolean alive = true;
 
     public MobState(MobStrategy mobStrategy, Position position) {
         this.strategy = mobStrategy;
@@ -41,5 +44,31 @@ public class MobState extends GameObjectState {
     public void updatePosition() {
         Position newPosition = strategy.getNewPosition(super.getPosition());
         super.updatePosition(newPosition);
+        if (this.getPosition().equals(Status.userState.getPosition())) {
+            fight(this);
+        }
+    }
+
+    private void fight(MobState mob) {
+        System.out.println("fight 2");
+        // todo finish game if user died
+        if (mob.getStrength() > Status.userState.getStrength()) {
+            Status.userState.updateHealth(mob.getStrength() / 2);
+            if (Status.userState.getLives() <= 0) {
+                Status.gameStatus = GameStatus.LOSE;
+                // выставила юзеру изначальные значения
+                Status.userState.setInitialValues();
+                Status.gameState.changeScreen();
+            }
+        } else {
+            System.out.println("fight 1");
+//            Status.userState.updateExp(Status.userState.getExp() + 20);
+            mob.updateLives(mob.getLives() - 1);
+            if (mob.getLives() <= 0) {
+//                Status.gameState.getMobStates().remove(mob);
+                mob.alive = false;
+            }
+            Status.userState.defeatMob();
+        }
     }
 }

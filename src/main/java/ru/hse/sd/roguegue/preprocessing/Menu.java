@@ -29,6 +29,7 @@ public class Menu {
     private void startGame() {
         MapGenerator mapGenerator = new MapGenerator();
         map = mapGenerator.getMap();
+        Status.userState.setInitialValues();
         Status.gameStatus = GameStatus.GAME;
         gameAction.updateState(map);
     }

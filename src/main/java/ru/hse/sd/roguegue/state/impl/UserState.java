@@ -62,6 +62,7 @@ public class UserState extends GameObjectState {
     }
 
     public void defeatMob() {
+        System.out.println(exp);
         exp += 20;
         if (exp > levels.get(4).get(0)) {
             health = levels.get(4).get(1);

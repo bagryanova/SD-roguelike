@@ -14,5 +14,11 @@ public class MobAction implements GameObjectAction {
         for (MobState mob : mobs) {
             mob.updatePosition();
         }
+        ArrayList<MobState> copyMobs = new ArrayList<>(Status.gameState.getMobStates());
+        for (MobState mob : copyMobs) {
+            if (!mob.alive) {
+                Status.gameState.getMobStates().remove(mob);
+            }
+        }
     }
 }
