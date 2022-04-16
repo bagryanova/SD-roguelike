@@ -1,6 +1,7 @@
 package ru.hse.sd.roguegue.state;
 
 import ru.hse.sd.roguegue.UI.GameObjectUI;
+import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.status.Status;
 
 /**
@@ -15,6 +16,10 @@ public abstract class GameObjectState {
      */
     public void updatePosition(Position newPosition) {
         Status.mapUI.displayCell(position);
+        Status.inventoryUI.displayAllInventoryOnTheMap();
+        for (MobState mobState : Status.gameState.getMobStates()) {
+            mobState.mobUI.displayPosition(mobState.getPosition());
+        }
         position = newPosition;
         gameObjectUI.displayPosition(position);
     }
