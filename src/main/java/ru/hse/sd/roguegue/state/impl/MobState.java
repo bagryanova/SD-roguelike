@@ -65,7 +65,6 @@ public class MobState extends GameObjectState {
 //            Status.userState.updateExp(Status.userState.getExp() + 20);
             mob.updateLives(mob.getLives() - 1);
             if (mob.getLives() <= 0) {
-//                Status.gameState.getMobStates().remove(mob);
                 mob.alive = false;
             }
             Status.userState.defeatMob();
