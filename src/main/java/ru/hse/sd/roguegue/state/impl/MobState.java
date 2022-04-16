@@ -17,7 +17,6 @@ public class MobState extends GameObjectState {
         this.strategy = mobStrategy;
         updatePosition(position);
         mobUI = new MobUI(mobStrategy);
-        setUI(mobUI);
     }
 
     public void updateStrategy(MobStrategy strategy) {
@@ -50,24 +49,20 @@ public class MobState extends GameObjectState {
     }
 
     public void fight() {
-        System.out.println("fight 2");
-        // todo finish game if user died
         if (getStrength() > Status.userState.getStrength()) {
             Status.userState.loseHealth(getStrength() / 2);
             if (Status.userState.getLives() <= 0) {
                 Status.gameStatus = GameStatus.LOSE;
-                // выставила юзеру изначальные значения
                 Status.userState.setInitialValues();
                 Status.gameState.changeScreen();
             }
         } else {
-            System.out.println("fight 1");
 //            Status.userState.updateExp(Status.userState.getExp() + 20);
             updateLives(getLives() - 1);
             if (getLives() <= 0) {
                 alive = false;
+                Status.userState.defeatMob();
             }
-            Status.userState.defeatMob();
         }
     }
 }

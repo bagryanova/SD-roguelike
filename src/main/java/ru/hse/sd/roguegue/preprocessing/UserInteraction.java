@@ -59,7 +59,6 @@ public class UserInteraction extends JFrame implements KeyListener {
             return;
         }
         redirectUserAction(event);
-        super.repaint();
     }
 
     private void redirectUserAction(KeyEvent event) {
@@ -70,6 +69,7 @@ public class UserInteraction extends JFrame implements KeyListener {
         } else if (Status.gameStatus == GameStatus.INVENTORY) {
             inventoryHandler.setInventoryAction(event);
         }
+        super.repaint();
     }
 
     @Override

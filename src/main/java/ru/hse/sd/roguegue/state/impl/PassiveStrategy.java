@@ -5,7 +5,7 @@ import ru.hse.sd.roguegue.state.Position;
 
 public class PassiveStrategy extends MobStrategy {
     public PassiveStrategy() {
-        super.lives = 5;
+        super.lives = 4;
         super.strength = 2;
     }
 

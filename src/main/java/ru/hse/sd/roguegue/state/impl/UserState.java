@@ -25,10 +25,6 @@ public class UserState extends GameObjectState {
             3, List.of(140, 20, 90),
             4, List.of(200, 25, 100));
 
-    {
-        setUI(userUI);
-    }
-
     /**
      * Set initial default values in case of user's death or start of the new game
      */
@@ -41,8 +37,7 @@ public class UserState extends GameObjectState {
 
     /**
      * @param lostHealth health that was lost in a fight
-     *                   <p>
-     *                   Update health according to the newHealth and display changes on the screen
+     * Update health according to the newHealth and display changes on the screen
      */
     public void loseHealth(int lostHealth) {
         if (health > lostHealth) {
