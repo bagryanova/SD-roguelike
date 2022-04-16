@@ -51,8 +51,7 @@ public class UserAction implements GameObjectAction {
             Status.gameStatus = GameStatus.MENU;
             Status.gameState.changeScreen();
         }
-        ArrayList<MobState> mobStates = new ArrayList<>(Status.gameState.getMobStates());
-        for (MobState mob : mobStates) {
+        for (MobState mob : Status.gameState.getMobStates()) {
             if (mob.getPosition().equals(user.getPosition())) {
                 fight(mob);
             }
