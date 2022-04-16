@@ -45,15 +45,15 @@ public class MobState extends GameObjectState {
         Position newPosition = strategy.getNewPosition(super.getPosition());
         super.updatePosition(newPosition);
         if (this.getPosition().equals(Status.userState.getPosition())) {
-            fight(this);
+            fight();
         }
     }
 
-    private void fight(MobState mob) {
+    public void fight() {
         System.out.println("fight 2");
         // todo finish game if user died
-        if (mob.getStrength() > Status.userState.getStrength()) {
-            Status.userState.updateHealth(mob.getStrength() / 2);
+        if (getStrength() > Status.userState.getStrength()) {
+            Status.userState.loseHealth(getStrength() / 2);
             if (Status.userState.getLives() <= 0) {
                 Status.gameStatus = GameStatus.LOSE;
                 // выставила юзеру изначальные значения
@@ -63,9 +63,9 @@ public class MobState extends GameObjectState {
         } else {
             System.out.println("fight 1");
 //            Status.userState.updateExp(Status.userState.getExp() + 20);
-            mob.updateLives(mob.getLives() - 1);
-            if (mob.getLives() <= 0) {
-                mob.alive = false;
+            updateLives(getLives() - 1);
+            if (getLives() <= 0) {
+                alive = false;
             }
             Status.userState.defeatMob();
         }
