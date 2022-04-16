@@ -19,7 +19,7 @@ public class PlayScreen implements Screen {
         Status.mapUI.displayMap();
         Status.userState.userUI.displayPosition();
         Status.userState.userUI.displayInformation();
-        Status.inventoryUI.displayAllInventory();
+        Status.inventoryUI.displayAllInventoryOnTheMap();
 
         for (MobState mobState : Status.gameState.getMobStates()) {
             mobState.mobUI.displayPosition(mobState.getPosition());
