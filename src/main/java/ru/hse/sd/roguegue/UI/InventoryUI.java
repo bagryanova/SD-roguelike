@@ -9,8 +9,9 @@ import java.util.List;
 
 public class InventoryUI  {
 
-    public void displayCurrentLine(int currentLine) {
-        Status.terminal.write('>', Constants.MAP_START_X, currentLine + Constants.SENTENCES_Y + 1);
+    public void displayCurrentLine(int prevLine, int currentLine) {
+        Status.terminal.write(' ', Constants.MAP_START_X, prevLine + Constants.MAP_START_Y + 1);
+        Status.terminal.write('>', Constants.MAP_START_X, currentLine + Constants.MAP_START_Y + 1);
     }
 
     public void displayAllInventoryOnTheMap() {

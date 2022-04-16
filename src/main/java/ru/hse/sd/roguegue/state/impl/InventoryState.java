@@ -17,14 +17,15 @@ public class InventoryState {
     void nextCurrentItem() {
         if (currentItemIndex + 1 < inventoryItems.size()) {
             currentItemIndex += 1;
-            inventoryUI.displayCurrentLine(currentItemIndex);
+            inventoryUI.displayCurrentLine(currentItemIndex - 1, currentItemIndex);
         }
     }
 
     void prevCurrentItem() {
         if (currentItemIndex - 1 >= 0) {
             currentItemIndex -= 1;
-            inventoryUI.displayCurrentLine(currentItemIndex);
+            inventoryUI.displayCurrentLine(currentItemIndex + 1, currentItemIndex);
+
         }
     }
 
