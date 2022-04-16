@@ -47,7 +47,7 @@ public class GameState {
      * @param newScore
      * update score according to the newScore and display changes on the screen
      */
-    // todo как у нас вообще счет обновляется..?
+    // todo счет вообще будет??
     public void updateScore(int newScore) {
         score = newScore;
         Status.gameUI.displayScore();

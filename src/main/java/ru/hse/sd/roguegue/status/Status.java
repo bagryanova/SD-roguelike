@@ -64,9 +64,6 @@ public class Status {
      */
     public static UserUI userUI = new UserUI();
 
-    // todo где-нибудь инициализировать в начале игры и задать этому всему характеристики
-    public static List<String> inventoryObjects = List.of("Helmet", "Sword", "Knife", "Coat");
-
     public static List<InventoryItem> inventory = new ArrayList<>(List.of());
 
     /**

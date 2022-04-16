@@ -7,6 +7,7 @@ import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.state.impl.UserState;
 import ru.hse.sd.roguegue.status.GameStatus;
+import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
 public class UserAction implements GameObjectAction {
@@ -34,19 +35,13 @@ public class UserAction implements GameObjectAction {
                 Status.gameStatus = GameStatus.INVENTORY;
                 Status.gameState.inventoryMenu();
             }
-//            case PUT_ON -> {
-//                if (Status.gameStatus.equals(GameStatus.GAME)) {
-//                    for (InventoryItem item : Status.inventory) {
-//                        if (item.position == position) {
-//                            state.putOnInventoryItem(item);
-//                            break;
-//                        }
-//                    }
-//                } else if (Status.gameStatus.equals(GameStatus.INVENTORY)) {
-//                    // todo from inventory menu
-//                }
-//            }
-//            case TAKE_OFF -> ; // todo после того как добавится меню и я пойму, что вообще приходит
+            case TAKE -> {
+                for (InventoryItem item : Status.inventory) {
+                    if (item.position.equals(position)) {
+                        Status.gameState.getInventoryState().getInventoryItems().add(item);
+                    }
+                }
+            }
 //            case CONFUSE -> ; // todo
         }
         if (Status.mapState.getMap().cellArray()[Status.userState.getPosition().getY()][Status.userState.getPosition().getX()] == CellType.EXIT) {
