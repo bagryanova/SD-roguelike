@@ -11,7 +11,7 @@ public class Handler {
     private final MobAction mobAction = new MobAction();
 
     private boolean validateAction(KeyEvent event) {
-        return event == null || event.getKeyCode() == KeyEvent.VK_LEFT || event.getKeyCode() == KeyEvent.VK_RIGHT ||
+        return event.getKeyCode() == KeyEvent.VK_M || event.getKeyCode() == KeyEvent.VK_LEFT || event.getKeyCode() == KeyEvent.VK_RIGHT ||
                 event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN ||
                 event.getKeyCode() == KeyEvent.VK_I;
     }
@@ -23,10 +23,6 @@ public class Handler {
         if (!validateAction(event)) {
             return;
         }
-        mobAction.updateState(Move.ENTER);
-        if (event == null) {
-            return;
-        }
         switch (event.getKeyCode()) {
             case KeyEvent.VK_LEFT -> userAction.updateState(Move.LEFT);
             case KeyEvent.VK_RIGHT -> userAction.updateState(Move.RIGHT);
@@ -34,6 +30,7 @@ public class Handler {
             case KeyEvent.VK_UP -> userAction.updateState(Move.UP);
             case KeyEvent.VK_I -> userAction.updateState(Move.INVENTORY);
             case KeyEvent.VK_SPACE -> userAction.updateState(Move.TAKE);
+            case KeyEvent.VK_M -> mobAction.updateState(Move.ENTER);
         }
     }
 }

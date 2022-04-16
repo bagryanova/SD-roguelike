@@ -17,6 +17,8 @@ public class UserInteraction extends JFrame implements KeyListener {
 
     private final InventoryHandler inventoryHandler = new InventoryHandler();
 
+    Thread mobThread;
+
     public UserInteraction() {
         super();
         add(Status.terminal);
@@ -26,15 +28,41 @@ public class UserInteraction extends JFrame implements KeyListener {
         Status.terminal.clear();
         Status.screen.display();
         super.repaint();
+
+        mobThread = new Thread(() -> {
+            while (true){
+                synchronized (inputQueue) {
+                    inputQueue.add(new KeyEvent(new Component() {
+                    }, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_M, '\n'));
+                }
+                    try {
+                        Thread.sleep(1000); // 1 second
+                    } catch (Exception ignored){}
+                }
+        });
+    }
+
+    public void runMobThread(){
+        mobThread.start();
+    }
+
+    public void stopMobThread(){
+        mobThread.interrupt();
     }
 
     /**
      * Get user's action and redirect it on the next layer
      */
-    public synchronized void getUserAction() {
-        KeyEvent event = inputQueue.poll();
-        redirectUserAction(event);
-        super.repaint();
+    public void getUserAction() {
+        KeyEvent event = null;
+        synchronized (inputQueue) {
+            event = inputQueue.poll();
+        }
+            if (event == null) {
+                return;
+            }
+            redirectUserAction(event);
+            super.repaint();
     }
 
     private void redirectUserAction(KeyEvent event) {
@@ -55,8 +83,10 @@ public class UserInteraction extends JFrame implements KeyListener {
      * Put all user's action un queue
      */
     @Override
-    synchronized public void keyPressed(KeyEvent e) {
-        inputQueue.add(e);
+    public void keyPressed(KeyEvent e) {
+        synchronized (inputQueue) {
+            inputQueue.add(e);
+        }
     }
 
     @Override
