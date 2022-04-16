@@ -16,7 +16,7 @@ public class MapState {
     public void updateMap(Map newMap) {
         map = newMap;
         Status.mapUI.displayMap();
-        Status.userUI.displayPosition();
+        Status.userState.userUI.displayPosition();
 
     }
 

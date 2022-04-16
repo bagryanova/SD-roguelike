@@ -7,7 +7,11 @@ import ru.hse.sd.roguegue.status.Status;
  * Class for displaying user on the map and related information. It has the char view of the user.
  */
 public class UserUI extends GameObjectUI{
-    private Character view = '!';
+
+    public UserUI() {
+        super();
+        view = '!';
+    }
 
     /**
      * Display user view on the map
@@ -19,7 +23,10 @@ public class UserUI extends GameObjectUI{
     /**
      * Display user's health above the map
      */
-    public void displayHealth() {
+    public void displayInformation() {
         Status.terminal.writeCenter("HEALTH: " + Status.userState.getHealth(), Constants.HEALTH_Y);
+        Status.terminal.writeCenter("LIVES: " + Status.userState.getLives(), Constants.HEALTH_Y + 1);
+        Status.terminal.writeCenter("EXP: " + Status.userState.getExp(), Constants.HEALTH_Y + 2);
+        Status.terminal.writeCenter("STRENGTH: " + Status.userState.getStrength(), Constants.HEALTH_Y + 3);
     }
 }
