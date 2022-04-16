@@ -29,17 +29,18 @@ public class UserState extends GameObjectState {
         strength = 5;
         lives = 5;
         // initial levels
-        levels.put(0, List.of(20, 100, 50)); // level num; req exp, health, strength
-        levels.put(1, List.of(60, 125, 60));
-        levels.put(2, List.of(100, 140, 75));
-        levels.put(3, List.of(140, 175, 90));
-        levels.put(4, List.of(200, 205, 100));
+        levels.put(0, List.of(20, 12, 50)); // level num; req exp, health, strength
+        levels.put(1, List.of(60, 15, 60));
+        levels.put(2, List.of(100, 17, 75));
+        levels.put(3, List.of(140, 20, 90));
+        levels.put(4, List.of(200, 25, 100));
     }
 
     /**
      * @param lostHealth
      * update health according to the newHealth and display changes on the screen
      */
+    // todo fix! this shit
     public void loseHealth(int lostHealth) {
         if (health > lostHealth) {
             updateHealth(health - lostHealth);

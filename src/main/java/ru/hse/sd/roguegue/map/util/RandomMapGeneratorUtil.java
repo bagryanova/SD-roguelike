@@ -73,10 +73,6 @@ public class RandomMapGeneratorUtil {
         }
     }
 
-    private Position getRandomGroundCell(GroundSpace gs) {
-        return new Position(rand.nextInt(gs.y() + 1, gs.y() + gs.h() - 1), rand.nextInt(gs.x + 1, gs.x + gs.w - 1));
-    }
-
     private void initCells(int width, int height) {
         cells = new CellType[height][width];
         for (int i = 0; i < height; i++) {

@@ -60,27 +60,6 @@ public class UserAction implements GameObjectAction {
         }
     }
 
-    private void fight(MobState mob) {
-        // todo finish game if user died
-        if (mob.getStrength() > Status.userState.getStrength()) {
-            Status.userState.loseHealth(mob.getStrength() / 2);
-            if (Status.userState.getLives() <= 0) {
-                Status.gameStatus = GameStatus.LOSE;
-                // выставила юзеру изначальные значения
-                Status.userState.setInitialValues();
-                Status.gameState.changeScreen();
-            }
-        } else {
-//            Status.userState.updateExp(Status.userState.getExp() + 20);
-            mob.updateLives(mob.getLives() - 1);
-            if (mob.getLives() <= 0) {
-//                Status.gameState.getMobStates().remove(mob);
-                mob.alive = false;
-                Status.userState.defeatMob();
-            }
-        }
-    }
-
     private boolean validateStep(Move move) {
         var state = Status.userState;
         Position position = state.getPosition();

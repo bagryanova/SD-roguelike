@@ -7,6 +7,7 @@ import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.Status;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Menu {
     private final GameAction gameAction = new GameAction();
@@ -27,6 +28,9 @@ public class Menu {
     }
 
     private void startGame() {
+        Status.inventoryMapItems = new ArrayList<>();
+        Status.gameState.getInventoryState().setInitialValues();
+        Status.gameState.setMobStates(new ArrayList<>());
         MapGenerator mapGenerator = new MapGenerator();
         map = mapGenerator.getMap();
         Status.userState.setInitialValues();

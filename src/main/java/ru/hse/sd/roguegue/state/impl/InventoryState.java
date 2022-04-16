@@ -8,11 +8,15 @@ import ru.hse.sd.roguegue.status.Status;
 import java.util.ArrayList;
 
 public class InventoryState {
-    ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
-    ArrayList<InventoryItem> activeInventoryItems = new ArrayList<>();
-    private InventoryUI inventoryUI = new InventoryUI();
-
+    private ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
+    private ArrayList<InventoryItem> activeInventoryItems = new ArrayList<>();
+    private final InventoryUI inventoryUI = new InventoryUI();
     private int currentItemIndex = 0;
+
+    public void setInitialValues() {
+        inventoryItems = new ArrayList<>();
+        activeInventoryItems = new ArrayList<>();
+    }
 
     void nextCurrentItem() {
         if (currentItemIndex + 1 < inventoryItems.size()) {
