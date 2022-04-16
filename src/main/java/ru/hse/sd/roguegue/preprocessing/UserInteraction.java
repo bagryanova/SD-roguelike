@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class UserInteraction extends JFrame implements KeyListener {
     private final Queue<KeyEvent> inputQueue = new LinkedList<>();
@@ -29,25 +31,16 @@ public class UserInteraction extends JFrame implements KeyListener {
         Status.screen.display();
         super.repaint();
 
-        mobThread = new Thread(() -> {
-            while (true){
+        TimerTask task = new TimerTask() {
+            public void run() {
                 synchronized (inputQueue) {
                     inputQueue.add(new KeyEvent(new Component() {
                     }, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_M, '\n'));
                 }
-                    try {
-                        Thread.sleep(1000); // 1 second
-                    } catch (Exception ignored){}
-                }
-        });
-    }
-
-    public void runMobThread(){
-        mobThread.start();
-    }
-
-    public void stopMobThread(){
-        mobThread.interrupt();
+            }
+        };
+        Timer timer = new Timer("Timer");
+        timer.schedule(task, 0, 1000);
     }
 
     /**

@@ -20,14 +20,8 @@ public class Roguegue {
             Status.init();
         }
         UserInteraction userInteraction = new UserInteraction();
-        userInteraction.runMobThread();
         while (Status.gameStatus != GameStatus.EXIT) {
             userInteraction.getUserAction();
-            try {
-                sleep(300);
-            } catch (InterruptedException ignored) {
-            }
         }
-        userInteraction.stopMobThread();
     }
 }
