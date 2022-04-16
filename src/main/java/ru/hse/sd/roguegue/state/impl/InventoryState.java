@@ -24,7 +24,7 @@ public class InventoryState extends GameObjectState {
         }
     }
 
-    void addInventoryItem(InventoryItem item) {
+    public void addInventoryItem(InventoryItem item) {
         inventoryItems.add(item);
     }
 

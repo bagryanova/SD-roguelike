@@ -38,7 +38,7 @@ public class UserAction implements GameObjectAction {
             case TAKE -> {
                 for (InventoryItem item : Status.inventoryMapItems) {
                     if (item.position.equals(position)) {
-                        Status.gameState.getInventoryState().getInventoryItems().add(item);
+                        Status.gameState.getInventoryState().addInventoryItem(item);
                     }
                 }
             }
