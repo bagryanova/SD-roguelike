@@ -97,7 +97,7 @@ public class UserAction implements GameObjectAction {
                 }
             }
             case PUT_ON -> {
-                if (!(cells[position.getY()][position.getX()] == CellType.INVENTORY && Status.gameStatus.equals(GameStatus.INVENTORY))) {
+                if (!(cells[position.getY()][position.getX()] == CellType.MAP_ITEM && Status.gameStatus.equals(GameStatus.INVENTORY))) {
                     return false;
                 }
             }

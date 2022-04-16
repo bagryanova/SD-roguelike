@@ -61,12 +61,12 @@ public class RandomMapGeneratorUtil {
     }
 
     private void placeInventory(List<GroundSpace> groundSpaces) { // todo доделать норм
-        List<String> inventoryObjects = List.of("Helmet", "Sword", "Knife", "Coat", "Gun", "Taser");
-        for (String name : inventoryObjects) {
+        List<String> mapInventoryObjects = List.of("Helmet", "Sword", "Knife", "Coat", "Gun", "Taser");
+        for (String name : mapInventoryObjects) {
             GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
             Position position = getRandomGroundCell(gs);
             Status.inventoryMapItems.add(new InventoryItem(name, position, 10, 10));
-            cells[position.getX()][position.getY()] = CellType.INVENTORY;
+//            cells[position.getX()][position.getY()] = CellType.MAP_ITEM;
         }
     }
 
