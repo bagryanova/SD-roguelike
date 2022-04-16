@@ -13,7 +13,7 @@ public class Handler {
     private boolean validateAction(KeyEvent event) {
         return event.getKeyCode() == KeyEvent.VK_M || event.getKeyCode() == KeyEvent.VK_LEFT || event.getKeyCode() == KeyEvent.VK_RIGHT ||
                 event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN ||
-                event.getKeyCode() == KeyEvent.VK_I;
+                event.getKeyCode() == KeyEvent.VK_I || event.getKeyCode() == KeyEvent.VK_SPACE;
     }
 
     /**

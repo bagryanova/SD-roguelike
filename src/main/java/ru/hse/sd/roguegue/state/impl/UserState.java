@@ -24,10 +24,10 @@ public class UserState extends GameObjectState {
     }
 
     public void setInitialValues() {
-        health = 10000;
+        health = 10;
         exp = 0;
-        strength = 5000;
-        lives = 50;
+        strength = 5;
+        lives = 5;
         // initial levels
         levels.put(0, List.of(20, 100, 50)); // level num; req exp, health, strength
         levels.put(1, List.of(60, 125, 60));

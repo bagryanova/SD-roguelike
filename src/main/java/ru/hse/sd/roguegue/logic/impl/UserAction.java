@@ -42,7 +42,9 @@ public class UserAction implements GameObjectAction {
                 for (InventoryItem item : Status.inventoryMapItems) {
                     if (item.position.equals(position)) {
                         Status.gameState.getInventoryState().addInventoryItem(item);
+                        item.present = false;
                     }
+                    Status.inventoryUI.displayTakingInventory(item);
                 }
             }
 //            case CONFUSE -> ; // todo
@@ -61,7 +63,6 @@ public class UserAction implements GameObjectAction {
     private void fight(MobState mob) {
         // todo finish game if user died
         if (mob.getStrength() > Status.userState.getStrength()) {
-            System.out.println("fight 2");
             Status.userState.updateHealth(mob.getStrength() / 2);
             if (Status.userState.getLives() <= 0) {
                 Status.gameStatus = GameStatus.LOSE;
@@ -70,7 +71,6 @@ public class UserAction implements GameObjectAction {
                 Status.gameState.changeScreen();
             }
         } else {
-            System.out.println("fight 1");
 //            Status.userState.updateExp(Status.userState.getExp() + 20);
             mob.updateLives(mob.getLives() - 1);
             if (mob.getLives() <= 0) {
