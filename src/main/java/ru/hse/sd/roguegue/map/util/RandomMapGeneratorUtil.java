@@ -34,10 +34,10 @@ public class RandomMapGeneratorUtil {
         List<GroundSpace> groundSpaces = setGroundSpaces();
         connectGroundSpaces(groundSpaces);
         GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
-        placeInventory(groundSpaces);
         cells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
         CommonMapUtil commonMapUtil = new CommonMapUtil();
         Map newMap = new Map(commonMapUtil.setBoundsAndPositions(cells));
+        placeInventory(newMap.cellArray());
         placeMobs(newMap.cellArray());
         return newMap;
     }
@@ -60,18 +60,21 @@ public class RandomMapGeneratorUtil {
         }
     }
 
-    private void placeInventory(List<GroundSpace> groundSpaces) { // todo доделать норм
+    private void placeInventory(CellType[][] mapCells) { // todo доделать норм
         List<String> mapInventoryObjects = List.of("Helmet", "Sword", "Knife", "Coat", "Gun", "Taser");
         for (String name : mapInventoryObjects) {
-            GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
-            Position position = getRandomGroundCell(gs);
-            Status.inventoryMapItems.add(new InventoryItem(name, position, 10, 10));
+            int i = 0, j = 0;
+            while (mapCells[i][j] != CellType.GROUND) {
+                i = rand.nextInt(0, mapCells.length - 1);
+                j = rand.nextInt(0, mapCells[0].length - 1);
+            }
+            Status.inventoryMapItems.add(new InventoryItem(name, new Position(j, i), 10, 10));
 //            cells[position.getX()][position.getY()] = CellType.MAP_ITEM;
         }
     }
 
     private Position getRandomGroundCell(GroundSpace gs) {
-        return new Position(rand.nextInt(gs.x + 1, gs.x + gs.w - 1), rand.nextInt(gs.y() + 1, gs.y() + gs.h() - 1));
+        return new Position(rand.nextInt(gs.y() + 1, gs.y() + gs.h() - 1), rand.nextInt(gs.x + 1, gs.x + gs.w - 1));
     }
 
     private void initCells(int width, int height) {

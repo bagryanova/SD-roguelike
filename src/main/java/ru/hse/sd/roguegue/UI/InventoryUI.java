@@ -12,7 +12,7 @@ public class InventoryUI  {
 
     public void displayAllInventoryOnTheMap() {
         for (InventoryItem item : Status.inventoryMapItems) {
-            Status.terminal.write(item.name.charAt(0), item.getPosition().getX() + Constants.MAP_START_X + 2,  item.getPosition().getY() + Constants.MAP_START_Y);
+            Status.terminal.write(item.name.charAt(0), item.getPosition().getX() + Constants.MAP_START_X,  item.getPosition().getY() + Constants.MAP_START_Y);
         }
     }
 
