@@ -40,7 +40,7 @@ public class UserState extends GameObjectState {
      * @param lostHealth
      * update health according to the newHealth and display changes on the screen
      */
-    public void updateHealth(int lostHealth) {
+    public void loseHealth(int lostHealth) {
         if (health > lostHealth) {
             health -= lostHealth;
         }
@@ -55,6 +55,10 @@ public class UserState extends GameObjectState {
             health = Constants.MAX_USER_HEALTH - cur;
         }
         Status.userState.userUI.displayInformation();
+    }
+
+    public void updateHealth(int newHealth) {
+        this.health = newHealth;
     }
 
     public int getHealth() {

@@ -55,7 +55,7 @@ public class UserAction implements GameObjectAction {
         }
         for (MobState mob : Status.gameState.getMobStates()) {
             if (mob.getPosition().equals(user.getPosition())) {
-                fight(mob);
+                mob.fight();
             }
         }
     }
@@ -63,7 +63,7 @@ public class UserAction implements GameObjectAction {
     private void fight(MobState mob) {
         // todo finish game if user died
         if (mob.getStrength() > Status.userState.getStrength()) {
-            Status.userState.updateHealth(mob.getStrength() / 2);
+            Status.userState.loseHealth(mob.getStrength() / 2);
             if (Status.userState.getLives() <= 0) {
                 Status.gameStatus = GameStatus.LOSE;
                 // выставила юзеру изначальные значения
@@ -76,8 +76,8 @@ public class UserAction implements GameObjectAction {
             if (mob.getLives() <= 0) {
 //                Status.gameState.getMobStates().remove(mob);
                 mob.alive = false;
+                Status.userState.defeatMob();
             }
-            Status.userState.defeatMob();
         }
     }
 
