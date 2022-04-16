@@ -19,10 +19,6 @@ public class UserState extends GameObjectState {
     private final HashMap<Integer, List<Integer>> levels = new HashMap<>();
     public UserUI userUI = new UserUI();
 
-    {
-        setUI(userUI);
-    }
-
     public void setInitialValues() {
         health = 10;
         exp = 0;

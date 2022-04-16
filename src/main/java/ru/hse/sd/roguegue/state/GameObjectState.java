@@ -9,7 +9,6 @@ import ru.hse.sd.roguegue.status.Status;
  */
 public abstract class GameObjectState {
     public Position position = new Position(0, 0);
-    private GameObjectUI gameObjectUI = new GameObjectUI();
 
     /**
      * @param newPosition update position according to the newPosition and display changes on the screen
@@ -21,11 +20,7 @@ public abstract class GameObjectState {
         for (MobState mobState : Status.gameState.getMobStates()) {
             mobState.mobUI.displayPosition(mobState.getPosition());
         }
-        gameObjectUI.displayPosition(position);
-    }
-
-    public void setUI(GameObjectUI UI) {
-        gameObjectUI = UI;
+        Status.userState.userUI.displayPosition();
     }
 
     public Position getPosition() {

@@ -17,7 +17,6 @@ public class MobState extends GameObjectState {
         this.strategy = mobStrategy;
         updatePosition(position);
         mobUI = new MobUI(mobStrategy);
-        setUI(mobUI);
     }
 
     public void updateStrategy(MobStrategy strategy) {

@@ -44,6 +44,9 @@ public class MapUI {
      * Display a full map
      */
     public void displayMap() {
+        if (Status.mapState.getMap() == null) {
+            return;
+        }
         CellType[][] cellArray = Status.mapState.getMap().cellArray();
         Status.terminal.setCursorY(dy);
         for (int i = 0; i < cellArray.length; ++i) {
