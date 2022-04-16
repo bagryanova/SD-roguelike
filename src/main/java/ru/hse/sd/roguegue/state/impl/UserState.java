@@ -18,6 +18,7 @@ public class UserState extends GameObjectState {
     private int lives;
     private final HashMap<Integer, List<Integer>> levels = new HashMap<>();
     public UserUI userUI = new UserUI();
+    private int level = 0;
 
     {
         setUI(userUI);
@@ -28,7 +29,6 @@ public class UserState extends GameObjectState {
         exp = 0;
         strength = 5;
         lives = 5;
-        // initial levels
         levels.put(0, List.of(20, 12, 50)); // level num; req exp, health, strength
         levels.put(1, List.of(60, 15, 60));
         levels.put(2, List.of(100, 17, 75));
@@ -37,23 +37,24 @@ public class UserState extends GameObjectState {
     }
 
     /**
-     * @param lostHealth
-     * update health according to the newHealth and display changes on the screen
+     * @param lostHealth health that was lost in a fight
+     *
+     * Update health according to the newHealth and display changes on the screen
      */
-    // todo fix! this shit
     public void loseHealth(int lostHealth) {
         if (health > lostHealth) {
             updateHealth(health - lostHealth);
-        }
-        else {
+        } else {
             int cur = lostHealth - health;
             int cnt = 0;
             while (cur > 0) {
-                cur -= Constants.MAX_USER_HEALTH;
+                cur -= levels.get(level).get(1);
                 cnt++;
             }
+            cur += levels.get(level).get(1);
+            System.out.println("lives " + lives + ' ' + cnt);
             updateLives(lives - cnt);
-            updateHealth(Constants.MAX_USER_HEALTH - cur);
+            updateHealth(levels.get(level).get(1) - cur);
         }
     }
 
@@ -78,8 +79,7 @@ public class UserState extends GameObjectState {
     }
 
     /**
-     * @param newExp
-     * update experience according to the newExp and display changes on the screen
+     * @param newExp update experience according to the newExp and display changes on the screen
      */
     public void updateExp(int newExp) {
         exp = newExp;
@@ -91,8 +91,7 @@ public class UserState extends GameObjectState {
     }
 
     /**
-     * @param newStrength
-     * update attack according to the newAttack
+     * @param newStrength update attack according to the newAttack
      */
     public void updateStrength(int newStrength) {
         strength = newStrength;
@@ -104,8 +103,7 @@ public class UserState extends GameObjectState {
     }
 
     /**
-     * @param newLives
-     * update attack according to the newAttack
+     * @param newLives update attack according to the newAttack
      */
     public void updateLives(int newLives) {
         lives = newLives;

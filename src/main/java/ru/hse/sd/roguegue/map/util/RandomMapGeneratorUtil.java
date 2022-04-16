@@ -2,14 +2,6 @@ package ru.hse.sd.roguegue.map.util;
 
 import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.map.Map;
-import ru.hse.sd.roguegue.state.MobStrategy;
-import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.impl.AggressiveStrategy;
-import ru.hse.sd.roguegue.state.impl.AvoidingStrategy;
-import ru.hse.sd.roguegue.state.impl.MobState;
-import ru.hse.sd.roguegue.state.impl.PassiveStrategy;
-import ru.hse.sd.roguegue.status.InventoryItem;
-import ru.hse.sd.roguegue.status.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,41 +28,10 @@ public class RandomMapGeneratorUtil {
         GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
         cells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
         CommonMapUtil commonMapUtil = new CommonMapUtil();
-        Map newMap = new Map(commonMapUtil.setBoundsAndPositions(cells));
-        placeInventory(newMap.cellArray());
-        placeMobs(newMap.cellArray());
+        Map newMap = new Map(commonMapUtil.setBordersAndPositions(cells));
+        commonMapUtil.placeInventory(newMap.cellArray());
+        commonMapUtil.placeMobs(newMap.cellArray());
         return newMap;
-    }
-
-    private void placeMobs(CellType[][] mapCells) {
-        placeMobsOfType(mapCells, new AggressiveStrategy(), 3);
-        placeMobsOfType(mapCells, new PassiveStrategy(), 3);
-        placeMobsOfType(mapCells, new AvoidingStrategy(), 2);
-    }
-
-    private void placeMobsOfType(CellType[][] mapCells, MobStrategy mobStrategy, int mobsNum) {
-        for (int c = 0; c < mobsNum; c++) {
-            int i = 0, j = 0;
-            while (mapCells[i][j] != CellType.GROUND) {
-                i = rand.nextInt(0, mapCells.length - 1);
-                j = rand.nextInt(0, mapCells[0].length - 1);
-            }
-            assert mapCells[i][j] == CellType.GROUND;
-            Status.gameState.getMobStates().add(new MobState(mobStrategy, new Position(j, i))); // todo надеюсь реально i j, а не j i
-        }
-    }
-
-    private void placeInventory(CellType[][] mapCells) { // todo доделать норм
-        List<String> mapInventoryObjects = List.of("Helmet", "Sword", "Knife", "Coat", "Gun", "Taser");
-        for (String name : mapInventoryObjects) {
-            int i = 0, j = 0;
-            while (mapCells[i][j] != CellType.GROUND) {
-                i = rand.nextInt(0, mapCells.length - 1);
-                j = rand.nextInt(0, mapCells[0].length - 1);
-            }
-            Status.inventoryMapItems.add(new InventoryItem(name, new Position(j, i), 10, 10));
-//            cells[position.getX()][position.getY()] = CellType.MAP_ITEM;
-        }
     }
 
     private void initCells(int width, int height) {
@@ -184,20 +145,5 @@ public class RandomMapGeneratorUtil {
      * Constraints for map generation
      */
     private record Constraints(double minRate, double maxRate, int minW, int maxW, int minH, int maxH) {
-    }
-
-    /**
-     * Util class for getting random values bounded by constraints
-     */
-    private static class RandUtil {
-
-        private RandUtil() {
-        }
-
-        private static final Random rand = new Random(System.currentTimeMillis());
-
-        public static int getRandom(int lowerBound, int upperBound) {
-            return (int) (rand.nextDouble() * ((upperBound - lowerBound) + 1)) + lowerBound;
-        }
     }
 }

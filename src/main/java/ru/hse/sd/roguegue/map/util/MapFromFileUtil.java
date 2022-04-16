@@ -29,7 +29,10 @@ public class MapFromFileUtil {
         File mapTemplate = new File(pathName + File.separatorChar + fileList[rand.nextInt(fileList.length - 1)]);
         CellType[][] cellArray = convertToMapFromFile(mapTemplate);
         CommonMapUtil commonMapUtil = new CommonMapUtil();
-        return new Map(commonMapUtil.setBoundsAndPositions(cellArray));
+        Map newMap = new Map(commonMapUtil.setBordersAndPositions(cellArray));
+        commonMapUtil.placeInventory(newMap.cellArray());
+        commonMapUtil.placeMobs(newMap.cellArray());
+        return newMap;
     }
 
     private CellType[][] convertToMapFromFile(File mapTemplate) {
