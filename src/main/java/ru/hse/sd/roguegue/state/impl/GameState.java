@@ -17,11 +17,11 @@ public class GameState {
     }
 
     public void upCurrentInventoryItem() {
-        this.inventoryState.nextCurrentItem();
+        this.inventoryState.prevCurrentItem();
     }
 
     public void downCurrentInventoryItem() {
-        this.inventoryState.prevCurrentItem();
+        this.inventoryState.nextCurrentItem();
     }
 
     public void putOnCurrentInventoryItem() {
