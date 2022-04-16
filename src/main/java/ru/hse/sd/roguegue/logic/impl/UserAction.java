@@ -20,17 +20,17 @@ public class UserAction implements GameObjectAction {
      */
     @Override
     public void updateState(Move move) {
-        UserState state = Status.userState;
-        Position position = state.getPosition();
+        UserState user = Status.userState;
+        Position position = user.getPosition();
         if (!validateStep(move)) {
-            state.updatePosition(position);
+            user.updatePosition(position);
             return;
         }
         switch (move) {
-            case UP -> state.updatePosition(new Position(position.getX(), position.getY() - 1));
-            case DOWN -> state.updatePosition(new Position(position.getX(), position.getY() + 1));
-            case LEFT -> state.updatePosition(new Position(position.getX() - 1, position.getY()));
-            case RIGHT -> state.updatePosition(new Position(position.getX() + 1, position.getY()));
+            case UP -> user.updatePosition(new Position(position.getX(), position.getY() - 1));
+            case DOWN -> user.updatePosition(new Position(position.getX(), position.getY() + 1));
+            case LEFT -> user.updatePosition(new Position(position.getX() - 1, position.getY()));
+            case RIGHT -> user.updatePosition(new Position(position.getX() + 1, position.getY()));
             case INVENTORY -> {
                 Status.gameStatus = GameStatus.INVENTORY;
                 Status.gameState.changeScreen();
@@ -49,7 +49,7 @@ public class UserAction implements GameObjectAction {
             Status.gameState.changeScreen();
         }
         for (MobState mob : Status.gameState.getMobStates()) {
-            if (mob.getPosition() == state.getPosition()) {
+            if (mob.getPosition().equals(user.getPosition())) {
                 fight(mob);
             }
         }
@@ -58,6 +58,7 @@ public class UserAction implements GameObjectAction {
     private void fight(MobState mob) {
         // todo finish game if user died
         if (mob.getStrength() > Status.userState.getStrength()) {
+            System.out.println("fight 1");
             Status.userState.updateHealth(mob.getStrength() / 2);
             if (Status.userState.getLives() <= 0) {
                 Status.gameStatus = GameStatus.LOSE;
@@ -66,7 +67,14 @@ public class UserAction implements GameObjectAction {
                 Status.gameState.changeScreen();
             }
         } else {
+            System.out.println("fight 2");
             mob.updateLives(mob.getLives() - 1);
+            if (mob.getLives() == 0) {
+                Status.gameState.getMobStates().remove(mob);
+                System.out.println("mobs");
+                Status.gameState.getMobStates().forEach(System.out::println);
+                System.out.println("mobs fin");
+            }
             Status.userState.defeatMob();
         }
     }
