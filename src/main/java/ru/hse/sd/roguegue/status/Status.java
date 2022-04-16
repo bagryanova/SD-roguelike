@@ -70,7 +70,7 @@ public class Status {
     public static List<InventoryItem> inventoryMapItems = new ArrayList<>(List.of());
 
     /**
-     * Initializes game status by setting default values todo
+     * Initializes game status by setting default values
      */
     public static void init() {
         gameStatus = GameStatus.MENU;

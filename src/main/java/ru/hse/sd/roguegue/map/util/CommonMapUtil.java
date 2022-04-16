@@ -11,7 +11,6 @@ import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class CommonMapUtil {

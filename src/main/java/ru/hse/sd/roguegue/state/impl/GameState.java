@@ -32,7 +32,7 @@ public class GameState {
         this.inventoryState.takeOffCurrentItem();
     }
 
-    private InventoryState inventoryState = new InventoryState();
+    private final InventoryState inventoryState = new InventoryState();
 
     public ArrayList<MobState> getMobStates() {
         return mobStates;

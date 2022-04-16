@@ -48,9 +48,12 @@ public class MobState extends GameObjectState {
         }
     }
 
+    /**
+     * Compare strengths of user and mob and update health and lives according to the characteristics
+     */
     public void fight() {
         if (getStrength() > Status.userState.getStrength()) {
-            Status.userState.loseHealth(getStrength() / 2);
+            Status.userState.loseHealth(getStrength() / 2 + 1);
             if (Status.userState.getLives() <= 0) {
                 Status.gameStatus = GameStatus.LOSE;
                 Status.userState.setInitialValues();
@@ -58,7 +61,6 @@ public class MobState extends GameObjectState {
             }
         } else {
             System.out.println("lives mob " + getLives());
-//            Status.userState.updateExp(Status.userState.getExp() + 20);
             updateLives(getLives() - 1);
             if (getLives() <= 0) {
                 alive = false;

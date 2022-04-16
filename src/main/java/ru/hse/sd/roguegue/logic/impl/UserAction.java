@@ -10,14 +10,12 @@ import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class UserAction implements GameObjectAction {
     /**
-     * Updates user state according to the move made by user.
-     * If user can't make this step - nothing changes.
+     * Updates user state according to the action made by user.
+     * If user can't make the step - nothing changes.
      * If user reached EXIT cell - calls methods to finish the game.
+     * If user chose to pick up the inventory item - item is added to the storage.
      *
      * @param move current user's move
      */
