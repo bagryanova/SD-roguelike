@@ -33,6 +33,7 @@ public class Handler {
             case KeyEvent.VK_DOWN -> userAction.updateState(Move.DOWN);
             case KeyEvent.VK_UP -> userAction.updateState(Move.UP);
             case KeyEvent.VK_I -> userAction.updateState(Move.INVENTORY);
+            case KeyEvent.VK_SPACE -> userAction.updateState(Move.TAKE);
         }
     }
 }
