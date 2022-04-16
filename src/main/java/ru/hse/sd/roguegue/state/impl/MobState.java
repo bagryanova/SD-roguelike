@@ -57,6 +57,7 @@ public class MobState extends GameObjectState {
                 Status.gameState.changeScreen();
             }
         } else {
+            System.out.println("lives mob " + getLives());
 //            Status.userState.updateExp(Status.userState.getExp() + 20);
             updateLives(getLives() - 1);
             if (getLives() <= 0) {

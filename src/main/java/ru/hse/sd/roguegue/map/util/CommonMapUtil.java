@@ -11,6 +11,7 @@ import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class CommonMapUtil {
@@ -49,12 +50,12 @@ public class CommonMapUtil {
      * Places mobs of specific types on free cells
      */
     public void placeMobs(CellType[][] mapCells) {
-        placeMobsOfType(mapCells, new AggressiveStrategy(), 3);
-        placeMobsOfType(mapCells, new PassiveStrategy(), 3);
-        placeMobsOfType(mapCells, new AvoidingStrategy(), 2);
+        placeMobsOfType(mapCells, "A", 3);
+        placeMobsOfType(mapCells, "P", 3);
+        placeMobsOfType(mapCells, "C", 2);
     }
 
-    private void placeMobsOfType(CellType[][] mapCells, MobStrategy mobStrategy, int mobsNum) {
+    private void placeMobsOfType(CellType[][] mapCells, String mobStrategyType, int mobsNum) {
         for (int c = 0; c < mobsNum; c++) {
             int i = 0, j = 0;
             while (mapCells[i][j] != CellType.GROUND) {
@@ -62,6 +63,12 @@ public class CommonMapUtil {
                 j = rand.nextInt(0, mapCells[0].length - 1);
             }
             assert mapCells[i][j] == CellType.GROUND;
+            MobStrategy mobStrategy = new AggressiveStrategy();
+            if (mobStrategyType.equals("P")) {
+                mobStrategy = new PassiveStrategy();
+            } else if (mobStrategyType.equals("C")) {
+                mobStrategy = new AvoidingStrategy();
+            }
             Status.gameState.getMobStates().add(new MobState(mobStrategy, new Position(j, i)));
         }
     }
