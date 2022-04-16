@@ -26,11 +26,11 @@ public class GameState {
     }
 
     public void putOnCurrentInventoryItem() {
-        this.inventoryState.prevCurrentItem();
+        this.inventoryState.putOnCurrentItem();
     }
 
     public void takeOffCurrentInventoryItem() {
-        this.inventoryState.prevCurrentItem();
+        this.inventoryState.takeOffCurrentItem();
     }
 
     private InventoryState inventoryState = new InventoryState();

@@ -40,7 +40,7 @@ public class InventoryState extends GameObjectState {
         Status.userState.putOnInventoryItem(inventoryItems.get(currentItemIndex));
     }
 
-    void takeOffInventoryItem(InventoryItem item) {
+    void takeOffCurrentItem() {
         if (!activeInventoryItems.contains(inventoryItems.get(currentItemIndex))) {
             return;
         }
