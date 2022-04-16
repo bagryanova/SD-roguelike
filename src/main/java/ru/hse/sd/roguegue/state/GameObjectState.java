@@ -16,11 +16,11 @@ public abstract class GameObjectState {
      */
     public void updatePosition(Position newPosition) {
         Status.mapUI.displayCell(position);
+        position = newPosition;
         Status.inventoryUI.displayAllInventoryOnTheMap();
         for (MobState mobState : Status.gameState.getMobStates()) {
             mobState.mobUI.displayPosition(mobState.getPosition());
         }
-        position = newPosition;
         gameObjectUI.displayPosition(position);
     }
 
