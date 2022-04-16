@@ -13,7 +13,7 @@ public class Handler {
     private boolean validateAction(KeyEvent event) {
         return event.getKeyCode() == KeyEvent.VK_M || event.getKeyCode() == KeyEvent.VK_LEFT || event.getKeyCode() == KeyEvent.VK_RIGHT ||
                 event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN ||
-                event.getKeyCode() == KeyEvent.VK_I || event.getKeyCode() == KeyEvent.VK_SPACE;
+                event.getKeyCode() == KeyEvent.VK_I || event.getKeyCode() == KeyEvent.VK_SPACE || event.getKeyCode() == KeyEvent.VK_C;
     }
 
     /**
@@ -31,6 +31,7 @@ public class Handler {
             case KeyEvent.VK_I -> userAction.updateState(Move.INVENTORY);
             case KeyEvent.VK_SPACE -> userAction.updateState(Move.TAKE);
             case KeyEvent.VK_M -> mobAction.updateState(Move.ENTER);
+            case KeyEvent.VK_C -> userAction.updateState(Move.CONFUSE);
         }
     }
 }
