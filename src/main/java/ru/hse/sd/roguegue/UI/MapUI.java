@@ -27,7 +27,7 @@ public class MapUI {
         graphicRepresentation.put(CellType.EXIT, '+');
 
         // todo соба я тут тестила и поменяла тебе немного
-        graphicRepresentation.put(CellType.INVENTORY, 'I');
+        //graphicRepresentation.put(CellType.INVENTORY, 'I');
     }
 
     /**

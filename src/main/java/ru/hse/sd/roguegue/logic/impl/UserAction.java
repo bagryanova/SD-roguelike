@@ -32,7 +32,7 @@ public class UserAction implements GameObjectAction {
             case RIGHT -> state.updatePosition(new Position(position.getX() + 1, position.getY()));
             case INVENTORY -> {
                 Status.gameStatus = GameStatus.INVENTORY;
-                Status.gameState.inventoryMenu();
+                Status.gameState.changeScreen();
             }
 //            case PUT_ON -> {
 //                if (Status.gameStatus.equals(GameStatus.GAME)) {
@@ -51,7 +51,7 @@ public class UserAction implements GameObjectAction {
         }
         if (Status.mapState.getMap().cellArray()[Status.userState.getPosition().getY()][Status.userState.getPosition().getX()] == CellType.EXIT) {
             Status.gameStatus = GameStatus.MENU;
-            Status.gameState.finishLevel();
+            Status.gameState.changeScreen();
         }
         for (MobState mob : Status.gameState.getMobStates()) {
             if (mob.getPosition() == state.getPosition()) {
@@ -68,7 +68,7 @@ public class UserAction implements GameObjectAction {
                 Status.gameStatus = GameStatus.LOSE;
                 // выставила юзеру изначальные значения
                 Status.userState.setInitialValues();
-                Status.gameState.finishLevel();
+                Status.gameState.changeScreen();
             }
         } else {
             mob.updateLives(mob.getLives() - 1);

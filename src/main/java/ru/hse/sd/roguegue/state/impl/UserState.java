@@ -1,5 +1,6 @@
 package ru.hse.sd.roguegue.state.impl;
 
+import ru.hse.sd.roguegue.UI.UserUI;
 import ru.hse.sd.roguegue.state.GameObjectState;
 import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.InventoryItem;
@@ -16,6 +17,11 @@ public class UserState extends GameObjectState {
     private int strength;
     private int lives;
     private final HashMap<Integer, List<Integer>> levels = new HashMap<>();
+    public UserUI userUI = new UserUI();
+
+    {
+        setUI(userUI);
+    }
 
     public void setInitialValues() {
         health = 100;
@@ -48,8 +54,7 @@ public class UserState extends GameObjectState {
             lives -= cnt;
             health = Constants.MAX_USER_HEALTH - cur;
         }
-        Status.userUI.displayHealth();
-        // todo display lives
+        Status.userState.userUI.displayInformation();
     }
 
     public int getHealth() {
@@ -73,8 +78,7 @@ public class UserState extends GameObjectState {
      */
     public void updateExp(int newExp) {
         exp = newExp;
-        // todo soba
-//        Status.userUI.displayExp();
+        Status.userState.userUI.displayInformation();
     }
 
     public int getExp() {
@@ -87,7 +91,7 @@ public class UserState extends GameObjectState {
      */
     public void updateStrength(int newStrength) {
         strength = newStrength;
-//        Status.userUI.displayAttack();
+        Status.userState.userUI.displayInformation();
     }
 
     public int getStrength() {
@@ -100,8 +104,7 @@ public class UserState extends GameObjectState {
      */
     public void updateLives(int newLives) {
         lives = newLives;
-        // todo
-//        Status.userUI.displayLives();
+        Status.userState.userUI.displayInformation();
     }
 
     public int getLives() {
@@ -109,12 +112,13 @@ public class UserState extends GameObjectState {
     }
 
     public void putOnInventoryItem(InventoryItem item) {
-        strength += item.plusAttack;
-        health += item.plusHealth;
+        updateStrength(strength + item.plusAttack);
+        updateHealth(health + item.plusHealth);
+
     }
 
     public void takeOffInventoryItem(InventoryItem item) {
-        strength -= item.plusAttack;
-        health -= item.plusHealth;
+        updateStrength(strength - item.plusAttack);
+        updateHealth(health - item.plusHealth);
     }
 }

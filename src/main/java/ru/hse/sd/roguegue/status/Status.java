@@ -2,6 +2,7 @@ package ru.hse.sd.roguegue.status;
 
 import asciiPanel.AsciiPanel;
 import ru.hse.sd.roguegue.UI.GameUI;
+import ru.hse.sd.roguegue.UI.InventoryUI;
 import ru.hse.sd.roguegue.UI.MapUI;
 import ru.hse.sd.roguegue.UI.UserUI;
 import ru.hse.sd.roguegue.UI.screens.MenuScreen;
@@ -59,10 +60,12 @@ public class Status {
      */
     public static GameUI gameUI = new GameUI();
 
+    public static InventoryUI inventoryUI = new InventoryUI();
+
     /**
      * UI for user. Can display user
      */
-    public static UserUI userUI = new UserUI();
+    //public static UserUI userUI = new UserUI();
 
     // todo где-нибудь инициализировать в начале игры и задать этому всему характеристики
     public static List<String> inventoryObjects = List.of("Helmet", "Sword", "Knife", "Coat");

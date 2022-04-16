@@ -15,8 +15,13 @@ public class InventoryAction implements GameObjectAction {
             case DOWN -> gameState.downCurrentInventoryItem();
             case PUT_ON -> gameState.putOnCurrentInventoryItem();
             case TAKE_OFF -> gameState.takeOffCurrentInventoryItem();
-            case ENTER -> Status.gameStatus = GameStatus.GAME;
+            case ENTER -> {
+                Status.gameStatus = GameStatus.GAME;
+                gameState.changeScreen();
+            }
         }
+
+
 
     }
 }
