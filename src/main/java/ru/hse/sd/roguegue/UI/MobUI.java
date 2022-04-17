@@ -19,7 +19,7 @@ public class MobUI extends GameObjectUI {
      * @param mobStrategy
      * Changes view of a mob according to the mobStrategy
      */
-    public void updateUI(MobStrategy mobStrategy) {
+    private void updateUI(MobStrategy mobStrategy) {
         if (AggressiveStrategy.class.equals(mobStrategy.getClass())) {
             view = 'a';
         } else if (AvoidingStrategy.class.equals(mobStrategy.getClass())) {
