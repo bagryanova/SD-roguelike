@@ -7,6 +7,12 @@ import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.Status;
 
 public class InventoryAction implements GameObjectAction {
+    /**
+     * Updates inventory state according to the action made by user.
+     * User can change current item, put on or take off them.
+     *
+     * @param move current user's move
+     */
     @Override
     public void updateState(Move move) {
         GameState gameState = Status.gameState;

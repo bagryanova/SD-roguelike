@@ -13,6 +13,9 @@ public class InventoryHandler {
         return event.getKeyCode() == KeyEvent.VK_Q || event.getKeyCode() == KeyEvent.VK_ENTER || event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN || event.getKeyCode() == KeyEvent.VK_BACK_SPACE;
     }
 
+    /**
+     * Depending on the user's action update inventory state
+     */
     public void setInventoryAction(KeyEvent event) {
         if (!validateAction(event)) {
             return;

@@ -9,6 +9,9 @@ public class PassiveStrategy extends MobStrategy {
         super.strength = 2;
     }
 
+    /**
+     * @param position doesn't update position.
+     */
     @Override
     public Position getNewPosition(Position position) {
         return position;
