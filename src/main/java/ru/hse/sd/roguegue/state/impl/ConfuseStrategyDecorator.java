@@ -7,6 +7,9 @@ import ru.hse.sd.roguegue.state.StrategyDecorator;
 
 import java.util.Random;
 
+/**
+ * Class for adding temporary confused behaviour to the current mob's strategy
+ */
 public class ConfuseStrategyDecorator extends StrategyDecorator {
     int timeCnt = 10;
     Random random = new Random();
@@ -15,6 +18,10 @@ public class ConfuseStrategyDecorator extends StrategyDecorator {
         super(strategy);
     }
 
+    /**
+     * Decorated method. Returns confused position in the first 10 steps after applying decoration.
+     * After 10 steps has usual strategy method's behaviour
+     */
     public Position getNewPosition(Position position) {
         Position curPosition = super.getNewPosition(position);
         if (timeCnt > 0) {
@@ -24,6 +31,10 @@ public class ConfuseStrategyDecorator extends StrategyDecorator {
         return curPosition;
     }
 
+    /**
+     * Returns adjacent cell in a random direction if it's possible to make move there.
+     * Otherwise returns given position.
+     */
     private Position getConfusedPosition(Position position) {
         int randDirection = random.nextInt(4);
 

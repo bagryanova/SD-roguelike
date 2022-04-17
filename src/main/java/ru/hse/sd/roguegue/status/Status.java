@@ -4,7 +4,6 @@ import asciiPanel.AsciiPanel;
 import ru.hse.sd.roguegue.UI.GameUI;
 import ru.hse.sd.roguegue.UI.InventoryUI;
 import ru.hse.sd.roguegue.UI.MapUI;
-import ru.hse.sd.roguegue.UI.UserUI;
 import ru.hse.sd.roguegue.UI.screens.MenuScreen;
 import ru.hse.sd.roguegue.UI.screens.Screen;
 import ru.hse.sd.roguegue.state.impl.GameState;
@@ -60,12 +59,10 @@ public class Status {
      */
     public static GameUI gameUI = new GameUI();
 
-    public static InventoryUI inventoryUI = new InventoryUI();
-
     /**
-     * UI for user. Can display user
+     * UI for user's inventory list
      */
-    //public static UserUI userUI = new UserUI();
+    public static InventoryUI inventoryUI = new InventoryUI();
 
     public static List<InventoryItem> inventoryMapItems = new ArrayList<>(List.of());
 

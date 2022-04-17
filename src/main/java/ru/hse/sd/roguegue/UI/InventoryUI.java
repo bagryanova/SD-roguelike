@@ -7,8 +7,16 @@ import ru.hse.sd.roguegue.status.Status;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for displaying inventory on the map. And also for displaying user's inventory in list.
+ */
 public class InventoryUI  {
 
+    /**
+     * @param prevLine
+     * @param currentLine
+     * Changes cursor's position from prevLine to currentLine
+     */
     public void displayCurrentLine(int prevLine, int currentLine) {
         Status.terminal.write(' ', Constants.MAP_START_X, prevLine + Constants.MAP_START_Y + 1);
         Status.terminal.write('>', Constants.MAP_START_X, currentLine + Constants.MAP_START_Y + 1);
@@ -29,10 +37,15 @@ public class InventoryUI  {
     public void displayUsersInventoryList() {
         Status.terminal.setCursorY(Constants.MAP_START_Y);
         for (InventoryItem item : Status.gameState.getInventoryState().getInventoryItems()) {
-            Status.terminal.write(item.name, Constants.MAP_START_X + 2,  Status.terminal.getCursorY() + 1);
+            Status.terminal.write(item.name + " strength: " + item.plusAttack + " health: " + item.plusHealth,
+                    Constants.MAP_START_X + 2,  Status.terminal.getCursorY() + 1);
         }
     }
 
+    /**
+     * @param item
+     * Displays how user takes inventory from the map (inventory item disappears from the map)
+     */
     public void displayTakingInventory(InventoryItem item) {
         Status.mapUI.displayCell(item.getPosition());
     }

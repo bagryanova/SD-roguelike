@@ -4,7 +4,7 @@ import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.Status;
 
 /**
- * Class for displaying user on the map and related information. It has the char view of the user.
+ * Class for displaying user on the map and related information
  */
 public class UserUI extends GameObjectUI{
 
