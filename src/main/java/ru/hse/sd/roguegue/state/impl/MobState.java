@@ -23,22 +23,30 @@ public class MobState extends GameObjectState {
         strategy = new ConfuseStrategyDecorator(strategy);
     }
 
-    public void updateStrength(int newStrength) {
-        strategy.strength = newStrength;
-    }
-
+    /**
+     * Get current strength
+     */
     public int getStrength() {
         return strategy.strength;
     }
 
+    /**
+     * Update current strength
+     */
     public void updateLives(int newLives) {
         strategy.lives = newLives;
     }
 
+    /**
+     * Get current lives
+     */
     public int getLives() {
         return strategy.lives;
     }
 
+    /**
+     * Update position according to strategy
+     */
     public void updatePosition() {
         Position newPosition = strategy.getNewPosition(super.getPosition());
         super.updatePosition(newPosition);

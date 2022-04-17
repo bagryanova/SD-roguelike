@@ -8,6 +8,9 @@ import ru.hse.sd.roguegue.status.Status;
 import java.util.ArrayList;
 
 public class MobAction implements GameObjectAction {
+    /**
+     * Update mob's state, remove dead mobs
+     */
     @Override
     public void updateState(Move move) {
         ArrayList<MobState> mobs = Status.gameState.getMobStates();

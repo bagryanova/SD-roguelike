@@ -13,19 +13,28 @@ public class InventoryState {
     private final InventoryUI inventoryUI = new InventoryUI();
     private int currentItemIndex = 0;
 
+    /**
+     * Initialize inventory.
+     */
     public void setInitialValues() {
         inventoryItems = new ArrayList<>();
         activeInventoryItems = new ArrayList<>();
     }
 
-    void nextCurrentItem() {
+    /**
+     * Move current item
+     */
+    public void nextCurrentItem() {
         if (currentItemIndex + 1 < inventoryItems.size()) {
             currentItemIndex += 1;
             inventoryUI.displayCurrentLine(currentItemIndex - 1, currentItemIndex);
         }
     }
 
-    void prevCurrentItem() {
+    /**
+     * Move current item
+     */
+    public void prevCurrentItem() {
         if (currentItemIndex - 1 >= 0) {
             currentItemIndex -= 1;
             inventoryUI.displayCurrentLine(currentItemIndex + 1, currentItemIndex);
@@ -33,15 +42,24 @@ public class InventoryState {
         }
     }
 
+    /**
+     * Add new inventory item
+     */
     public void addInventoryItem(InventoryItem item) {
         inventoryItems.add(item);
     }
 
+    /**
+     * Get all inventory item
+     */
     public ArrayList<InventoryItem> getInventoryItems() {
         return inventoryItems;
     }
 
-    void putOnCurrentItem() {
+    /**
+     * Put on current inventory item
+     */
+    public void putOnCurrentItem() {
         if (activeInventoryItems.contains(inventoryItems.get(currentItemIndex))) {
             return;
         }
@@ -49,7 +67,10 @@ public class InventoryState {
         Status.userState.putOnInventoryItem(inventoryItems.get(currentItemIndex));
     }
 
-    void takeOffCurrentItem() {
+    /**
+     * Take off current inventory item
+     */
+    public void takeOffCurrentItem() {
         if (!activeInventoryItems.contains(inventoryItems.get(currentItemIndex))) {
             return;
         }

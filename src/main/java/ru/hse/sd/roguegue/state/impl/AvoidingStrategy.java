@@ -11,6 +11,9 @@ public class AvoidingStrategy extends MobStrategy {
         super.strength = 3;
     }
 
+    /**
+     * @param position update position according to the user position, try to be far.
+     */
     @Override
     public Position getNewPosition(Position position) {
         Position userPosition = Status.userState.getPosition();

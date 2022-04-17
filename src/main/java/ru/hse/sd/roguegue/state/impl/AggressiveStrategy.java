@@ -11,6 +11,9 @@ public class AggressiveStrategy extends MobStrategy {
         super.strength = 6;
     }
 
+    /**
+     * @param position update position according to the user position, try to be closer.
+     */
     @Override
     public Position getNewPosition(Position position) {
         Position userPosition = Status.userState.getPosition();

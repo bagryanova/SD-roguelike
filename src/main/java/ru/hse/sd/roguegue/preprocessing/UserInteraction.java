@@ -32,6 +32,9 @@ public class UserInteraction extends JFrame implements KeyListener {
         super.repaint();
     }
 
+    /**
+     * Start mob's moving
+     */
     public void startMob() {
         TimerTask task = new TimerTask() {
             public void run() {
