@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class GameState {
     private int score;
-
     private ArrayList<MobState> mobStates = new ArrayList<>();
+    private final InventoryState inventoryState = new InventoryState();
 
     public InventoryState getInventoryState() {
         return inventoryState;
@@ -32,8 +32,6 @@ public class GameState {
         this.inventoryState.takeOffCurrentItem();
     }
 
-    private final InventoryState inventoryState = new InventoryState();
-
     public ArrayList<MobState> getMobStates() {
         return mobStates;
     }
@@ -43,8 +41,7 @@ public class GameState {
     }
 
     /**
-     * @param newScore
-     * update score according to the newScore and display changes on the screen
+     * @param newScore update score according to the newScore and display changes on the screen
      */
     // todo счет вообще будет??
     public void updateScore(int newScore) {

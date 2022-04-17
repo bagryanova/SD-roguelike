@@ -131,7 +131,6 @@ public class UserState extends GameObjectState {
     public void putOnInventoryItem(InventoryItem item) {
         updateStrength(strength + item.plusAttack);
         updateHealth(health + item.plusHealth);
-
     }
 
     public void takeOffInventoryItem(InventoryItem item) {

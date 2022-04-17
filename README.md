@@ -102,7 +102,7 @@
 ### Диаграмма классов
 
 <br></br>
-![t1-1](assets/class.png)
+![t1-1](assets/diag-upd.png)
 <br></br>
 
 
