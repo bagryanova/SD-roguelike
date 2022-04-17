@@ -2,10 +2,16 @@ package ru.hse.sd.roguegue.UI.screens;
 
 import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.GameStatus;
-import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
+/**
+ * Screen for displaying user's inventory items list
+ */
 public class InventoryScreen implements Screen {
+
+    /**
+     * Shows content of inventory as a list with cursor
+     */
     @Override
     public void display() {
         Status.terminal.clear();
@@ -16,6 +22,10 @@ public class InventoryScreen implements Screen {
 
     }
 
+    /**
+     * @return PlayScreen if user wants return to the game process
+     * otherwise return this screen
+     */
     @Override
     public Screen change() {
         if (Status.gameStatus == GameStatus.GAME) {

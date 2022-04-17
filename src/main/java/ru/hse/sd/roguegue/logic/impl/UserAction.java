@@ -45,7 +45,13 @@ public class UserAction implements GameObjectAction {
                     Status.inventoryUI.displayTakingInventory(item);
                 }
             }
-//            case CONFUSE -> ; // todo
+            case CONFUSE -> {
+                for (MobState mob : Status.gameState.getMobStates()) {
+                    if (mob.getPosition().equals(user.getPosition())) {
+                        mob.setConfuseStrategy();
+                    }
+                }
+            }
         }
         if (Status.mapState.getMap().cellArray()[Status.userState.getPosition().getY()][Status.userState.getPosition().getX()] == CellType.EXIT) {
             Status.gameStatus = GameStatus.MENU;

@@ -19,9 +19,8 @@ public class MobState extends GameObjectState {
         mobUI = new MobUI(mobStrategy);
     }
 
-    public void updateStrategy(MobStrategy strategy) {
-        this.strategy = strategy;
-        //иногда (а возможно всегда) нужно поменять mobUI, а точнее view
+    public void setConfuseStrategy() {
+        strategy = new ConfuseStrategyDecorator(strategy);
     }
 
     public void updateStrength(int newStrength) {

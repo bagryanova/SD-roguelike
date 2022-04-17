@@ -7,6 +7,13 @@ public class MobStrategy {
     public int strength;
     public int lives;
 
+    public MobStrategy() {}
+
+    public MobStrategy(MobStrategy strategy) {
+        this.strength = strategy.strength;
+        this.lives = strategy.lives;
+    }
+
     public boolean validatePosition(Position position) {
         CellType[][] cells = Status.mapState.getMap().cellArray();
         return cells[position.getY()][position.getX()] == CellType.GROUND;
@@ -15,4 +22,5 @@ public class MobStrategy {
     public Position getNewPosition(Position position) {
         return position;
     }
+
 }

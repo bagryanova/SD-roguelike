@@ -14,10 +14,6 @@ public class GameObjectUI {
 
     public GameObjectUI(){}
 
-    public GameObjectUI(char symbol) {
-        view = symbol;
-    }
-
     /**
      * @param position
      * Display object view in the position

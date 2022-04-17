@@ -25,7 +25,6 @@ public class MapUI {
         graphicRepresentation.put(CellType.GROUND, (char)250);
         graphicRepresentation.put(CellType.OBSTACLE, (char)177);
         graphicRepresentation.put(CellType.EXIT, '+');
-//        graphicRepresentation.put(CellType.MAP_ITEM, 'I');
     }
 
     /**
