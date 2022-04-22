@@ -4,6 +4,7 @@ import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.impl.AggressiveStrategy;
 import ru.hse.sd.roguegue.state.impl.AvoidingStrategy;
 import ru.hse.sd.roguegue.state.impl.PassiveStrategy;
+import ru.hse.sd.roguegue.state.impl.ReplicatingStrategy;
 
 /**
  * Class for displaying mob on the map and related information
@@ -26,6 +27,8 @@ public class MobUI extends GameObjectUI {
             view = 'c'; //coward
         } else if (PassiveStrategy.class.equals(mobStrategy.getClass())) {
             view = 'p';
+        } else if (mobStrategy instanceof ReplicatingStrategy) {
+            view = 'r';
         }
     }
 }

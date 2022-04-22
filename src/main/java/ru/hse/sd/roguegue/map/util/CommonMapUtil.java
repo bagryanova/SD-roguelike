@@ -3,10 +3,7 @@ package ru.hse.sd.roguegue.map.util;
 import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.impl.AggressiveStrategy;
-import ru.hse.sd.roguegue.state.impl.AvoidingStrategy;
-import ru.hse.sd.roguegue.state.impl.MobState;
-import ru.hse.sd.roguegue.state.impl.PassiveStrategy;
+import ru.hse.sd.roguegue.state.impl.*;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
@@ -52,6 +49,7 @@ public class CommonMapUtil {
         placeMobsOfType(mapCells, "A", 3);
         placeMobsOfType(mapCells, "P", 3);
         placeMobsOfType(mapCells, "C", 2);
+        placeMobsOfType(mapCells, "R", 2);
     }
 
     private void placeMobsOfType(CellType[][] mapCells, String mobStrategyType, int mobsNum) {
@@ -67,6 +65,8 @@ public class CommonMapUtil {
                 mobStrategy = new PassiveStrategy();
             } else if (mobStrategyType.equals("C")) {
                 mobStrategy = new AvoidingStrategy();
+            } else if (mobStrategyType.equals("R")) {
+                mobStrategy = new ReplicatingStrategy();
             }
             Status.gameState.getMobStates().add(new MobState(mobStrategy, new Position(j, i)));
         }

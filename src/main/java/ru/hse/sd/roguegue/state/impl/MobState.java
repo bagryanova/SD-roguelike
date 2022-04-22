@@ -7,7 +7,7 @@ import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.Status;
 
-public class MobState extends GameObjectState {
+public class MobState extends GameObjectState implements Cloneable {
 
     private MobStrategy strategy;
     public MobUI mobUI;
@@ -53,6 +53,30 @@ public class MobState extends GameObjectState {
         if (this.getPosition().equals(Status.userState.getPosition())) {
             fight();
         }
+        if (strategy.getClass() == ReplicatingStrategy.class) {
+            ReplicatingStrategy replicatingStrategy = (ReplicatingStrategy) strategy;
+            if (replicatingStrategy.replicationTime()) {
+                MobState clone = clone();
+                if (clone != null) {
+                    Status.gameState.getMobStates().add(clone);
+                    System.out.println("MOB SIZE " + Status.gameState.getMobStates().size());
+                }
+            }
+        }
+    }
+
+    @Override
+    public MobState clone() {
+        try {
+            MobState clone = (MobState) super.clone();
+            clone.strategy = new ReplicatingStrategy();
+            clone.mobUI = new MobUI(clone.strategy);
+            clone.position = new Position(position.getX(), position.getY());
+            clone.updatePosition(clone.strategy.getNewPosition(clone.position));
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 
     /**
@@ -75,4 +99,5 @@ public class MobState extends GameObjectState {
             }
         }
     }
+
 }
