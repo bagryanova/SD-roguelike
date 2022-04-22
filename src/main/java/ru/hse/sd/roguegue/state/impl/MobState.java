@@ -4,6 +4,7 @@ import ru.hse.sd.roguegue.UI.MobUI;
 import ru.hse.sd.roguegue.state.GameObjectState;
 import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
+import ru.hse.sd.roguegue.state.StrategyDecorator;
 import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.Status;
 
@@ -62,6 +63,13 @@ public class MobState extends GameObjectState implements Cloneable {
                     System.out.println("MOB SIZE " + Status.gameState.getMobStates().size());
                 }
             }
+        }
+        tryRemoveStrategyDecorator();
+    }
+
+    private void tryRemoveStrategyDecorator() {
+        if (strategy instanceof StrategyDecorator) {
+            this.strategy = ((StrategyDecorator) strategy).tryRemoveDecorator();
         }
     }
 

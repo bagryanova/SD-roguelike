@@ -31,6 +31,15 @@ public class ConfuseStrategyDecorator extends StrategyDecorator {
         return curPosition;
     }
 
+    @Override
+    public MobStrategy tryRemoveDecorator() {
+        if (timeCnt == 0) {
+            return super.tryRemoveDecorator();
+        } else {
+            return this;
+        }
+    }
+
     /**
      * Returns adjacent cell in a random direction if it's possible to make move there.
      * Otherwise returns given position.
