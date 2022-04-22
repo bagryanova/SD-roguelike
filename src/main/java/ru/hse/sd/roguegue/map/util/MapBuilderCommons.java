@@ -13,7 +13,7 @@ import ru.hse.sd.roguegue.status.Status;
 import java.util.List;
 import java.util.Random;
 
-public class CommonMapUtil {
+public class MapBuilderCommons {
 
     private final Random rand = new Random();
 
@@ -45,23 +45,23 @@ public class CommonMapUtil {
     }
 
     /**
-     * @param mapCells cells array, represents map
+     * @param cells cells array, represents map
      * Places mobs of specific types on free cells
      */
-    public void placeMobs(CellType[][] mapCells) {
-        placeMobsOfType(mapCells, "A", 3);
-        placeMobsOfType(mapCells, "P", 3);
-        placeMobsOfType(mapCells, "C", 2);
+    public void placeMobs(CellType[][] cells) {
+        placeMobsOfType(cells, "A", 3);
+        placeMobsOfType(cells, "P", 3);
+        placeMobsOfType(cells, "C", 2);
     }
 
-    private void placeMobsOfType(CellType[][] mapCells, String mobStrategyType, int mobsNum) {
+    private void placeMobsOfType(CellType[][] cells, String mobStrategyType, int mobsNum) {
         for (int c = 0; c < mobsNum; c++) {
             int i = 0, j = 0;
-            while (mapCells[i][j] != CellType.GROUND) {
-                i = rand.nextInt(0, mapCells.length - 1);
-                j = rand.nextInt(0, mapCells[0].length - 1);
+            while (cells[i][j] != CellType.GROUND) {
+                i = rand.nextInt(0, cells.length - 1);
+                j = rand.nextInt(0, cells[0].length - 1);
             }
-            assert mapCells[i][j] == CellType.GROUND;
+            assert cells[i][j] == CellType.GROUND;
             MobStrategy mobStrategy = new AggressiveStrategy();
             if (mobStrategyType.equals("P")) {
                 mobStrategy = new PassiveStrategy();
@@ -73,16 +73,16 @@ public class CommonMapUtil {
     }
 
     /**
-     * @param mapCells cells array, represents map
+     * @param cells cells array, represents map
      * Initializes and laces inventory items on free cells
      */
-    public void placeInventory(CellType[][] mapCells) {
+    public void placeInventory(CellType[][] cells) {
         List<String> mapInventoryObjects = List.of("Helmet", "Sword", "Knife", "Cloak", "Gun", "Boots", "Gloves");
         for (String name : mapInventoryObjects) {
             int i = 0, j = 0;
-            while (mapCells[i][j] != CellType.GROUND) {
-                i = rand.nextInt(0, mapCells.length - 1);
-                j = rand.nextInt(0, mapCells[0].length - 1);
+            while (cells[i][j] != CellType.GROUND) {
+                i = rand.nextInt(0, cells.length - 1);
+                j = rand.nextInt(0, cells[0].length - 1);
             }
             Status.inventoryMapItems.add(new InventoryItem(name, new Position(j, i), rand.nextInt(3, 9), rand.nextInt(3, 12)));
         }

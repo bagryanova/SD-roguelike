@@ -1,16 +1,58 @@
 package ru.hse.sd.roguegue.map.util;
 
 import ru.hse.sd.roguegue.map.CellType;
+import ru.hse.sd.roguegue.map.Fabric;
 import ru.hse.sd.roguegue.map.Map;
+import ru.hse.sd.roguegue.map.MapBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RandomMapGeneratorUtil {
-    private CellType[][] cells = new CellType[0][0];
+public class MapRandomBuilder implements MapBuilder {
+    private CellType[][] currentCells = new CellType[0][0];
     private final Random rand = new Random();
+    MapBuilderCommons commons = new MapBuilderCommons();
     private Constraints constraints;
+    private final int width;
+    private final int height;
+    private final Fabric fabric;
+
+    public MapRandomBuilder(int width, int height, Fabric fabric) {
+        this.width = width;
+        this.height = height;
+        this.fabric = fabric;
+    }
+
+    @Override
+    public void generateMap() {
+        initCells(width, height);
+        constraints = new Constraints(0.4, 0.65, 6, 10, 6, 12);
+        List<GroundSpace> groundSpaces = setGroundSpaces();
+        connectGroundSpaces(groundSpaces);
+        GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
+        currentCells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
+    }
+
+    @Override
+    public CellType[][] setBordersAndPositions() {
+        return commons.setBordersAndPositions(currentCells);
+    }
+
+    @Override
+    public void placeMobs(CellType[][] cells) {
+        commons.placeMobs(cells);
+    }
+
+    @Override
+    public void placeInventory(CellType[][] cells) {
+        commons.placeInventory(cells);
+    }
+
+    @Override
+    public Map mapFromCells(CellType[][] cells) {
+        return new Map(cells);
+    }
 
     /**
      * Initializes new map, sets constraints for its creation, generates random number of separated ground spaces
@@ -26,19 +68,19 @@ public class RandomMapGeneratorUtil {
         List<GroundSpace> groundSpaces = setGroundSpaces();
         connectGroundSpaces(groundSpaces);
         GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
-        cells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
-        CommonMapUtil commonMapUtil = new CommonMapUtil();
-        Map newMap = new Map(commonMapUtil.setBordersAndPositions(cells));
+        currentCells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
+        MapBuilderCommons commonMapUtil = new MapBuilderCommons();
+        Map newMap = new Map(commonMapUtil.setBordersAndPositions(currentCells));
         commonMapUtil.placeInventory(newMap.cellArray());
         commonMapUtil.placeMobs(newMap.cellArray());
         return newMap;
     }
 
     private void initCells(int width, int height) {
-        cells = new CellType[height][width];
+        currentCells = new CellType[height][width];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                cells[i][j] = CellType.OBSTACLE;
+                currentCells[i][j] = CellType.OBSTACLE;
             }
         }
     }
@@ -49,8 +91,8 @@ public class RandomMapGeneratorUtil {
      * @return list of all generated ground spaces
      */
     private List<GroundSpace> setGroundSpaces() {
-        int groundsAcross = cells.length / constraints.maxW();
-        int groundsDown = cells[0].length / constraints.maxH();
+        int groundsAcross = currentCells.length / constraints.maxW();
+        int groundsDown = currentCells[0].length / constraints.maxH();
         int maxGrounds = groundsAcross * groundsDown;
         int totalGrounds = RandUtil.getRandom((int) (maxGrounds * constraints.minRate()), (int) (maxGrounds * constraints.maxRate()));
         if (totalGrounds <= 0) totalGrounds = 1;
@@ -63,7 +105,7 @@ public class RandomMapGeneratorUtil {
             int x = constraints.maxW() * (center % groundsAcross) + RandUtil.getRandom(0, constraints.maxW() - w);
             int y = constraints.maxH() * (center / groundsAcross) + RandUtil.getRandom(0, constraints.maxH() - h);
             GroundSpace ground = new GroundSpace(x, y, w, h);
-            ground.setCells(cells);
+            ground.setCells(currentCells);
             grounds.add(ground);
         });
         return grounds;
@@ -115,7 +157,7 @@ public class RandomMapGeneratorUtil {
                     } else {
                         curY += stepYDir;
                     }
-                    cells[curX][curY] = CellType.GROUND;
+                    currentCells[curX][curY] = CellType.GROUND;
                 }
                 if (dir == Direction.X) {
                     stepX -= stepXDir * len;

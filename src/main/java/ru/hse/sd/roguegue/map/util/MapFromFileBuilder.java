@@ -1,7 +1,9 @@
 package ru.hse.sd.roguegue.map.util;
 
 import ru.hse.sd.roguegue.map.CellType;
+import ru.hse.sd.roguegue.map.Fabric;
 import ru.hse.sd.roguegue.map.Map;
+import ru.hse.sd.roguegue.map.MapBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,10 +12,48 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class MapFromFileUtil {
+public class MapFromFileBuilder implements MapBuilder {
+    private CellType[][] currentCells = new CellType[0][0];
     private final Random rand = new Random();
     private final String pathName =
             "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar + "templates";
+    private MapBuilderCommons commons = new MapBuilderCommons();
+    private final Fabric fabric;
+
+    public MapFromFileBuilder(Fabric fabric) {
+        this.fabric = fabric;
+    }
+
+    @Override
+    public void generateMap() {
+        File file = new File(pathName);
+        String[] fileList = file.list();
+        if (fileList == null || fileList.length == 0) {
+            return;
+        }
+        File mapTemplate = new File(pathName + File.separatorChar + fileList[rand.nextInt(fileList.length - 1)]);
+        currentCells = convertToMapFromFile(mapTemplate);
+    }
+
+    @Override
+    public CellType[][] setBordersAndPositions() {
+        return commons.setBordersAndPositions(currentCells);
+    }
+
+    @Override
+    public void placeMobs(CellType[][] cells) {
+        commons.placeMobs(cells);
+    }
+
+    @Override
+    public void placeInventory(CellType[][] cells) {
+        commons.placeInventory(cells);
+    }
+
+    @Override
+    public Map mapFromCells(CellType[][] cells) {
+        return new Map(cells);
+    }
 
     /**
      * Gets map representation from random file and converts it to Map type
@@ -28,7 +68,7 @@ public class MapFromFileUtil {
         }
         File mapTemplate = new File(pathName + File.separatorChar + fileList[rand.nextInt(fileList.length - 1)]);
         CellType[][] cellArray = convertToMapFromFile(mapTemplate);
-        CommonMapUtil commonMapUtil = new CommonMapUtil();
+        MapBuilderCommons commonMapUtil = new MapBuilderCommons();
         Map newMap = new Map(commonMapUtil.setBordersAndPositions(cellArray));
         commonMapUtil.placeInventory(newMap.cellArray());
         commonMapUtil.placeMobs(newMap.cellArray());

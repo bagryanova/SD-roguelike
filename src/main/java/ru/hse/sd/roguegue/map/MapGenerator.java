@@ -1,14 +1,14 @@
 package ru.hse.sd.roguegue.map;
 
 import ru.hse.sd.roguegue.status.Constants;
-import ru.hse.sd.roguegue.map.util.MapFromFileUtil;
-import ru.hse.sd.roguegue.map.util.RandomMapGeneratorUtil;
+import ru.hse.sd.roguegue.map.util.MapFromFileBuilder;
+import ru.hse.sd.roguegue.map.util.MapRandomBuilder;
 import ru.hse.sd.roguegue.status.MapMode;
 import ru.hse.sd.roguegue.status.Status;
 
 public class MapGenerator {
-    private final RandomMapGeneratorUtil mapGeneratorUtil = new RandomMapGeneratorUtil();
-    private final MapFromFileUtil mapFromFileUtil = new MapFromFileUtil();
+    private final MapRandomBuilder mapGeneratorUtil = new MapRandomBuilder(Constants.MAP_WIDTH, Constants.MAP_HEIGHT, null);
+    private final MapFromFileBuilder mapFromFileUtil = new MapFromFileBuilder(null);
 
     /**
      * According to the map mode either generates or loads map from file
