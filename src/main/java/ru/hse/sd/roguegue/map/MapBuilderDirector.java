@@ -8,6 +8,14 @@ public class MapBuilderDirector {
 
     MapBuilder builder;
 
+    /**
+     * Creates new MapBuilderDirector
+     *
+     * @param mode   defines if map should be loaded from file or generated randomly
+     * @param width  map width
+     * @param height map height
+     * @param fabric fabric for mobs creation
+     */
     public MapBuilderDirector(MapMode mode, int width, int height, Fabric fabric) {
         if (mode == MapMode.FILE) {
             builder = new MapFromFileBuilder(fabric);
@@ -16,11 +24,17 @@ public class MapBuilderDirector {
         }
     }
 
+    /**
+     * Builds map step by step
+     *
+     * @return created map
+     */
     public Map build() {
         builder.generateMap();
-        CellType[][] cells = builder.setBordersAndPositions();
-        builder.placeInventory(cells);
-        builder.placeMobs(cells);
-        return builder.mapFromCells(cells);
+        builder.setBordersAndPositions();
+        builder.setUserPosition();
+        builder.placeInventory();
+        builder.placeMobs();
+        return builder.mapFromCells();
     }
 }

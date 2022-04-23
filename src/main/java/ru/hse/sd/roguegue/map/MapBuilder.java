@@ -1,13 +1,36 @@
 package ru.hse.sd.roguegue.map;
 
 public interface MapBuilder {
+
+    /**
+     * Generates rooms and tunnels, connecting those rooms
+     */
     void generateMap();
 
-    CellType[][] setBordersAndPositions();
+    /**
+     * Sets a border around the map
+     */
+    void setBordersAndPositions();
 
-    void placeMobs(CellType[][] cells);
+    /**
+     * Sets user position on the map
+     */
+    void setUserPosition();
 
-    void placeInventory(CellType[][] cells);
+    /**
+     * Places mobs on the map
+     */
+    void placeMobs();
 
-    Map mapFromCells(CellType[][] cells);
+    /**
+     * Places inventory on the map
+     */
+    void placeInventory();
+
+    /**
+     * Converts array of cells to a Map
+     *
+     * @return map that was created
+     */
+    Map mapFromCells();
 }

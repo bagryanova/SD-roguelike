@@ -24,6 +24,9 @@ public class MapFromFileBuilder implements MapBuilder {
         this.fabric = fabric;
     }
 
+    /**
+     * Gets map representation from random file and converts it to an array of cells
+     */
     @Override
     public void generateMap() {
         File file = new File(pathName);
@@ -35,44 +38,44 @@ public class MapFromFileBuilder implements MapBuilder {
         currentCells = convertToMapFromFile(mapTemplate);
     }
 
+    /**
+     * See {@link MapBuilder#setBordersAndPositions()}, {@link MapBuilderCommons#setBordersAndPositions(CellType[][])}
+     */
     @Override
-    public CellType[][] setBordersAndPositions() {
-        return commons.setBordersAndPositions(currentCells);
-    }
-
-    @Override
-    public void placeMobs(CellType[][] cells) {
-        commons.placeMobs(cells);
-    }
-
-    @Override
-    public void placeInventory(CellType[][] cells) {
-        commons.placeInventory(cells);
-    }
-
-    @Override
-    public Map mapFromCells(CellType[][] cells) {
-        return new Map(cells);
+    public void setBordersAndPositions() {
+        currentCells = commons.setBordersAndPositions(currentCells);
     }
 
     /**
-     * Gets map representation from random file and converts it to Map type
-     *
-     * @return converted Map
+     * See {@link MapBuilder#setUserPosition()}, {@link MapBuilderCommons#setUserPosition(CellType[][])}
      */
-    public Map getRandomMapFromFile() {
-        File file = new File(pathName);
-        String[] fileList = file.list();
-        if (fileList == null || fileList.length == 0) {
-            return null;
-        }
-        File mapTemplate = new File(pathName + File.separatorChar + fileList[rand.nextInt(fileList.length - 1)]);
-        CellType[][] cellArray = convertToMapFromFile(mapTemplate);
-        MapBuilderCommons commonMapUtil = new MapBuilderCommons();
-        Map newMap = new Map(commonMapUtil.setBordersAndPositions(cellArray));
-        commonMapUtil.placeInventory(newMap.cellArray());
-        commonMapUtil.placeMobs(newMap.cellArray());
-        return newMap;
+    @Override
+    public void setUserPosition() {
+        commons.setUserPosition(currentCells);
+    }
+
+    /**
+     * See {@link MapBuilder#placeMobs()}, {@link MapBuilderCommons#placeMobs(CellType[][])}
+     */
+    @Override
+    public void placeMobs() {
+        commons.placeMobs(currentCells);
+    }
+
+    /**
+     * See {@link MapBuilder#placeInventory()}, {@link MapBuilderCommons#placeInventory(CellType[][])}
+     */
+    @Override
+    public void placeInventory() {
+        commons.placeInventory(currentCells);
+    }
+
+    /**
+     * See {@link MapBuilder#mapFromCells()}
+     */
+    @Override
+    public Map mapFromCells() {
+        return new Map(currentCells);
     }
 
     private CellType[][] convertToMapFromFile(File mapTemplate) {

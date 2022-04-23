@@ -3,7 +3,8 @@ package ru.hse.sd.roguegue;
 import org.junit.jupiter.api.Test;
 import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.map.Map;
-import ru.hse.sd.roguegue.map.MapGenerator;
+import ru.hse.sd.roguegue.map.MapBuilderDirector;
+import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.MapMode;
 import ru.hse.sd.roguegue.status.Status;
@@ -15,8 +16,8 @@ public class TestMapGeneration {
     public void stressTestRandomMapGeneration() {
         Status.mapMode = MapMode.RANDOM;
         for (int cnt = 0; cnt < 10; cnt++) {
-            MapGenerator mapGenerator = new MapGenerator();
-            Map map = mapGenerator.getMap();
+            MapBuilderDirector director = new MapBuilderDirector(Status.mapMode, Constants.MAP_WIDTH, Constants.MAP_HEIGHT, null);
+            Map map = director.build();
 //            map.printMap();
             int fin = 0;
             for (int i = 0; i < map.cellArray().length; i++) {
@@ -39,8 +40,8 @@ public class TestMapGeneration {
     public void stressTestMapFromFileGeneration() {
         Status.mapMode = MapMode.FILE;
         for (int cnt = 0; cnt < 100; cnt++) {
-            MapGenerator mapGenerator = new MapGenerator();
-            Map map = mapGenerator.getMap();
+            MapBuilderDirector director = new MapBuilderDirector(Status.mapMode, Constants.MAP_WIDTH, Constants.MAP_HEIGHT, null);
+            Map map = director.build();
             int fin = 0;
             for (int i = 0; i < map.cellArray().length; i++) {
                 boolean space = false;
@@ -63,8 +64,8 @@ public class TestMapGeneration {
         Status.mapMode = MapMode.RANDOM;
         for (int cnt = 0; cnt < 100; cnt++) {
             Status.inventoryMapItems = new ArrayList<>();
-            MapGenerator mapGenerator = new MapGenerator();
-            Map map = mapGenerator.getMap();
+            MapBuilderDirector director = new MapBuilderDirector(Status.mapMode, Constants.MAP_WIDTH, Constants.MAP_HEIGHT, null);
+            Map map = director.build();
             for (InventoryItem item : Status.inventoryMapItems) {
                 assert map.getCell(item.position.getY(), item.position.getX()).equals(CellType.GROUND);
             }
@@ -76,8 +77,8 @@ public class TestMapGeneration {
         Status.mapMode = MapMode.FILE;
         for (int cnt = 0; cnt < 100; cnt++) {
             Status.inventoryMapItems = new ArrayList<>();
-            MapGenerator mapGenerator = new MapGenerator();
-            Map map = mapGenerator.getMap();
+            MapBuilderDirector director = new MapBuilderDirector(Status.mapMode, Constants.MAP_WIDTH, Constants.MAP_HEIGHT, null);
+            Map map = director.build();
             for (InventoryItem item : Status.inventoryMapItems) {
                 assert map.getCell(item.position.getY(), item.position.getX()).equals(CellType.GROUND);
             }

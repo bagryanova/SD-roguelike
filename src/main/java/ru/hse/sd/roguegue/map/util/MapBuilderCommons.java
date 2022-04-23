@@ -18,11 +18,12 @@ public class MapBuilderCommons {
     private final Random rand = new Random();
 
     /**
+     * Sets border around the map
+     *
      * @param cells array of cells, represents map
-     * @return map with positions and borders
+     * @return map with border
      */
     public CellType[][] setBordersAndPositions(CellType[][] cells) {
-        boolean setPosition = true;
         CellType[][] borderedCells = new CellType[cells.length + 2][cells[0].length + 2];
         for (int i = 0; i < borderedCells.length; i++) {
             for (int j = 0; j < borderedCells[0].length; j++) {
@@ -33,20 +34,28 @@ public class MapBuilderCommons {
                 }
             }
         }
-        for (int i = 0; i < borderedCells.length; i++) {
-            for (int j = 0; j < borderedCells[0].length; j++) {
-                if (borderedCells[i][j] == CellType.GROUND && setPosition) {
-                    setPosition = false;
-                    Status.userState.updatePosition(new Position(j, i));
-                }
-            }
-        }
         return borderedCells;
     }
 
     /**
+     * Sets user position. User can occupy any sell with type [CellType.GROUND]
+     *
+     * @param cells array of cells, represents map
+     */
+    public void setUserPosition(CellType[][] cells) {
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[0].length; j++) {
+                if (cells[i][j] == CellType.GROUND) {
+                    Status.userState.updatePosition(new Position(j, i));
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
      * @param cells cells array, represents map
-     * Places mobs of specific types on free cells
+     *              Places mobs of specific types on free cells
      */
     public void placeMobs(CellType[][] cells) {
         placeMobsOfType(cells, "A", 3);
@@ -74,7 +83,7 @@ public class MapBuilderCommons {
 
     /**
      * @param cells cells array, represents map
-     * Initializes and laces inventory items on free cells
+     *              Initializes and laces inventory items on free cells
      */
     public void placeInventory(CellType[][] cells) {
         List<String> mapInventoryObjects = List.of("Helmet", "Sword", "Knife", "Cloak", "Gun", "Boots", "Gloves");

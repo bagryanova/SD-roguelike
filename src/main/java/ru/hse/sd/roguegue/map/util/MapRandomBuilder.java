@@ -24,6 +24,10 @@ public class MapRandomBuilder implements MapBuilder {
         this.fabric = fabric;
     }
 
+    /**
+     * Initializes new map, sets constraints for its creation, generates random number of separated ground spaces
+     * and connects them in a way that all the ground spaces are connected either by paths or by paths and other ground spaces
+     */
     @Override
     public void generateMap() {
         initCells(width, height);
@@ -34,46 +38,44 @@ public class MapRandomBuilder implements MapBuilder {
         currentCells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
     }
 
+    /**
+     * See {@link MapBuilder#setBordersAndPositions()}, {@link MapBuilderCommons#setBordersAndPositions(CellType[][])}
+     */
     @Override
-    public CellType[][] setBordersAndPositions() {
-        return commons.setBordersAndPositions(currentCells);
-    }
-
-    @Override
-    public void placeMobs(CellType[][] cells) {
-        commons.placeMobs(cells);
-    }
-
-    @Override
-    public void placeInventory(CellType[][] cells) {
-        commons.placeInventory(cells);
-    }
-
-    @Override
-    public Map mapFromCells(CellType[][] cells) {
-        return new Map(cells);
+    public void setBordersAndPositions() {
+        currentCells = commons.setBordersAndPositions(currentCells);
     }
 
     /**
-     * Initializes new map, sets constraints for its creation, generates random number of separated ground spaces
-     * and connects them in a way that all the ground spaces are connected either by paths or by paths and other ground spaces
-     *
-     * @param width  map width
-     * @param height map height
-     * @return randomly generated map
+     * See {@link MapBuilder#setUserPosition()}, {@link MapBuilderCommons#setUserPosition(CellType[][])}
      */
-    public Map generateMap(int width, int height) {
-        initCells(width, height);
-        constraints = new Constraints(0.4, 0.65, 6, 10, 6, 12);
-        List<GroundSpace> groundSpaces = setGroundSpaces();
-        connectGroundSpaces(groundSpaces);
-        GroundSpace gs = groundSpaces.get(rand.nextInt(groundSpaces.size()));
-        currentCells[gs.x() + 2][gs.y() + 2] = CellType.EXIT;
-        MapBuilderCommons commonMapUtil = new MapBuilderCommons();
-        Map newMap = new Map(commonMapUtil.setBordersAndPositions(currentCells));
-        commonMapUtil.placeInventory(newMap.cellArray());
-        commonMapUtil.placeMobs(newMap.cellArray());
-        return newMap;
+    @Override
+    public void setUserPosition() {
+        commons.setUserPosition(currentCells);
+    }
+
+    /**
+     * See {@link MapBuilder#placeMobs()}, {@link MapBuilderCommons#placeMobs(CellType[][])}
+     */
+    @Override
+    public void placeMobs() {
+        commons.placeMobs(currentCells);
+    }
+
+    /**
+     * See {@link MapBuilder#placeInventory()}, {@link MapBuilderCommons#placeInventory(CellType[][])}
+     */
+    @Override
+    public void placeInventory() {
+        commons.placeInventory(currentCells);
+    }
+
+    /**
+     * See {@link MapBuilder#mapFromCells()}
+     */
+    @Override
+    public Map mapFromCells() {
+        return new Map(currentCells);
     }
 
     private void initCells(int width, int height) {
