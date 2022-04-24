@@ -1,34 +1,28 @@
 package ru.hse.sd.roguegue.UI;
 
-import ru.hse.sd.roguegue.state.MobStrategy;
-import ru.hse.sd.roguegue.state.impl.AggressiveStrategy;
-import ru.hse.sd.roguegue.state.impl.AvoidingStrategy;
-import ru.hse.sd.roguegue.state.impl.PassiveStrategy;
-import ru.hse.sd.roguegue.state.impl.ReplicatingStrategy;
+import ru.hse.sd.roguegue.status.MobType;
 
 /**
  * Class for displaying mob on the map and related information
  */
 public class MobUI extends GameObjectUI {
 
-    public MobUI(MobStrategy mobStrategy) {
+    public MobUI(MobType mobType) {
         super();
-        updateUI(mobStrategy);
+        updateUI(mobType);
     }
 
     /**
-     * @param mobStrategy
-     * Changes view of a mob according to the mobStrategy
+     * @param mobType
+     * Changes view of a mob according to the mobType
      */
-    private void updateUI(MobStrategy mobStrategy) {
-        if (AggressiveStrategy.class.equals(mobStrategy.getClass())) {
-            view = 'a';
-        } else if (AvoidingStrategy.class.equals(mobStrategy.getClass())) {
-            view = 'c'; //coward
-        } else if (PassiveStrategy.class.equals(mobStrategy.getClass())) {
-            view = 'p';
-        } else if (mobStrategy instanceof ReplicatingStrategy) {
-            view = 'r';
+    private void updateUI(MobType mobType) {
+        if (mobType == MobType.NATURE) {
+            view = 'n';
+        } else if (mobType == MobType.TECH) {
+            view = 't';
+        } else if (mobType == MobType.MAGIC) {
+            view = 'm';
         }
     }
 }

@@ -8,18 +8,18 @@ import java.util.Random;
 
 public class ReplicatingStrategy extends MobStrategy {
     private Random random = new Random();
-    //private int withoutReplicating = 0;
-    private final int replicatingConstant = 5;
 
-    public ReplicatingStrategy() {
-        super.lives = 1;
-        super.strength = 4;
-    }
+    public ReplicatingStrategy() {}
 
+    /**
+     * @param position
+     * select random direction and try to make move
+     * if it's possible return updated position
+     * otherwise return the initial one
+     */
     @Override
     public Position getNewPosition(Position position) {
         int randDirection = random.nextInt(4);
-        //withoutReplicating += 1;
 
         switch (randDirection) {
             case 0 -> {
@@ -50,14 +50,9 @@ public class ReplicatingStrategy extends MobStrategy {
         return position;
     }
 
-    /*public boolean replicationTime() {
-        if (withoutReplicating < replicatingConstant) {
-            return false;
-        }
-        withoutReplicating = 0;
-        return true;
-    }*/
-
+    /**
+     * @return true if it's time to create a clone
+     */
     public boolean replicationTime() {
         return (random.nextInt(10) == 5);
     }

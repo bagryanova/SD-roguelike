@@ -21,10 +21,13 @@ public class MobState extends GameObjectState implements Cloneable {
     public MobState(MobStrategy mobStrategy, Position position, MobType mobType) {
         this.strategy = mobStrategy;
         updatePosition(position);
-        this.mobUI = new MobUI(mobStrategy);
+        this.mobUI = new MobUI(mobType);
         this.mobType = mobType;
     }
 
+    /**
+     * Add confusing decorator to current mob's strategy
+     */
     public void setConfuseStrategy() {
         strategy = new ConfuseStrategyDecorator(strategy);
     }
@@ -59,6 +62,9 @@ public class MobState extends GameObjectState implements Cloneable {
 
     /**
      * Update position according to strategy
+     * For some mobs, which have to do something after changing the position, do it
+     * More precisely, create mob's clone if it's time for replicating mobs.
+     * And try to remove strategy decorator
      */
     public void updatePosition() {
         Position newPosition = strategy.getNewPosition(super.getPosition());
@@ -90,7 +96,7 @@ public class MobState extends GameObjectState implements Cloneable {
         try {
             MobState clone = (MobState) super.clone();
             clone.strategy = new ReplicatingStrategy();
-            clone.mobUI = new MobUI(clone.strategy);
+            clone.mobUI = new MobUI(clone.mobType);
             clone.position = new Position(position.getX(), position.getY());
             clone.updatePosition(clone.strategy.getNewPosition(clone.position));
             return clone;
