@@ -4,15 +4,7 @@ import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.status.Status;
 
 public class MobStrategy {
-    public int strength;
-    public int lives;
-
     public MobStrategy() {}
-
-    public MobStrategy(MobStrategy strategy) {
-        this.strength = strategy.strength;
-        this.lives = strategy.lives;
-    }
 
     /**
      * Validate new mob's position

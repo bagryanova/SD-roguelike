@@ -4,10 +4,7 @@ import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
 
 public class PassiveStrategy extends MobStrategy {
-    public PassiveStrategy() {
-        super.lives = 4;
-        super.strength = 2;
-    }
+    public PassiveStrategy() {}
 
     /**
      * @param position doesn't update position.

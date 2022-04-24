@@ -10,6 +10,8 @@ import ru.hse.sd.roguegue.status.Status;
 public class MobState extends GameObjectState {
 
     private MobStrategy strategy;
+    public int strength;
+    public int lives;
     public MobUI mobUI;
     public boolean alive = true;
 
@@ -27,21 +29,28 @@ public class MobState extends GameObjectState {
      * Get current strength
      */
     public int getStrength() {
-        return strategy.strength;
+        return strength;
+    }
+
+    /**
+     * Get current strength
+     */
+    public int updateStrength(int newStrength) {
+        return strength = newStrength;
     }
 
     /**
      * Update current strength
      */
     public void updateLives(int newLives) {
-        strategy.lives = newLives;
+        lives = newLives;
     }
 
     /**
      * Get current lives
      */
     public int getLives() {
-        return strategy.lives;
+        return lives;
     }
 
     /**
