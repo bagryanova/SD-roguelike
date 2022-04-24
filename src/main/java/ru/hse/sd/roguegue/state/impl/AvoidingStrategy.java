@@ -6,10 +6,7 @@ import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.Status;
 
 public class AvoidingStrategy extends MobStrategy {
-    public AvoidingStrategy() {
-        super.lives = 6;
-        super.strength = 3;
-    }
+    public AvoidingStrategy() {}
 
     /**
      * @param position update position according to the user position, try to be far.

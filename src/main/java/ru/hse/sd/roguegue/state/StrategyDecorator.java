@@ -7,7 +7,7 @@ public abstract class StrategyDecorator extends MobStrategy {
     private MobStrategy decoratedStrategy;
 
     public StrategyDecorator(MobStrategy strategy) {
-        super(strategy);
+        super();
         decoratedStrategy = strategy;
     }
 
