@@ -3,49 +3,23 @@ package ru.hse.sd.roguegue.state.impl;
 import ru.hse.sd.roguegue.logic.Move;
 import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.StrategyDecorator;
 
 import java.util.Random;
 
-/**
- * Class for adding temporary confused behaviour to the current mob's strategy
- */
-public class ConfuseStrategyDecorator extends StrategyDecorator {
-    private int timeCnt = 10;
+public class ReplicatingStrategy extends MobStrategy {
     private Random random = new Random();
+    //private int withoutReplicating = 0;
+    private final int replicatingConstant = 5;
 
-    public ConfuseStrategyDecorator(MobStrategy strategy) {
-        super(strategy);
-    }
-
-    /**
-     * Decorated method. Returns confused position in the first 10 steps after applying decoration.
-     * After 10 steps has usual strategy method's behaviour
-     */
-    public Position getNewPosition(Position position) {
-        Position curPosition = super.getNewPosition(position);
-        if (timeCnt > 0) {
-            curPosition = getConfusedPosition(position);
-            timeCnt -= 1;
-        }
-        return curPosition;
+    public ReplicatingStrategy() {
+        super.lives = 1;
+        super.strength = 4;
     }
 
     @Override
-    public MobStrategy tryRemoveDecorator() {
-        if (timeCnt == 0) {
-            return super.tryRemoveDecorator();
-        } else {
-            return this;
-        }
-    }
-
-    /**
-     * Returns adjacent cell in a random direction if it's possible to make move there.
-     * Otherwise returns given position.
-     */
-    private Position getConfusedPosition(Position position) {
+    public Position getNewPosition(Position position) {
         int randDirection = random.nextInt(4);
+        //withoutReplicating += 1;
 
         switch (randDirection) {
             case 0 -> {
@@ -75,4 +49,18 @@ public class ConfuseStrategyDecorator extends StrategyDecorator {
         }
         return position;
     }
+
+    /*public boolean replicationTime() {
+        if (withoutReplicating < replicatingConstant) {
+            return false;
+        }
+        withoutReplicating = 0;
+        return true;
+    }*/
+
+    public boolean replicationTime() {
+        return (random.nextInt(10) == 5);
+    }
+
+
 }

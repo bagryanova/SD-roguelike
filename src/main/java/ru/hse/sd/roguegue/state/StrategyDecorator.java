@@ -17,4 +17,8 @@ public abstract class StrategyDecorator extends MobStrategy {
     public Position getNewPosition(Position position) {
         return decoratedStrategy.getNewPosition(position);
     }
+
+    public MobStrategy tryRemoveDecorator() {
+        return decoratedStrategy;
+    }
 }

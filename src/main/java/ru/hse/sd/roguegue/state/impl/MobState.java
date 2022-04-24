@@ -4,11 +4,13 @@ import ru.hse.sd.roguegue.UI.MobUI;
 import ru.hse.sd.roguegue.state.GameObjectState;
 import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
+import ru.hse.sd.roguegue.state.StrategyDecorator;
 import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.MobType;
 import ru.hse.sd.roguegue.status.Status;
 
-public class MobState extends GameObjectState {
+public class MobState extends GameObjectState implements Cloneable {
+
     private MobStrategy strategy;
     public int strength = 0;
     public int lives = 0;
@@ -63,6 +65,37 @@ public class MobState extends GameObjectState {
         super.updatePosition(newPosition);
         if (this.getPosition().equals(Status.userState.getPosition())) {
             fight();
+        }
+        if (strategy.getClass() == ReplicatingStrategy.class) {
+            ReplicatingStrategy replicatingStrategy = (ReplicatingStrategy) strategy;
+            if (replicatingStrategy.replicationTime()) {
+                MobState clone = clone();
+                if (clone != null) {
+                    Status.gameState.getMobStates().add(clone);
+                    System.out.println("MOB SIZE " + Status.gameState.getMobStates().size());
+                }
+            }
+        }
+        tryRemoveStrategyDecorator();
+    }
+
+    private void tryRemoveStrategyDecorator() {
+        if (strategy instanceof StrategyDecorator) {
+            this.strategy = ((StrategyDecorator) strategy).tryRemoveDecorator();
+        }
+    }
+
+    @Override
+    public MobState clone() {
+        try {
+            MobState clone = (MobState) super.clone();
+            clone.strategy = new ReplicatingStrategy();
+            clone.mobUI = new MobUI(clone.strategy);
+            clone.position = new Position(position.getX(), position.getY());
+            clone.updatePosition(clone.strategy.getNewPosition(clone.position));
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
         }
     }
 

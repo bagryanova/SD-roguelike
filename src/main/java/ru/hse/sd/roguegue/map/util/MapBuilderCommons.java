@@ -5,10 +5,7 @@ import ru.hse.sd.roguegue.map.MobFactory;
 import ru.hse.sd.roguegue.map.impl.NatureMobFactory;
 import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.impl.AggressiveStrategy;
-import ru.hse.sd.roguegue.state.impl.AvoidingStrategy;
-import ru.hse.sd.roguegue.state.impl.MobState;
-import ru.hse.sd.roguegue.state.impl.PassiveStrategy;
+import ru.hse.sd.roguegue.state.impl.*;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
@@ -63,6 +60,7 @@ public class MapBuilderCommons {
         placeMobsOfType(cells, "A", 1, factory);
         placeMobsOfType(cells, "P", 1, factory);
         placeMobsOfType(cells, "C", 1, factory);
+        placeMobsOfType(cells, "R", 1, factory);
     }
 
     private void placeMobsOfType(CellType[][] cells, String mobStrategyType, int mobsNum, MobFactory factory) {
@@ -78,6 +76,8 @@ public class MapBuilderCommons {
                 mobStrategy = new PassiveStrategy();
             } else if (mobStrategyType.equals("C")) {
                 mobStrategy = new AvoidingStrategy();
+            } else if (mobStrategyType.equals("R")) {
+                mobStrategy = new ReplicatingStrategy();
             }
             Status.gameState.getMobStates().add(factory.createMob(mobStrategy, new Position(j, i)));
         }
