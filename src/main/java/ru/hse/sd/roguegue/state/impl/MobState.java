@@ -5,20 +5,22 @@ import ru.hse.sd.roguegue.state.GameObjectState;
 import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.GameStatus;
+import ru.hse.sd.roguegue.status.MobType;
 import ru.hse.sd.roguegue.status.Status;
 
 public class MobState extends GameObjectState {
-
     private MobStrategy strategy;
-    public int strength;
-    public int lives;
+    public int strength = 0;
+    public int lives = 0;
+    public MobType mobType;
     public MobUI mobUI;
     public boolean alive = true;
 
-    public MobState(MobStrategy mobStrategy, Position position) {
+    public MobState(MobStrategy mobStrategy, Position position, MobType mobType) {
         this.strategy = mobStrategy;
         updatePosition(position);
-        mobUI = new MobUI(mobStrategy);
+        this.mobUI = new MobUI(mobStrategy);
+        this.mobType = mobType;
     }
 
     public void setConfuseStrategy() {

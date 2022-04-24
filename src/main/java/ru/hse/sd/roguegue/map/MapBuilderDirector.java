@@ -14,13 +14,13 @@ public class MapBuilderDirector {
      * @param mode   defines if map should be loaded from file or generated randomly
      * @param width  map width
      * @param height map height
-     * @param fabric fabric for mobs creation
+     * @param factory factory for mobs creation
      */
-    public MapBuilderDirector(MapMode mode, int width, int height, Fabric fabric) {
+    public MapBuilderDirector(MapMode mode, int width, int height, MobFactory factory) {
         if (mode == MapMode.FILE) {
-            builder = new MapFromFileBuilder(fabric);
+            builder = new MapFromFileBuilder(factory);
         } else if (mode == MapMode.RANDOM) {
-            builder = new MapRandomBuilder(width, height, fabric);
+            builder = new MapRandomBuilder(width, height, factory);
         }
     }
 

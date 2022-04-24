@@ -1,9 +1,9 @@
 package ru.hse.sd.roguegue.map.util;
 
-import ru.hse.sd.roguegue.map.CellType;
-import ru.hse.sd.roguegue.map.Fabric;
-import ru.hse.sd.roguegue.map.Map;
-import ru.hse.sd.roguegue.map.MapBuilder;
+import ru.hse.sd.roguegue.map.*;
+import ru.hse.sd.roguegue.map.impl.MagicMobFactory;
+import ru.hse.sd.roguegue.map.impl.NatureMobFactory;
+import ru.hse.sd.roguegue.map.impl.TechMobFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +16,12 @@ public class MapRandomBuilder implements MapBuilder {
     private Constraints constraints;
     private final int width;
     private final int height;
-    private final Fabric fabric;
+    private MobFactory factory;
 
-    public MapRandomBuilder(int width, int height, Fabric fabric) {
+    public MapRandomBuilder(int width, int height, MobFactory factory) {
         this.width = width;
         this.height = height;
-        this.fabric = fabric;
+        this.factory = factory;
     }
 
     /**
@@ -55,11 +55,16 @@ public class MapRandomBuilder implements MapBuilder {
     }
 
     /**
-     * See {@link MapBuilder#placeMobs()}, {@link MapBuilderCommons#placeMobs(CellType[][])}
+     * See {@link MapBuilder#placeMobs()}, {@link MapBuilderCommons#placeMobs(CellType[][], MobFactory)}
      */
     @Override
     public void placeMobs() {
-        commons.placeMobs(currentCells);
+        factory = new MagicMobFactory();
+        commons.placeMobs(currentCells, factory);
+        factory = new TechMobFactory();
+        commons.placeMobs(currentCells, factory);
+        factory = new NatureMobFactory();
+        commons.placeMobs(currentCells, factory);
     }
 
     /**

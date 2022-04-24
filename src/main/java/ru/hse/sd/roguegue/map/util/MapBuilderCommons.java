@@ -1,6 +1,8 @@
 package ru.hse.sd.roguegue.map.util;
 
 import ru.hse.sd.roguegue.map.CellType;
+import ru.hse.sd.roguegue.map.MobFactory;
+import ru.hse.sd.roguegue.map.impl.NatureMobFactory;
 import ru.hse.sd.roguegue.state.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.impl.AggressiveStrategy;
@@ -57,13 +59,13 @@ public class MapBuilderCommons {
      * @param cells cells array, represents map
      *              Places mobs of specific types on free cells
      */
-    public void placeMobs(CellType[][] cells) {
-        placeMobsOfType(cells, "A", 3);
-        placeMobsOfType(cells, "P", 3);
-        placeMobsOfType(cells, "C", 2);
+    public void placeMobs(CellType[][] cells, MobFactory factory) {
+        placeMobsOfType(cells, "A", 1, factory);
+        placeMobsOfType(cells, "P", 1, factory);
+        placeMobsOfType(cells, "C", 1, factory);
     }
 
-    private void placeMobsOfType(CellType[][] cells, String mobStrategyType, int mobsNum) {
+    private void placeMobsOfType(CellType[][] cells, String mobStrategyType, int mobsNum, MobFactory factory) {
         for (int c = 0; c < mobsNum; c++) {
             int i = 0, j = 0;
             while (cells[i][j] != CellType.GROUND) {
@@ -77,7 +79,7 @@ public class MapBuilderCommons {
             } else if (mobStrategyType.equals("C")) {
                 mobStrategy = new AvoidingStrategy();
             }
-            Status.gameState.getMobStates().add(new MobState(mobStrategy, new Position(j, i)));
+            Status.gameState.getMobStates().add(factory.createMob(mobStrategy, new Position(j, i)));
         }
     }
 
