@@ -1,50 +1,24 @@
-package ru.hse.sd.roguegue.state.impl;
+package ru.hse.sd.roguegue.state.mobs.strategies;
 
 import ru.hse.sd.roguegue.logic.Move;
-import ru.hse.sd.roguegue.state.MobStrategy;
+import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.StrategyDecorator;
 
 import java.util.Random;
 
-/**
- * Class for adding temporary confused behaviour to the current mob's strategy
- */
-public class ConfuseStrategyDecorator extends StrategyDecorator {
-    private int timeCnt = 10;
+public class ReplicatingStrategy extends MobStrategy {
     private Random random = new Random();
 
-    public ConfuseStrategyDecorator(MobStrategy strategy) {
-        super(strategy);
-    }
+    public ReplicatingStrategy() {}
 
     /**
-     * Decorated method. Returns confused position in the first 10 steps after applying decoration.
-     * After 10 steps has usual strategy method's behaviour
+     * @param position
+     * select random direction and try to make move
+     * if it's possible return updated position
+     * otherwise return the initial one
      */
-    public Position getNewPosition(Position position) {
-        Position curPosition = super.getNewPosition(position);
-        if (timeCnt > 0) {
-            curPosition = getConfusedPosition(position);
-            timeCnt -= 1;
-        }
-        return curPosition;
-    }
-
     @Override
-    public MobStrategy tryRemoveDecorator() {
-        if (timeCnt == 0) {
-            return super.tryRemoveDecorator();
-        } else {
-            return this;
-        }
-    }
-
-    /**
-     * Returns adjacent cell in a random direction if it's possible to make move there.
-     * Otherwise returns given position.
-     */
-    private Position getConfusedPosition(Position position) {
+    public Position getNewPosition(Position position) {
         int randDirection = random.nextInt(4);
 
         switch (randDirection) {
@@ -75,4 +49,13 @@ public class ConfuseStrategyDecorator extends StrategyDecorator {
         }
         return position;
     }
+
+    /**
+     * @return true if it's time to create a clone
+     */
+    public boolean replicationTime() {
+        return (random.nextInt(10) == 5);
+    }
+
+
 }

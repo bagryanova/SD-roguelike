@@ -1,8 +1,8 @@
-package ru.hse.sd.roguegue.state.impl;
+package ru.hse.sd.roguegue.state.mobs.strategies;
 
 import ru.hse.sd.roguegue.logic.Move;
 import ru.hse.sd.roguegue.map.CellType;
-import ru.hse.sd.roguegue.state.MobStrategy;
+import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.Status;
 

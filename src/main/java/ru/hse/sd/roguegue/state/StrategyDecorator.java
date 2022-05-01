@@ -1,5 +1,7 @@
 package ru.hse.sd.roguegue.state;
 
+import ru.hse.sd.roguegue.state.mobs.MobStrategy;
+
 /**
  * Abstract class for adding some additional (probably temporary) functionality to the strategy
  */

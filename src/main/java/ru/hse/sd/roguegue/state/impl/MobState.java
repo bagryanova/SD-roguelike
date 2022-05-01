@@ -2,9 +2,11 @@ package ru.hse.sd.roguegue.state.impl;
 
 import ru.hse.sd.roguegue.UI.MobUI;
 import ru.hse.sd.roguegue.state.GameObjectState;
-import ru.hse.sd.roguegue.state.MobStrategy;
+import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.StrategyDecorator;
+import ru.hse.sd.roguegue.state.mobs.strategies.ConfuseStrategyDecorator;
+import ru.hse.sd.roguegue.state.mobs.strategies.ReplicatingStrategy;
 import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.MobType;
 import ru.hse.sd.roguegue.status.Status;

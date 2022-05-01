@@ -1,6 +1,7 @@
-package ru.hse.sd.roguegue.state;
+package ru.hse.sd.roguegue.state.mobs;
 
 import ru.hse.sd.roguegue.map.CellType;
+import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.Status;
 
 public class MobStrategy {

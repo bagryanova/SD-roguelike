@@ -1,6 +1,5 @@
 package ru.hse.sd.roguegue.state;
 
-import ru.hse.sd.roguegue.UI.GameObjectUI;
 import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.status.Status;
 

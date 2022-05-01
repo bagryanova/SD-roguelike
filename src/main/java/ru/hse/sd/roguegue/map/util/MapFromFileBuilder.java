@@ -4,7 +4,6 @@ import ru.hse.sd.roguegue.map.*;
 import ru.hse.sd.roguegue.map.impl.MagicMobFactory;
 import ru.hse.sd.roguegue.map.impl.NatureMobFactory;
 import ru.hse.sd.roguegue.map.impl.TechMobFactory;
-import ru.hse.sd.roguegue.state.MobStrategy;
 
 import java.io.File;
 import java.io.IOException;

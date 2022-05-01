@@ -2,10 +2,9 @@ package ru.hse.sd.roguegue.map.util;
 
 import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.map.MobFactory;
-import ru.hse.sd.roguegue.map.impl.NatureMobFactory;
-import ru.hse.sd.roguegue.state.MobStrategy;
+import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.impl.*;
+import ru.hse.sd.roguegue.state.mobs.strategies.*;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
