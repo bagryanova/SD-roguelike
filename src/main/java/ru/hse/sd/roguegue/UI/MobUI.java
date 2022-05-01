@@ -1,5 +1,6 @@
 package ru.hse.sd.roguegue.UI;
 
+import asciiPanel.AsciiPanel;
 import ru.hse.sd.roguegue.status.MobType;
 
 /**
@@ -17,12 +18,13 @@ public class MobUI extends GameObjectUI {
      * Changes view of a mob according to the mobType
      */
     private void updateUI(MobType mobType) {
+        view = '\u000B';
         if (mobType == MobType.NATURE) {
-            view = 'n';
+            color = AsciiPanel.brightGreen;
         } else if (mobType == MobType.TECH) {
-            view = 't';
+            color = AsciiPanel.brightCyan;
         } else if (mobType == MobType.MAGIC) {
-            view = 'm';
+            color = AsciiPanel.brightMagenta;
         }
     }
 }
