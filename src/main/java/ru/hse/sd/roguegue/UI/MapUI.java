@@ -24,7 +24,7 @@ public class MapUI {
         graphicRepresentation = new EnumMap<>(CellType.class);
         graphicRepresentation.put(CellType.GROUND, (char)250);
         graphicRepresentation.put(CellType.OBSTACLE, (char)177);
-        graphicRepresentation.put(CellType.EXIT, '+');
+        graphicRepresentation.put(CellType.EXIT, '\u00DB');
     }
 
     /**

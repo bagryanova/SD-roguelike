@@ -18,7 +18,7 @@ public class MobUI extends GameObjectUI {
      * Changes view of a mob according to the mobType
      */
     private void updateUI(MobType mobType) {
-        view = '\u000B';
+        view = '\u001E';
         if (mobType == MobType.NATURE) {
             color = AsciiPanel.brightGreen;
         } else if (mobType == MobType.TECH) {
