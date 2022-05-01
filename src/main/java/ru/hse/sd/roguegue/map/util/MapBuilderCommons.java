@@ -72,21 +72,14 @@ public class MapBuilderCommons {
                 j = rand.nextInt(0, cells[0].length - 1);
             }
             assert cells[i][j] == CellType.GROUND;
-            MobStrategy mobStrategy = new AggressiveStrategy();
-            switch (mobStrategyType) {
-                case "P":
-                    mobStrategy = new PassiveStrategy();
-                    break;
-                case "C":
-                    mobStrategy = new AvoidingStrategy();
-                    break;
-                case "R":
-                    mobStrategy = new ReplicatingStrategy();
-                    break;
-                case "H":
-                    mobStrategy = new AreaHoldingStrategy();
-                    break;
-            }
+            new AggressiveStrategy();
+            MobStrategy mobStrategy = switch (mobStrategyType) {
+                case "P" -> new PassiveStrategy();
+                case "C" -> new AvoidingStrategy();
+                case "R" -> new ReplicatingStrategy();
+                case "H" -> new AreaHoldingStrategy();
+                default -> new AggressiveStrategy();
+            };
             Status.gameState.getMobStates().add(factory.createMob(mobStrategy, new Position(j, i)));
         }
     }
