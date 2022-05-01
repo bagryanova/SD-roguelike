@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Mobs with this strategy can only move in a closed area.
+ * Area is defined by initial position and maximum number of cells mob can step away from its initial position.
+ */
 public class AreaHoldingStrategy extends MobStrategy {
     public AreaHoldingStrategy() {
     }
@@ -19,7 +23,7 @@ public class AreaHoldingStrategy extends MobStrategy {
     private Position initialPosition;
 
     /**
-     * @param position update position, mob can only move in his area
+     * @param position update position, mob can only move in his area.
      */
     @Override
     public Position getNewPosition(Position position) {
@@ -41,6 +45,11 @@ public class AreaHoldingStrategy extends MobStrategy {
         return position;
     }
 
+    /**
+     * Checks if current cell is GROUND cell and if mob's distance from initial position is valid
+     * @param position position to be checked
+     * @return true if new position is valid
+     */
     @Override
     public boolean validatePosition(Position position) {
         CellType[][] cells = Status.mapState.getMap().cellArray();

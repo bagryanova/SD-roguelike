@@ -72,7 +72,6 @@ public class MapBuilderCommons {
                 j = rand.nextInt(0, cells[0].length - 1);
             }
             assert cells[i][j] == CellType.GROUND;
-            new AggressiveStrategy();
             MobStrategy mobStrategy = switch (mobStrategyType) {
                 case "P" -> new PassiveStrategy();
                 case "C" -> new AvoidingStrategy();
