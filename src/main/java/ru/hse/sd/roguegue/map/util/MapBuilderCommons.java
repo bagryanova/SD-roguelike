@@ -61,6 +61,7 @@ public class MapBuilderCommons {
         placeMobsOfType(cells, "P", 1, factory);
         placeMobsOfType(cells, "C", 1, factory);
         placeMobsOfType(cells, "R", 1, factory);
+        placeMobsOfType(cells, "H", 1, factory);
     }
 
     private void placeMobsOfType(CellType[][] cells, String mobStrategyType, int mobsNum, MobFactory factory) {
@@ -72,12 +73,19 @@ public class MapBuilderCommons {
             }
             assert cells[i][j] == CellType.GROUND;
             MobStrategy mobStrategy = new AggressiveStrategy();
-            if (mobStrategyType.equals("P")) {
-                mobStrategy = new PassiveStrategy();
-            } else if (mobStrategyType.equals("C")) {
-                mobStrategy = new AvoidingStrategy();
-            } else if (mobStrategyType.equals("R")) {
-                mobStrategy = new ReplicatingStrategy();
+            switch (mobStrategyType) {
+                case "P":
+                    mobStrategy = new PassiveStrategy();
+                    break;
+                case "C":
+                    mobStrategy = new AvoidingStrategy();
+                    break;
+                case "R":
+                    mobStrategy = new ReplicatingStrategy();
+                    break;
+                case "H":
+                    mobStrategy = new AreaHoldingStrategy();
+                    break;
             }
             Status.gameState.getMobStates().add(factory.createMob(mobStrategy, new Position(j, i)));
         }
