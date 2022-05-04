@@ -5,5 +5,5 @@ import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.impl.MobState;
 
 public interface MobFactory {
-    MobState createMob(MobStrategy strategy, Position position);
+    MobState createMob(Position position);
 }

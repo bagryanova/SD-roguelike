@@ -8,10 +8,10 @@ import ru.hse.sd.roguegue.status.MobType;
 
 public class TechMobFactory implements MobFactory {
     @Override
-    public MobState createMob(MobStrategy strategy, Position position) {
-        MobState mob = new MobState(strategy, position, MobType.TECH);
+    public MobState createMob(Position position) {
+        MobState mob = new MobState(position, MobType.TECH);
         mob.updateLives(7);
-        mob.updateStrength(3);
+        mob.updateStrength(0);
         return mob;
     }
 }

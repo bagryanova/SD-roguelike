@@ -56,14 +56,10 @@ public class MapBuilderCommons {
      *              Places mobs of specific types on free cells
      */
     public void placeMobs(CellType[][] cells, MobFactory factory) {
-        placeMobsOfType(cells, "A", 1, factory);
-        placeMobsOfType(cells, "P", 1, factory);
-        placeMobsOfType(cells, "C", 1, factory);
-        placeMobsOfType(cells, "R", 1, factory);
-        placeMobsOfType(cells, "H", 1, factory);
+        placeMobsOfType(cells, 5, factory);
     }
 
-    private void placeMobsOfType(CellType[][] cells, String mobStrategyType, int mobsNum, MobFactory factory) {
+    private void placeMobsOfType(CellType[][] cells, int mobsNum, MobFactory factory) {
         for (int c = 0; c < mobsNum; c++) {
             int i = 0, j = 0;
             while (cells[i][j] != CellType.GROUND) {
@@ -71,14 +67,7 @@ public class MapBuilderCommons {
                 j = rand.nextInt(0, cells[0].length - 1);
             }
             assert cells[i][j] == CellType.GROUND;
-            MobStrategy mobStrategy = switch (mobStrategyType) {
-                case "P" -> new PassiveStrategy();
-                case "C" -> new AvoidingStrategy();
-                case "R" -> new ReplicatingStrategy();
-                case "H" -> new AreaHoldingStrategy();
-                default -> new AggressiveStrategy();
-            };
-            Status.gameState.getMobStates().add(factory.createMob(mobStrategy, new Position(j, i)));
+            Status.gameState.getMobStates().add(factory.createMob(new Position(j, i)));
         }
     }
 

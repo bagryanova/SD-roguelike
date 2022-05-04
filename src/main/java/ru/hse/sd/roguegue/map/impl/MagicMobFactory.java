@@ -8,10 +8,10 @@ import ru.hse.sd.roguegue.status.MobType;
 
 public class MagicMobFactory implements MobFactory {
     @Override
-    public MobState createMob(MobStrategy strategy, Position position) {
-        MobState mob = new MobState(strategy, position, MobType.MAGIC);
+    public MobState createMob(Position position) {
+        MobState mob = new MobState(position, MobType.MAGIC);
         mob.updateLives(3);
-        mob.updateStrength(7);
+        mob.updateStrength(0);
         return mob;
     }
 }

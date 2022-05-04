@@ -8,10 +8,10 @@ import ru.hse.sd.roguegue.status.MobType;
 
 public class NatureMobFactory implements MobFactory {
     @Override
-    public MobState createMob(MobStrategy strategy, Position position) {
-        MobState mob = new MobState(strategy, position, MobType.NATURE);
-        mob.updateLives(3);
-        mob.updateStrength(3);
+    public MobState createMob(Position position) {
+        MobState mob = new MobState(position, MobType.NATURE);
+        mob.updateLives(5);
+        mob.updateStrength(0);
         return mob;
     }
 }

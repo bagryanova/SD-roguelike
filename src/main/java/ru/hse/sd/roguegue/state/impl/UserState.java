@@ -31,7 +31,7 @@ public class UserState extends GameObjectState {
     public void setInitialValues() {
         health = 10;
         exp = 0;
-        strength = 5;
+        strength = 1;
         lives = 5;
     }
 
