@@ -4,6 +4,9 @@ import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.status.Status;
 
+/**
+ * Class for outsourcing viewing of object which has changed its position
+ */
 public class DisplayNewObjectPositionCommand implements UICommand {
     private Position prev;
 

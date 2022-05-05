@@ -2,6 +2,9 @@ package ru.hse.sd.roguegue.UI.Commands;
 
 import ru.hse.sd.roguegue.status.Status;
 
+/**
+ * Class for outsourcing displaying information about user
+ */
 public class DisplayInformationCommand implements UICommand {
     @Override
     public void execute() {

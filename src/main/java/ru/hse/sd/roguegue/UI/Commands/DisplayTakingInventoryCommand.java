@@ -3,6 +3,9 @@ package ru.hse.sd.roguegue.UI.Commands;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
+/**
+ * Class for outsourcing inventory item's taking
+ */
 public class DisplayTakingInventoryCommand implements UICommand {
     private InventoryItem item;
 
