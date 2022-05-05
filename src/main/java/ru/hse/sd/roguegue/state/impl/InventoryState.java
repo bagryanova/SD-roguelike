@@ -1,7 +1,6 @@
 package ru.hse.sd.roguegue.state.impl;
 
-import ru.hse.sd.roguegue.UI.InventoryUI;
-import ru.hse.sd.roguegue.state.GameObjectState;
+import ru.hse.sd.roguegue.UI.Commands.DisplayCurrentLineCommand;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 public class InventoryState {
     private ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
     private ArrayList<InventoryItem> activeInventoryItems = new ArrayList<>();
-    private final InventoryUI inventoryUI = new InventoryUI();
     private int currentItemIndex = 0;
 
     /**
@@ -27,7 +25,7 @@ public class InventoryState {
     public void nextCurrentItem() {
         if (currentItemIndex + 1 < inventoryItems.size()) {
             currentItemIndex += 1;
-            inventoryUI.displayCurrentLine(currentItemIndex - 1, currentItemIndex);
+            new DisplayCurrentLineCommand(currentItemIndex - 1, currentItemIndex).execute();
         }
     }
 
@@ -37,7 +35,7 @@ public class InventoryState {
     public void prevCurrentItem() {
         if (currentItemIndex - 1 >= 0) {
             currentItemIndex -= 1;
-            inventoryUI.displayCurrentLine(currentItemIndex + 1, currentItemIndex);
+            new DisplayCurrentLineCommand(currentItemIndex + 1, currentItemIndex).execute();
 
         }
     }

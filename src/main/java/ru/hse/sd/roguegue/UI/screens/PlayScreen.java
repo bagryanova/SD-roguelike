@@ -15,7 +15,6 @@ public class PlayScreen implements Screen {
     public void display() {
         Status.terminal.clear();
         Status.terminal.setCursorPosition(0, 0);
-        Status.gameUI.displayScore();
         Status.mapUI.displayMap();
         Status.userState.userUI.displayPosition();
         Status.userState.userUI.displayInformation();

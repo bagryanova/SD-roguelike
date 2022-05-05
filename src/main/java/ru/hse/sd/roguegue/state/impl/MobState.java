@@ -2,16 +2,14 @@ package ru.hse.sd.roguegue.state.impl;
 
 import ru.hse.sd.roguegue.UI.MobUI;
 import ru.hse.sd.roguegue.state.GameObjectState;
-import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.StrategyDecorator;
 import ru.hse.sd.roguegue.state.mobs.StrategyState;
 import ru.hse.sd.roguegue.state.mobs.states.OkStrategyState;
-import ru.hse.sd.roguegue.state.mobs.strategies.ConfuseStrategyDecorator;
-import ru.hse.sd.roguegue.state.mobs.strategies.ReplicatingStrategy;
 import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.MobType;
 import ru.hse.sd.roguegue.status.Status;
+
+import java.util.Random;
 
 public class MobState extends GameObjectState implements Cloneable {
 
@@ -21,6 +19,8 @@ public class MobState extends GameObjectState implements Cloneable {
     public MobType mobType;
     public MobUI mobUI;
     public boolean alive = true;
+
+    private Random random = new Random();
 
     public MobState(Position position, MobType mobType) {
         updatePosition(position);
@@ -70,7 +70,7 @@ public class MobState extends GameObjectState implements Cloneable {
     /**
      * Update position according to strategy
      * For some mobs, which have to do something after changing the position, do it
-     * More precisely, create mob's clone if it's time for replicating mobs.
+     * More precisely, create mob's clone if it's time for replicating
      * And try to remove strategy decorator
      */
     public void updatePosition() {
@@ -80,16 +80,7 @@ public class MobState extends GameObjectState implements Cloneable {
         if (this.getPosition().equals(Status.userState.getPosition())) {
             fight();
         }
-//        if (strategy.getClass() == ReplicatingStrategy.class) {
-//            ReplicatingStrategy replicatingStrategy = (ReplicatingStrategy) strategy;
-//            if (replicatingStrategy.replicationTime()) {
-//                MobState clone = clone();
-//                if (clone != null) {
-//                    Status.gameState.getMobStates().add(clone);
-//                    System.out.println("MOB SIZE " + Status.gameState.getMobStates().size());
-//                }
-//            }
-//        }
+        replicate();
         tryRemoveStrategyDecorator();
     }
 
@@ -97,19 +88,33 @@ public class MobState extends GameObjectState implements Cloneable {
         strategy.tryRemoveStrategyDecorator();
     }
 
-//    @Override
-//    public MobState clone() {
-//        try {
-//            MobState clone = (MobState) super.clone();
-//            clone.strategy = new ReplicatingStrategy();
-//            clone.mobUI = new MobUI(clone.mobType);
-//            clone.position = new Position(position.getX(), position.getY());
-//            clone.updatePosition(clone.strategy.getNewPosition(clone.position));
-//            return clone;
-//        } catch (CloneNotSupportedException e) {
-//            throw new AssertionError();
-//        }
-//    }
+    /**
+     * Check if it's time for replication and do it
+     */
+    private void replicate() {
+         if (random.nextInt(30) != 5) {
+             return;
+         }
+        MobState clone = clone();
+        if (clone != null) {
+            Status.gameState.getMobStates().add(clone);
+            System.out.println("MOB SIZE " + Status.gameState.getMobStates().size());
+        }
+    }
+
+    @Override
+    public MobState clone() {
+        try {
+            MobState clone = (MobState) super.clone();
+            clone.strategy = new OkStrategyState(clone);
+            clone.mobUI = new MobUI(clone.mobType);
+            clone.position = new Position(position.getX(), position.getY());
+            clone.updatePosition(clone.strategy.getNewPosition(clone.position));
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 
     /**
      * Compare strengths of user and mob and update health and lives according to the characteristics

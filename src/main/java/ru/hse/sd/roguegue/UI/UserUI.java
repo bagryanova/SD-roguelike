@@ -6,7 +6,7 @@ import ru.hse.sd.roguegue.status.Status;
 /**
  * Class for displaying user on the map and related information
  */
-public class UserUI extends GameObjectUI{
+public class UserUI extends GameObjectUI {
 
     public UserUI() {
         super();

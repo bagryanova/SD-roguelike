@@ -1,7 +1,7 @@
 package ru.hse.sd.roguegue.state.impl;
 
+import ru.hse.sd.roguegue.UI.Commands.DisplayMapCommand;
 import ru.hse.sd.roguegue.map.Map;
-import ru.hse.sd.roguegue.status.Status;
 
 /**
  * Class for the information about map
@@ -15,8 +15,7 @@ public class MapState {
      */
     public void updateMap(Map newMap) {
         map = newMap;
-        Status.mapUI.displayMap();
-        Status.userState.userUI.displayPosition();
+        new DisplayMapCommand().execute();
 
     }
 
