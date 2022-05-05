@@ -3,7 +3,6 @@ package ru.hse.sd.roguegue.state.mobs;
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.StrategyDecorator;
 import ru.hse.sd.roguegue.state.mobs.strategies.ConfuseStrategyDecorator;
-import ru.hse.sd.roguegue.state.mobs.strategies.ReplicatingStrategy;
 
 public abstract class StrategyState {
 
@@ -31,13 +30,5 @@ public abstract class StrategyState {
         if (strategy instanceof StrategyDecorator) {
             this.strategy = ((StrategyDecorator) strategy).tryRemoveDecorator();
         }
-    }
-
-    public void setReplicatingStrategy(){
-        strategy = new ReplicatingStrategy();
-    }
-
-    public boolean isReplicating() {
-        return strategy.getClass() == ReplicatingStrategy.class;
     }
 }
