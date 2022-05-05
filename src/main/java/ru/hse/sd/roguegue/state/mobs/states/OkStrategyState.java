@@ -1,17 +1,13 @@
 package ru.hse.sd.roguegue.state.mobs.states;
 
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.StrategyDecorator;
 import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 import ru.hse.sd.roguegue.state.mobs.StrategyState;
 import ru.hse.sd.roguegue.state.mobs.strategies.AggressiveStrategy;
-import ru.hse.sd.roguegue.state.mobs.strategies.ConfuseStrategyDecorator;
-import ru.hse.sd.roguegue.state.mobs.strategies.PassiveStrategy;
-import ru.hse.sd.roguegue.state.mobs.strategies.ReplicatingStrategy;
 import ru.hse.sd.roguegue.status.Status;
 
-public class OkStrategyState implements StrategyState {
+public class OkStrategyState extends StrategyState {
     public OkStrategyState(MobState state) {
         this.state = state;
     }
@@ -20,12 +16,9 @@ public class OkStrategyState implements StrategyState {
     private final MobState state;
 
     /**
-     * Validate new mob's position
+     * If mob's number of lives is small - mob will switch to avoiding strategy
+     * If mob is far enough from user - mob will patrol his small area
      */
-    public boolean validatePosition(Position position) {
-        return strategy.validatePosition(position);
-    }
-
     public void updateStrategy() {
         if (state.lives < 3) {
             state.updateStrategyState(new PanicStrategyState(state));
@@ -40,24 +33,6 @@ public class OkStrategyState implements StrategyState {
     public Position getNewPosition(Position position) {
         System.out.println("It's ok");
         return strategy.getNewPosition(position);
-    }
-
-    public void setConfuse(){
-        strategy = new ConfuseStrategyDecorator(strategy);
-    }
-
-    public void tryRemoveStrategyDecorator() {
-        if (strategy instanceof StrategyDecorator) {
-            this.strategy = ((StrategyDecorator) strategy).tryRemoveDecorator();
-        }
-    }
-
-    public void setReplicatingStrategy(){
-        strategy = new ReplicatingStrategy();
-    }
-
-    public boolean isReplicating(){
-        return strategy.getClass() == ReplicatingStrategy.class;
     }
 
     private boolean checkDistance() {

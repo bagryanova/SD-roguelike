@@ -1,16 +1,13 @@
 package ru.hse.sd.roguegue.state.mobs.states;
 
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.StrategyDecorator;
 import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 import ru.hse.sd.roguegue.state.mobs.StrategyState;
 import ru.hse.sd.roguegue.state.mobs.strategies.AreaHoldingStrategy;
-import ru.hse.sd.roguegue.state.mobs.strategies.ConfuseStrategyDecorator;
-import ru.hse.sd.roguegue.state.mobs.strategies.ReplicatingStrategy;
 import ru.hse.sd.roguegue.status.Status;
 
-public class PatrolAreaStrategyState implements StrategyState {
+public class PatrolAreaStrategyState extends StrategyState {
 
     public PatrolAreaStrategyState(MobState state) {
         this.state = state;
@@ -20,42 +17,18 @@ public class PatrolAreaStrategyState implements StrategyState {
     private final MobState state;
 
     @Override
-    public boolean validatePosition(Position position) {
-        return strategy.validatePosition(position);
-    }
-
-    @Override
     public Position getNewPosition(Position position) {
         return strategy.getNewPosition(position);
     }
 
+    /**
+     * If mob is close to user, mob will switch back to its initial strategy
+     */
     @Override
     public void updateStrategy() {
         if (checkDistance()) {
             state.updateStrategyState(new OkStrategyState(state));
         }
-    }
-
-    @Override
-    public void setConfuse() {
-        strategy = new ConfuseStrategyDecorator(strategy);
-    }
-
-    @Override
-    public void tryRemoveStrategyDecorator() {
-        if (strategy instanceof StrategyDecorator) {
-            this.strategy = ((StrategyDecorator) strategy).tryRemoveDecorator();
-        }
-    }
-
-    @Override
-    public void setReplicatingStrategy() {
-        strategy = new ReplicatingStrategy();
-    }
-
-    @Override
-    public boolean isReplicating() {
-        return strategy.getClass() == ReplicatingStrategy.class;
     }
 
     private boolean checkDistance() {

@@ -1,32 +1,43 @@
 package ru.hse.sd.roguegue.state.mobs;
 
-import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.impl.MobState;
-import ru.hse.sd.roguegue.state.mobs.MobStrategy;
+import ru.hse.sd.roguegue.state.StrategyDecorator;
 import ru.hse.sd.roguegue.state.mobs.strategies.ConfuseStrategyDecorator;
 import ru.hse.sd.roguegue.state.mobs.strategies.ReplicatingStrategy;
-import ru.hse.sd.roguegue.status.Status;
 
-public interface StrategyState {
+public abstract class StrategyState {
+
+    private MobStrategy strategy;
 
     /**
      * Validate new mob's position
      */
-    boolean validatePosition(Position position);
+    public boolean validatePosition(Position position) {
+        return strategy.validatePosition(position);
+    }
 
     /**
      * Get new mob's position
      */
-    Position getNewPosition(Position position);
+    public abstract Position getNewPosition(Position position);
 
-    void updateStrategy();
+    public abstract void updateStrategy();
 
-    void setConfuse();
+    public void setConfuse() {
+        strategy = new ConfuseStrategyDecorator(strategy);
+    }
 
-    void tryRemoveStrategyDecorator();
+    public void tryRemoveStrategyDecorator() {
+        if (strategy instanceof StrategyDecorator) {
+            this.strategy = ((StrategyDecorator) strategy).tryRemoveDecorator();
+        }
+    }
 
-    void setReplicatingStrategy();
+    public void setReplicatingStrategy(){
+        strategy = new ReplicatingStrategy();
+    }
 
-    boolean isReplicating();
+    public boolean isReplicating() {
+        return strategy.getClass() == ReplicatingStrategy.class;
+    }
 }
