@@ -1,12 +1,6 @@
 package ru.hse.sd.roguegue.state.mobs;
 
-import ru.hse.sd.roguegue.map.CellType;
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.impl.MobState;
-import ru.hse.sd.roguegue.state.mobs.MobStrategy;
-import ru.hse.sd.roguegue.state.mobs.strategies.ConfuseStrategyDecorator;
-import ru.hse.sd.roguegue.state.mobs.strategies.ReplicatingStrategy;
-import ru.hse.sd.roguegue.status.Status;
 
 public interface StrategyState {
 
@@ -25,8 +19,4 @@ public interface StrategyState {
     void setConfuse();
 
     void tryRemoveStrategyDecorator();
-
-    void setReplicatingStrategy();
-
-    boolean isReplicating();
 }

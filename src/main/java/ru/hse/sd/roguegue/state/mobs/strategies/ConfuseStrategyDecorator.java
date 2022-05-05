@@ -42,7 +42,7 @@ public class ConfuseStrategyDecorator extends StrategyDecorator {
 
     /**
      * Returns adjacent cell in a random direction if it's possible to make move there.
-     * Otherwise returns given position.
+     * Otherwise, returns given position.
      */
     private Position getConfusedPosition(Position position) {
         int randDirection = random.nextInt(4);

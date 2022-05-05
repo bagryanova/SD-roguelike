@@ -7,10 +7,9 @@ import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 import ru.hse.sd.roguegue.state.mobs.StrategyState;
 import ru.hse.sd.roguegue.state.mobs.strategies.AggressiveStrategy;
 import ru.hse.sd.roguegue.state.mobs.strategies.ConfuseStrategyDecorator;
-import ru.hse.sd.roguegue.state.mobs.strategies.ReplicatingStrategy;
 
 public class OkStrategyState implements StrategyState {
-    public OkStrategyState(MobState state) {
+    public  OkStrategyState(MobState state) {
         this.state = state;
     }
 
@@ -48,11 +47,5 @@ public class OkStrategyState implements StrategyState {
         }
     }
 
-    public void setReplicatingStrategy(){
-        strategy = new ReplicatingStrategy();
-    }
 
-    public boolean isReplicating(){
-        return strategy.getClass() == ReplicatingStrategy.class;
-    }
 }
