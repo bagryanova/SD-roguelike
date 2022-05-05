@@ -1,6 +1,6 @@
 package ru.hse.sd.roguegue.state.impl;
 
-import ru.hse.sd.roguegue.status.Status;
+import ru.hse.sd.roguegue.UI.Commands.ChangeScreenCommand;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,6 @@ import java.util.ArrayList;
  * Class for information about game process (such as score)
  */
 public class GameState {
-    private int score;
     private ArrayList<MobState> mobStates = new ArrayList<>();
     private final InventoryState inventoryState = new InventoryState();
 
@@ -40,23 +39,8 @@ public class GameState {
         this.mobStates = mobStates;
     }
 
-    /**
-     * @param newScore update score according to the newScore and display changes on the screen
-     */
-    // todo счет вообще будет??
-    public void updateScore(int newScore) {
-        score = newScore;
-        Status.gameUI.displayScore();
-    }
-
-    public int getScore() {
-        return score;
-    }
-
     public void changeScreen() {
-        Status.screen = Status.screen.change();
-        Status.terminal.clear();
-        Status.screen.display();
+        new ChangeScreenCommand().execute();
     }
 
 }

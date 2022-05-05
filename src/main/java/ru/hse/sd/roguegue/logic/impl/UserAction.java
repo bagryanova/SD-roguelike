@@ -1,5 +1,6 @@
 package ru.hse.sd.roguegue.logic.impl;
 
+import ru.hse.sd.roguegue.UI.Commands.DisplayTakingInventoryCommand;
 import ru.hse.sd.roguegue.logic.GameObjectAction;
 import ru.hse.sd.roguegue.logic.Move;
 import ru.hse.sd.roguegue.map.CellType;
@@ -42,7 +43,7 @@ public class UserAction implements GameObjectAction {
                         Status.gameState.getInventoryState().addInventoryItem(item);
                         item.present = false;
                     }
-                    Status.inventoryUI.displayTakingInventory(item);
+                    new DisplayTakingInventoryCommand(item).execute();
                 }
             }
             case CONFUSE -> {

@@ -1,5 +1,6 @@
 package ru.hse.sd.roguegue.preprocessing;
 
+import ru.hse.sd.roguegue.UI.Commands.DisplayScreenCommand;
 import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.Status;
 
@@ -27,8 +28,7 @@ public class UserInteraction extends JFrame implements KeyListener {
         pack();
         addKeyListener(this);
         setVisible(true);
-        Status.terminal.clear();
-        Status.screen.display();
+        new DisplayScreenCommand().execute();
         super.repaint();
     }
 

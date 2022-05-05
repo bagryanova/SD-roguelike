@@ -1,7 +1,6 @@
 package ru.hse.sd.roguegue.status;
 
 import asciiPanel.AsciiPanel;
-import ru.hse.sd.roguegue.UI.GameUI;
 import ru.hse.sd.roguegue.UI.InventoryUI;
 import ru.hse.sd.roguegue.UI.MapUI;
 import ru.hse.sd.roguegue.UI.screens.MenuScreen;
@@ -54,10 +53,6 @@ public class Status {
      */
     public static MapUI mapUI = new MapUI();
 
-    /**
-     * UI for game information. Can display score
-     */
-    public static GameUI gameUI = new GameUI();
 
     /**
      * UI for user's inventory list

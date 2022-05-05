@@ -1,5 +1,6 @@
 package ru.hse.sd.roguegue.state.impl;
 
+import ru.hse.sd.roguegue.UI.Commands.DisplayInformationCommand;
 import ru.hse.sd.roguegue.UI.UserUI;
 import ru.hse.sd.roguegue.state.GameObjectState;
 import ru.hse.sd.roguegue.status.Constants;
@@ -62,7 +63,7 @@ public class UserState extends GameObjectState {
      */
     public void updateHealth(int newHealth) {
         this.health = newHealth;
-        Status.userState.userUI.displayInformation();
+        new DisplayInformationCommand().execute();
     }
 
     /**
@@ -91,7 +92,7 @@ public class UserState extends GameObjectState {
      */
     public void updateExp(int newExp) {
         exp = newExp;
-        Status.userState.userUI.displayInformation();
+        new DisplayInformationCommand().execute();
     }
 
     public int getExp() {
@@ -103,7 +104,7 @@ public class UserState extends GameObjectState {
      */
     public void updateStrength(int newStrength) {
         strength = newStrength;
-        Status.userState.userUI.displayInformation();
+        new DisplayInformationCommand().execute();
     }
 
     /**
@@ -118,7 +119,7 @@ public class UserState extends GameObjectState {
      */
     public void updateLives(int newLives) {
         lives = newLives;
-        Status.userState.userUI.displayInformation();
+        new DisplayInformationCommand().execute();
     }
 
     /**
