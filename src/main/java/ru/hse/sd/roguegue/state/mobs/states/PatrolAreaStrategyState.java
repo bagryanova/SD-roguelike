@@ -1,40 +1,27 @@
 package ru.hse.sd.roguegue.state.mobs.states;
 
-import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.impl.MobState;
-import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 import ru.hse.sd.roguegue.state.mobs.StrategyState;
 import ru.hse.sd.roguegue.state.mobs.strategies.AreaHoldingStrategy;
-import ru.hse.sd.roguegue.status.Status;
 
+/**
+ * Whenever distance from mob to user is big enough - mob's strategy will switch to
+ * area holding strategy and remain so until user comes closer
+ */
 public class PatrolAreaStrategyState extends StrategyState {
 
     public PatrolAreaStrategyState(MobState state) {
         this.state = state;
-    }
-
-    private MobStrategy strategy = new AreaHoldingStrategy();
-    private final MobState state;
-
-    @Override
-    public Position getNewPosition(Position position) {
-        return strategy.getNewPosition(position);
+        strategy = new AreaHoldingStrategy();
     }
 
     /**
-     * If mob is close to user, mob will switch back to its initial strategy
+     * If mob's distance from user is less than 20, mob will switch back to its initial strategy or switch to avoiding strategy
      */
     @Override
     public void updateStrategy() {
-        if (checkDistance()) {
+        if (checkDistance(20)) {
             state.updateStrategyState(new OkStrategyState(state));
         }
-    }
-
-    private boolean checkDistance() {
-        double xLen = Math.pow(Status.userState.getPosition().getX() - state.getPosition().getX(), 2);
-        double yLen = Math.pow(Status.userState.getPosition().getY() - state.getPosition().getY(), 2);
-        System.out.println(Math.sqrt(xLen + yLen));
-        return Math.sqrt(xLen + yLen) < 20;
     }
 }
