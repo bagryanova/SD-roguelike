@@ -51,7 +51,6 @@ public class UserState extends GameObjectState {
                 cnt++;
             }
             cur += levels.get(level).get(1);
-            System.out.println("lives " + lives + ' ' + cnt);
             updateLives(lives - cnt);
             updateHealth(levels.get(level).get(1) - cur);
         }
@@ -59,7 +58,7 @@ public class UserState extends GameObjectState {
 
     /**
      * @param newHealth new health to be set
-     *                  Updates health according to the new health
+     * Updates health according to the new health
      */
     public void updateHealth(int newHealth) {
         this.health = newHealth;

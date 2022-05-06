@@ -51,13 +51,12 @@ public abstract class StrategyState {
 
     /**
      * Check if the distance between user and mob is smaller than distanceToCheck
-     * @param distanceToCheck distsnce will be compared with it
+     * @param distanceToCheck distance will be compared with it
      * @return true if distance is smaller than the distanceToCheck
      */
     protected boolean checkDistance(int distanceToCheck) {
         double xLen = Math.pow(Status.userState.getPosition().getX() - state.getPosition().getX(), 2);
         double yLen = Math.pow(Status.userState.getPosition().getY() - state.getPosition().getY(), 2);
-        System.out.println(Math.sqrt(xLen + yLen));
         return Math.sqrt(xLen + yLen) < distanceToCheck;
     }
 }

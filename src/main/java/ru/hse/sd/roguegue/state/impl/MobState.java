@@ -98,7 +98,6 @@ public class MobState extends GameObjectState implements Cloneable {
         MobState clone = clone();
         if (clone != null) {
             Status.gameState.getMobStates().add(clone);
-            System.out.println("MOB SIZE " + Status.gameState.getMobStates().size());
         }
     }
 
@@ -128,7 +127,6 @@ public class MobState extends GameObjectState implements Cloneable {
                 Status.gameState.changeScreen();
             }
         } else {
-            System.out.println("lives mob " + getLives());
             updateLives(getLives() - 1);
             if (getLives() <= 0) {
                 alive = false;

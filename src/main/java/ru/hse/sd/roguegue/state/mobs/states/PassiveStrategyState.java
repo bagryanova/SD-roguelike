@@ -16,11 +16,11 @@ public class PassiveStrategyState extends StrategyState {
     }
 
     /**
-     * If mob's distance from user is less than 30, mob will switch back to its initial strategy
+     * If mob's distance from user is less than 27, mob will switch back to its initial strategy
      */
     @Override
     public void updateStrategy() {
-        if (checkDistance(30)) {
+        if (checkDistance(27)) {
             state.updateStrategyState(new OkStrategyState(state));
         }
     }

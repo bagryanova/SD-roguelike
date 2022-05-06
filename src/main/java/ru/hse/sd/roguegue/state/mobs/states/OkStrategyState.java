@@ -18,9 +18,9 @@ public class OkStrategyState extends StrategyState {
     public void updateStrategy() {
         if (state.lives < 3) {
             state.updateStrategyState(new PanicStrategyState(state));
-        } else if (!checkDistance(30)) {
+        } else if (!checkDistance(27)) {
             state.updateStrategyState(new PassiveStrategyState(state));
-        } else if (!checkDistance(20)) {
+        } else if (!checkDistance(19)) {
             state.updateStrategyState(new PatrolAreaStrategyState(state));
         }
     }

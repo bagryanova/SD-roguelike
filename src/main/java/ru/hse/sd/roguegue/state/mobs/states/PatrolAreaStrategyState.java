@@ -16,11 +16,11 @@ public class PatrolAreaStrategyState extends StrategyState {
     }
 
     /**
-     * If mob's distance from user is less than 20, mob will switch back to its initial strategy or switch to avoiding strategy
+     * If mob's distance from user is less than 19, mob will switch back to its initial strategy or switch to avoiding strategy
      */
     @Override
     public void updateStrategy() {
-        if (checkDistance(20)) {
+        if (checkDistance(19)) {
             state.updateStrategyState(new OkStrategyState(state));
         }
     }
