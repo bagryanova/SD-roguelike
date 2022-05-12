@@ -1,5 +1,6 @@
-package ru.hse.sd.roguegue.state;
+package ru.hse.sd.roguegue.state.mobs.strategies;
 
+import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.mobs.MobStrategy;
 
 /**

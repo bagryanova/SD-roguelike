@@ -1,7 +1,7 @@
 package ru.hse.sd.roguegue.state.mobs;
 
 import ru.hse.sd.roguegue.state.Position;
-import ru.hse.sd.roguegue.state.StrategyDecorator;
+import ru.hse.sd.roguegue.state.mobs.strategies.StrategyDecorator;
 import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.state.mobs.strategies.ConfuseStrategyDecorator;
 import ru.hse.sd.roguegue.status.Status;
