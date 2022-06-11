@@ -1,6 +1,5 @@
-package ru.hse.sd.roguegue.UI;
+package ru.hse.sd.roguegue.ui;
 
-import asciiPanel.AsciiPanel;
 import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.status.Status;
@@ -13,14 +12,13 @@ import java.awt.*;
 public class GameObjectUI {
     protected Character view = '?';
     protected Color color;
-    int dy = Constants.MAP_START_Y;
-    int dx = Constants.MAP_START_X;
+    protected int dy = Constants.MAP_START_Y;
+    protected int dx = Constants.MAP_START_X;
 
-    public GameObjectUI(){}
+    public GameObjectUI() {}
 
     /**
-     * @param position
-     * Display object view in the position
+     * Display object view in the position on the map
      */
     public void displayPosition(Position position) {
         Status.terminal.write(view, position.getX() + dx, position.getY() + dy, color);

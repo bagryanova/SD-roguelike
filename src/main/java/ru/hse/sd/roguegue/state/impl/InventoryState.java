@@ -1,6 +1,6 @@
 package ru.hse.sd.roguegue.state.impl;
 
-import ru.hse.sd.roguegue.UI.Commands.DisplayCurrentLineCommand;
+import ru.hse.sd.roguegue.ui.Commands.DisplayCurrentLineCommand;
 import ru.hse.sd.roguegue.status.InventoryItem;
 import ru.hse.sd.roguegue.status.Status;
 

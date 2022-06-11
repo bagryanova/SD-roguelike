@@ -1,10 +1,10 @@
 package ru.hse.sd.roguegue.status;
 
 import asciiPanel.AsciiPanel;
-import ru.hse.sd.roguegue.UI.InventoryUI;
-import ru.hse.sd.roguegue.UI.MapUI;
-import ru.hse.sd.roguegue.UI.screens.MenuScreen;
-import ru.hse.sd.roguegue.UI.screens.Screen;
+import ru.hse.sd.roguegue.ui.InventoryUI;
+import ru.hse.sd.roguegue.ui.MapUI;
+import ru.hse.sd.roguegue.ui.screens.MenuScreen;
+import ru.hse.sd.roguegue.ui.screens.Screen;
 import ru.hse.sd.roguegue.state.impl.GameState;
 import ru.hse.sd.roguegue.state.impl.MapState;
 import ru.hse.sd.roguegue.state.impl.UserState;

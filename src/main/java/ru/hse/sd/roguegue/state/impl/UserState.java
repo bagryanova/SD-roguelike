@@ -1,11 +1,9 @@
 package ru.hse.sd.roguegue.state.impl;
 
-import ru.hse.sd.roguegue.UI.Commands.DisplayInformationCommand;
-import ru.hse.sd.roguegue.UI.UserUI;
+import ru.hse.sd.roguegue.ui.Commands.DisplayInformationCommand;
+import ru.hse.sd.roguegue.ui.UserUI;
 import ru.hse.sd.roguegue.state.GameObjectState;
-import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.InventoryItem;
-import ru.hse.sd.roguegue.status.Status;
 
 import java.util.*;
 

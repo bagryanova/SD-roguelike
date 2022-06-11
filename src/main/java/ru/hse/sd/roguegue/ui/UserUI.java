@@ -1,4 +1,4 @@
-package ru.hse.sd.roguegue.UI;
+package ru.hse.sd.roguegue.ui;
 
 import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.Status;

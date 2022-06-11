@@ -1,4 +1,4 @@
-package ru.hse.sd.roguegue.UI;
+package ru.hse.sd.roguegue.ui;
 
 import asciiPanel.AsciiPanel;
 import ru.hse.sd.roguegue.status.MobType;
@@ -14,7 +14,6 @@ public class MobUI extends GameObjectUI {
     }
 
     /**
-     * @param mobType
      * Changes view of a mob according to the mobType
      */
     private void updateUI(MobType mobType) {

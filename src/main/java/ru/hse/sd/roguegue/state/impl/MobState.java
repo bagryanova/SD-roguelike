@@ -1,6 +1,6 @@
 package ru.hse.sd.roguegue.state.impl;
 
-import ru.hse.sd.roguegue.UI.MobUI;
+import ru.hse.sd.roguegue.ui.MobUI;
 import ru.hse.sd.roguegue.state.GameObjectState;
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.mobs.StrategyState;

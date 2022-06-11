@@ -1,6 +1,6 @@
 package ru.hse.sd.roguegue.state;
 
-import ru.hse.sd.roguegue.UI.Commands.DisplayNewObjectPositionCommand;
+import ru.hse.sd.roguegue.ui.Commands.DisplayNewObjectPositionCommand;
 
 /**
  * Abstract class for the information about GameObject

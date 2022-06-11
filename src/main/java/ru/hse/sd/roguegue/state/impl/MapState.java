@@ -1,6 +1,6 @@
 package ru.hse.sd.roguegue.state.impl;
 
-import ru.hse.sd.roguegue.UI.Commands.DisplayMapCommand;
+import ru.hse.sd.roguegue.ui.Commands.DisplayMapCommand;
 import ru.hse.sd.roguegue.map.Map;
 
 /**
@@ -16,7 +16,6 @@ public class MapState {
     public void updateMap(Map newMap) {
         map = newMap;
         new DisplayMapCommand().execute();
-
     }
 
     public Map getMap() {

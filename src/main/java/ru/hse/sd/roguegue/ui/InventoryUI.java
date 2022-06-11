@@ -1,4 +1,4 @@
-package ru.hse.sd.roguegue.UI;
+package ru.hse.sd.roguegue.ui;
 
 import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.InventoryItem;
@@ -13,8 +13,6 @@ import java.util.List;
 public class InventoryUI  {
 
     /**
-     * @param prevLine
-     * @param currentLine
      * Changes cursor's position from prevLine to currentLine
      */
     public void displayCurrentLine(int prevLine, int currentLine) {
@@ -43,7 +41,6 @@ public class InventoryUI  {
     }
 
     /**
-     * @param item
      * Displays how user takes inventory from the map (inventory item disappears from the map)
      */
     public void displayTakingInventory(InventoryItem item) {

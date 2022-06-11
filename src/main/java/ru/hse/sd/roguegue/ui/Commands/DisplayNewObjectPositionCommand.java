@@ -1,4 +1,4 @@
-package ru.hse.sd.roguegue.UI.Commands;
+package ru.hse.sd.roguegue.ui.Commands;
 
 import ru.hse.sd.roguegue.state.Position;
 import ru.hse.sd.roguegue.state.impl.MobState;
@@ -10,7 +10,7 @@ import ru.hse.sd.roguegue.status.Status;
 public class DisplayNewObjectPositionCommand implements UICommand {
     private Position prev;
 
-    private DisplayNewObjectPositionCommand(){}
+    private DisplayNewObjectPositionCommand() {}
 
     public DisplayNewObjectPositionCommand(Position prev) {
         this.prev = prev;

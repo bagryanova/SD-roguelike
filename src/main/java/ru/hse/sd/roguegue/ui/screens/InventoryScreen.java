@@ -1,4 +1,4 @@
-package ru.hse.sd.roguegue.UI.screens;
+package ru.hse.sd.roguegue.ui.screens;
 
 import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.GameStatus;
@@ -19,7 +19,6 @@ public class InventoryScreen implements Screen {
         Status.userState.userUI.displayInformation();
         Status.inventoryUI.displayUsersInventoryList();
         Status.terminal.write('>', Constants.MAP_START_X, Constants.MAP_START_Y + 1);
-
     }
 
     /**

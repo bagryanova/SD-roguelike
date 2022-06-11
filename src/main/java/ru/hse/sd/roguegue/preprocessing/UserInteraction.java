@@ -1,6 +1,6 @@
 package ru.hse.sd.roguegue.preprocessing;
 
-import ru.hse.sd.roguegue.UI.Commands.DisplayScreenCommand;
+import ru.hse.sd.roguegue.ui.Commands.DisplayScreenCommand;
 import ru.hse.sd.roguegue.status.GameStatus;
 import ru.hse.sd.roguegue.status.Status;
 

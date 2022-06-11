@@ -1,4 +1,4 @@
-package ru.hse.sd.roguegue.UI.Commands;
+package ru.hse.sd.roguegue.ui.Commands;
 
 import ru.hse.sd.roguegue.state.impl.MobState;
 import ru.hse.sd.roguegue.status.Status;

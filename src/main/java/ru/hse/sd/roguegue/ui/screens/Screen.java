@@ -1,4 +1,4 @@
-package ru.hse.sd.roguegue.UI.screens;
+package ru.hse.sd.roguegue.ui.screens;
 
 /**
  * Interface for screen

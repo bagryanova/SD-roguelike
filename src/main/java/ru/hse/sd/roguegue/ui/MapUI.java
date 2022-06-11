@@ -1,4 +1,4 @@
-package ru.hse.sd.roguegue.UI;
+package ru.hse.sd.roguegue.ui;
 
 import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.map.CellType;
@@ -16,7 +16,6 @@ public class MapUI {
     private final int dx = Constants.MAP_START_X;
     private final int dy = Constants.MAP_START_Y;
 
-
     /**
      * In the constructor we have to define all graphic representations
      */
@@ -28,7 +27,6 @@ public class MapUI {
     }
 
     /**
-     * @param position
      * Display only one cell from the map according to the position
      */
     public void displayCell(Position position) {
@@ -55,6 +53,5 @@ public class MapUI {
             }
             Status.terminal.setCursorY(Status.terminal.getCursorY() + 1);
         }
-
     }
 }

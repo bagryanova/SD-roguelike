@@ -1,6 +1,6 @@
 package ru.hse.sd.roguegue.state.impl;
 
-import ru.hse.sd.roguegue.UI.Commands.ChangeScreenCommand;
+import ru.hse.sd.roguegue.ui.Commands.ChangeScreenCommand;
 
 import java.util.ArrayList;
 

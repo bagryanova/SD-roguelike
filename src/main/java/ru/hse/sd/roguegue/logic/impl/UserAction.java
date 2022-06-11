@@ -1,6 +1,6 @@
 package ru.hse.sd.roguegue.logic.impl;
 
-import ru.hse.sd.roguegue.UI.Commands.DisplayTakingInventoryCommand;
+import ru.hse.sd.roguegue.ui.Commands.DisplayTakingInventoryCommand;
 import ru.hse.sd.roguegue.logic.GameObjectAction;
 import ru.hse.sd.roguegue.logic.Move;
 import ru.hse.sd.roguegue.map.CellType;

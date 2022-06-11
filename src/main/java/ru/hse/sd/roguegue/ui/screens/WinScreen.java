@@ -1,4 +1,4 @@
-package ru.hse.sd.roguegue.UI.screens;
+package ru.hse.sd.roguegue.ui.screens;
 
 import ru.hse.sd.roguegue.status.Constants;
 import ru.hse.sd.roguegue.status.GameStatus;
