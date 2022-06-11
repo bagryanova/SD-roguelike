@@ -1,0 +1,87 @@
+package ru.hse.sd.roguegue;
+
+import org.junit.jupiter.api.Test;
+import ru.hse.sd.roguegue.map.CellType;
+import ru.hse.sd.roguegue.map.Map;
+import ru.hse.sd.roguegue.map.MapBuilderDirector;
+import ru.hse.sd.roguegue.status.Constants;
+import ru.hse.sd.roguegue.status.InventoryItem;
+import ru.hse.sd.roguegue.status.MapMode;
+import ru.hse.sd.roguegue.status.Status;
+
+import java.util.ArrayList;
+
+public class TestMapGeneration {
+    @Test
+    public void stressTestRandomMapGeneration() {
+        Status.mapMode = MapMode.RANDOM;
+        for (int cnt = 0; cnt < 10; cnt++) {
+            MapBuilderDirector director = new MapBuilderDirector(Status.mapMode, Constants.MAP_WIDTH, Constants.MAP_HEIGHT, null);
+            Map map = director.build();
+//            map.printMap();
+            int fin = 0;
+            for (int i = 0; i < map.cellArray().length; i++) {
+                boolean space = false;
+                for (int j = 0; j < map.cellArray()[0].length; j++) {
+                    if (map.getCell(i, j) == CellType.GROUND || map.getCell(i, j) == CellType.EXIT) {
+                        assert fin != 2;
+                        space = true;
+                        fin = 1;
+                    }
+                }
+                if (fin == 1 && !space) fin = 2;
+                if (fin == 2 || fin == 0) assert !space;
+                else assert space;
+            }
+        }
+    }
+
+    @Test
+    public void stressTestMapFromFileGeneration() {
+        Status.mapMode = MapMode.FILE;
+        for (int cnt = 0; cnt < 100; cnt++) {
+            MapBuilderDirector director = new MapBuilderDirector(Status.mapMode, Constants.MAP_WIDTH, Constants.MAP_HEIGHT, null);
+            Map map = director.build();
+            int fin = 0;
+            for (int i = 0; i < map.cellArray().length; i++) {
+                boolean space = false;
+                for (int j = 0; j < map.cellArray()[0].length; j++) {
+                    if (map.getCell(i, j) == CellType.GROUND || map.getCell(i, j) == CellType.EXIT) {
+                        assert fin != 2;
+                        space = true;
+                        fin = 1;
+                    }
+                }
+                if (fin == 1 && !space) fin = 2;
+                if (fin == 2 || fin == 0) assert !space;
+                else assert space;
+            }
+        }
+    }
+
+    @Test
+    public void testInventoryGeneration() {
+        Status.mapMode = MapMode.RANDOM;
+        for (int cnt = 0; cnt < 100; cnt++) {
+            Status.inventoryMapItems = new ArrayList<>();
+            MapBuilderDirector director = new MapBuilderDirector(Status.mapMode, Constants.MAP_WIDTH, Constants.MAP_HEIGHT, null);
+            Map map = director.build();
+            for (InventoryItem item : Status.inventoryMapItems) {
+                assert map.getCell(item.position.getY(), item.position.getX()).equals(CellType.GROUND);
+            }
+        }
+    }
+
+    @Test
+    public void testInventoryOnFileMapGeneration() {
+        Status.mapMode = MapMode.FILE;
+        for (int cnt = 0; cnt < 100; cnt++) {
+            Status.inventoryMapItems = new ArrayList<>();
+            MapBuilderDirector director = new MapBuilderDirector(Status.mapMode, Constants.MAP_WIDTH, Constants.MAP_HEIGHT, null);
+            Map map = director.build();
+            for (InventoryItem item : Status.inventoryMapItems) {
+                assert map.getCell(item.position.getY(), item.position.getX()).equals(CellType.GROUND);
+            }
+        }
+    }
+}
